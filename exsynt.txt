@@ -1,6 +1,13 @@
 PROGRAM chakib
 A = 1 + 2;
-A = MAT(5,4);
-A = (A+B) + (C+D);
+A = MAT(5,4) + C;
+A = ((((A+B) * B)));
+A = (A+b) + (A+b);
+B = ("chakib");
+A = (((A+B) / B));
 B = TRUE;
+B = 30;
+A = MAT(5,4) + (B * 5);
+C = "L3";
+D = TRUE;
 END
