@@ -8,11 +8,11 @@
 %left opar_mult opar_div
 %start S
 %%
-S: ROUTINE saut S | pp S | {printf("syntaxe correcte"); YYACCEPT;};
+S: ROUTINE saut S | pp S |  {printf("syntaxe correcte"); YYACCEPT;};
 saut: saut_ligne saut | saut_ligne;
 
 
-pp: mc_program idf saut corp_program;
+pp: mc_program saut idf saut corp_program;
 
 
 
@@ -35,7 +35,7 @@ opar: opar_plus | opar_moins | opar_div | opar_mult;
 type: mc_integer | mc_real | mc_logical;
 
 
-list_parametre: idf | list_parametre vg idf | ;
+list_parametre: idf | list_parametre vg idf | cst | list_parametre vg cst; | ;
 
 
 
@@ -51,7 +51,7 @@ affect: idf aff expression;
 
 
 
-expression: cst | idf | cst_char | cst_bool | expression opar idf | expression opar cst | po expression pf  | call | expression opar cst_char | expression po cst pf | expression po cst vg cst pf; | expression opar po expression pf;
+expression: cst | idf | cst_char | cst_bool | expression opar idf | expression opar cst | po expression pf | call | expression opar cst_char | expression po cst pf | expression po cst vg cst pf | expression opar po expression pf;
 
 
 

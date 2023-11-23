@@ -9,7 +9,7 @@ int nb_colonne = 1;
 lettre [a-zA-Z]
 chiffre [0-9]
 IDF {lettre}({lettre}|{chiffre})*
-cst [+-]?{chiffre}+([.]{chiffre}+)?
+cst [-]?{chiffre}+([.]{chiffre}+)?
 LOGICAL "TRUE"|"FALSE" 
 chainec \"[^\"]*\"
 COMMENTAIRE %[^;]*;	

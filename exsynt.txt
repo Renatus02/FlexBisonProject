@@ -1,4 +1,5 @@
-PROGRAM chakib
+PROGRAM
+chakib
 A = 1 + 2;
 A = MAT(5,4) + C;
 A = ((((A+B) * B)));
@@ -9,5 +10,7 @@ B = TRUE;
 B = 30;
 A = MAT(5,4) + (B * 5);
 C = "L3";
-D = TRUE;
+D = TRUE; X = 5; X = 6;
+C = ("L3" * "L3" + (A+B + (MAT(1,2) + ("Hello nigger"))) / A) / (B+1); WRITE("BLABLABLA");
+X = CALL a(a,b,c,d,e,f,g,h,i);
 END

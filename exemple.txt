@@ -1,11 +1,7 @@
-
-%Routine;
-ROUTINE MultiplyNumbers(a, b)
-    WRITE ("Donner la valeur de x :");
-    READ (x);
+INTEGER ROUTINE MultiplyNumbers(a, b)
     INTEGER a, b;
-    RETURN a * b;
-ENDR
+    WRITE ("Donner la valeur de x :");
+    READ(x);
 
 
 
@@ -17,11 +13,6 @@ stringVar = "Hello, Compiler!";
 boolVar1 = TRUE;
 boolVar2 = FALSE;
 
-IF (variable1.GT.5) THEN
-    WRITE("Variable 1 is greater than 5.");
-ELSE
-    WRITE("Variable 1 is not greater than 5.");
-ENDIF
 
 
 
@@ -34,20 +25,19 @@ WRITE("Result of multiplication: ", variable2);
 
 %Test de partage memoire;
 
-EQUIVALENCE((variable1, variable2), (realVar, matrice));
-
 
 
 %test de la limite de IDF et la limite du integer;
 
-variable1 = 6546546489;
+variable1 = 123;
 variable2 = -123;
-realVar1 = 32767.01;
+realVar1 = 3276.01;
 realVar2 = -123.01;
 
 ENDR
 
-PROGRAM SampleProgram
+PROGRAM
+SampleProgram
 %Declarations;
 INTEGER variable1, variable2;
 CHARACTER stringVar*20;
