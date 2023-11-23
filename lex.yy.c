@@ -700,22 +700,22 @@ YY_RULE_SETUP
 case 2:
 YY_RULE_SETUP
 #line 18 "lexical.l"
-{printf(" + reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opar;}
+{printf(" + reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opar_plus;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
 #line 19 "lexical.l"
-{printf(" - reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opar;}
+{printf(" - reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opar_moins;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
 #line 20 "lexical.l"
-{printf(" * reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opar;}
+{printf(" * reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opar_mult;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
 #line 21 "lexical.l"
-{printf(" / reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opar;}
+{printf(" / reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opar_div;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
@@ -886,7 +886,7 @@ YY_RULE_SETUP
 case 39:
 YY_RULE_SETUP
 #line 56 "lexical.l"
-{printf("LOGICAL reconnu(%s) a la ligne %d, colonne %d\n", yytext, nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return cst;}
+{printf("LOGICAL reconnu(%s) a la ligne %d, colonne %d\n", yytext, nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return cst_bool;}
 	YY_BREAK
 case 40:
 YY_RULE_SETUP

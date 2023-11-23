@@ -12,13 +12,13 @@ IDF {lettre}({lettre}|{chiffre})*
 cst [+-]?{chiffre}+([.]{chiffre}+)?
 LOGICAL "TRUE"|"FALSE" 
 chainec \"[^\"]*\"
-COMMENTAIRE %[^;]*;
+COMMENTAIRE %[^;]*;	
 %%
 "=" {printf(" = reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return aff;}
-"+" {printf(" + reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opar;}
-"-" {printf(" - reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opar;}
-"*" {printf(" * reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opar;}
-"/" {printf(" / reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opar;}
+"+" {printf(" + reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opar_plus;}
+"-" {printf(" - reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opar_moins;}
+"*" {printf(" * reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opar_mult;}
+"/" {printf(" / reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opar_div;}
 "." {printf(" . reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return point;}
 "(" {printf(" ( reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return po;}
 ")" {printf(" ) reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return pf;}
@@ -53,7 +53,7 @@ COMMENTAIRE %[^;]*;
 "EQ" {printf("EQ reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); 
 nb_colonne=nb_colonne+strlen(yytext); return opcomp;}
 "LOGICAL" {printf("LOGICAL reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_logical;}
-{LOGICAL} {printf("LOGICAL reconnu(%s) a la ligne %d, colonne %d\n", yytext, nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return cst;}
+{LOGICAL} {printf("LOGICAL reconnu(%s) a la ligne %d, colonne %d\n", yytext, nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return cst_bool;}
 {COMMENTAIRE} {
 	nb_colonne = nb_colonne + strlen(yytext);
 }
