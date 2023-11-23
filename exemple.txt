@@ -1,0 +1,58 @@
+
+%Routine;
+ROUTINE MultiplyNumbers(a, b)
+    WRITE ("Donner la valeur de x :");
+    READ (x);
+    INTEGER a, b;
+    RETURN a * b;
+ENDR
+
+
+
+%Instructions;
+
+variable1 = 10;
+realVar = 3.14;
+stringVar = "Hello, Compiler!";
+boolVar1 = TRUE;
+boolVar2 = FALSE;
+
+IF (variable1.GT.5) THEN
+    WRITE("Variable 1 is greater than 5.");
+ELSE
+    WRITE("Variable 1 is not greater than 5.");
+ENDIF
+
+
+
+%Call the routine;
+
+variable2 = CALL MultiplyNumbers(5, 3);
+WRITE("Result of multiplication: ", variable2);
+%Test du boucle;
+
+
+%Test de partage memoire;
+
+EQUIVALENCE((variable1, variable2), (realVar, matrice));
+
+
+
+%test de la limite de IDF et la limite du integer;
+
+variable1 = 6546546489;
+variable2 = -123;
+realVar1 = 32767.01;
+realVar2 = -123.01;
+
+ENDR
+
+PROGRAM SampleProgram
+%Declarations;
+INTEGER variable1, variable2;
+CHARACTER stringVar*20;
+REAL realVar1, realVar2;
+LOGICAL boolVar1;
+INTEGER matrice DIMENSION (20,100);
+
+END
