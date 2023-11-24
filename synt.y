@@ -1,91 +1,216 @@
 %{
     #include <string.h>
+    #include "synt.tab.h"
 %}
 
 
-%token saut_ligne aff point po pf vg cst idf pvg mc_then mc_if mc_else mc_program mc_endif mc_character mc_real mc_enddo mc_read mc_write mc_integer mc_endr mc_routine mc_return mc_equivalence opcomp oplog mc_dowhile mc_end mc_call mc_dimension mc_logical cst_char opar_plus opar_moins opar_div opar_mult cst_bool
-%left opar_plus opar_moins
-%left opar_mult opar_div
-%start S
+%token aff point po pf vg idf pvg mc_then mc_if mc_else mc_program mc_endif mc_character mc_real mc_enddo mc_read mc_write mc_integer mc_endr mc_routine mc_equivalence mc_dowhile mc_end mc_call mc_dimension mc_logical cst_char opar_plus opar_moins opar_div opar_mult cst_bool cst_int cst_float op_gt op_lt op_eq op_ge op_le op_and op_or op_ne;
+%left op_and op_or;
+%left op_gt op_ge op_eq op_ne op_le op_lt;
+%left opar_plus opar_moins;
+%left opar_mult opar_div;
+%start PROG
 %%
-S: ROUTINE saut S | pp S |  {printf("syntaxe correcte"); YYACCEPT;};
-saut: saut_ligne saut | saut_ligne;
 
+//l'axiome de la grammaire
+PROG: ROUTINE PROG | PP PROG | {printf("syntaxe correcte"); YYACCEPT;};
 
-pp: mc_program saut idf saut corp_program;
+//la grammaire
 
-
-
-corp_program: list_declaration list_instruction mc_end;
-
-
-
-ROUTINE: type mc_routine idf po list_parametre pf saut corp_fonction; | mc_character mc_routine idf opar_mult cst po list_parametre pf saut corp_fonction;
+PP: mc_program idf CORP_PROGRAM;
 
 
 
-corp_fonction: list_declaration list_instruction mc_endr; 
+CORP_PROGRAM: LIST_DECLARATION LIST_INSTRUCTION mc_end;
 
 
 
-opar: opar_plus | opar_moins | opar_div | opar_mult;
+ROUTINE: TYPE mc_routine idf po LIST_PARAMETRE pf CORP_FONCTION;
+
+       | mc_character mc_routine idf opar_mult CST po LIST_PARAMETRE pf CORP_FONCTION;
 
 
 
-type: mc_integer | mc_real | mc_logical;
+CORP_FONCTION: LIST_DECLARATION LIST_INSTRUCTION RETURN mc_endr;
 
+RETURN: idf aff EXPRESSION;
 
-list_parametre: idf | list_parametre vg idf | cst | list_parametre vg cst; | ;
+OPAR: opar_plus
 
-
-
-list_declaration: list_declaration type list_idf pvg saut | list_declaration mc_character list_idf pvg saut | list_declaration type list_idf pvg | list_declaration mc_character list_idf pvg | ;
-
-
-
-list_idf: idf | list_idf vg idf | list_idf mc_dimension po cst pf | list_idf mc_dimension po cst vg cst pf; | list_idf opar_mult cst;
-
-
-
-affect: idf aff expression;
+    | opar_moins 
+ 
+    | opar_div 
+ 
+    | opar_mult;
 
 
 
-expression: cst | idf | cst_char | cst_bool | expression opar idf | expression opar cst | po expression pf | call | expression opar cst_char | expression po cst pf | expression po cst vg cst pf | expression opar po expression pf;
+TYPE: mc_integer 
+
+    | mc_real 
+    
+    | mc_logical;
 
 
 
-call: mc_call idf po list_parametre pf;
+LIST_PARAMETRE: idf     
+
+              | LIST_PARAMETRE vg idf 
+
+              | CST 
+
+              | LIST_PARAMETRE vg CST 
+
+              | LIST_PARAMETRE vg idf po CST pf 
+
+              | LIST_PARAMETRE vg idf po CST vg CST pf 
+
+              | ;
 
 
 
-read: mc_read po idf pf;
+LIST_DECLARATION: LIST_DECLARATION TYPE DECLARATION pvg 
+
+                | LIST_DECLARATION mc_character DECLARATION pvg 
+                
+                | ;
 
 
 
-write: mc_write po write_args pf;
+DECLARATION: idf 
+
+           | DECLARATION vg idf 
+           
+           | DECLARATION mc_dimension po CST pf 
+           
+           | DECLARATION mc_dimension po CST vg CST pf; 
+           
+           | DECLARATION opar_mult CST;
 
 
 
-write_args: cst_char | idf | write_args vg cst_char | write_args vg idf;
+AFFECT: idf aff EXPRESSION;
 
 
 
-condition: mc_if po exp_cnd pf mc_then list_instruction mc_else list_instruction mc_endif;
+EXPRESSION: CST 
+
+          | idf 
+          
+          | cst_char 
+          
+          | cst_bool 
+          
+          | EXPRESSION OPAR idf 
+          
+          | EXPRESSION OPAR CST 
+          
+          | po EXPRESSION pf 
+          
+          | CALL 
+          
+          | EXPRESSION OPAR cst_char 
+          
+          | EXPRESSION po CST pf 
+          
+          | EXPRESSION po CST vg CST pf 
+          
+          | EXPRESSION OPAR po EXPRESSION pf;
 
 
 
-exp_cnd: ;
+CALL: mc_call idf po LIST_PARAMETRE pf;
 
 
 
-instruction: affect | write | read | condition | boucle | eq;
-list_instruction: list_instruction instruction pvg saut | list_instruction instruction pvg | ;
+READ: mc_read po idf pf;
 
 
 
-boucle: mc_dowhile po exp_cnd pf list_instruction mc_enddo;
-eq: mc_equivalence po list_parametre pf vg list_parametre pf pvg;
+WRITE: mc_write po WRITE_ARGS pf;
+
+
+
+WRITE_ARGS: cst_char 
+
+          | idf 
+          
+          | WRITE_ARGS vg cst_char 
+          
+          | WRITE_ARGS vg idf;
+
+
+
+CONDITION: mc_if po exp_cnd pf mc_then LIST_INSTRUCTION mc_else LIST_INSTRUCTION mc_endif 
+
+         | mc_if po cst_bool pf mc_then LIST_INSTRUCTION mc_else LIST_INSTRUCTION mc_endif;
+
+
+
+exp_cnd: EXPRESSION point OPCOMP point EXPRESSION 
+
+       | exp_cnd point OPLOG point LALR 
+       
+       | LALR;
+
+
+
+LALR: po exp_cnd pf;
+
+
+
+INSTRUCTION: AFFECT pvg 
+
+           | WRITE pvg 
+           
+           | READ pvg 
+           
+           | CONDITION 
+           
+           | BOUCLE 
+           
+           | EQ pvg;       
+
+
+
+LIST_INSTRUCTION: LIST_INSTRUCTION INSTRUCTION 
+
+                | ;
+
+
+
+BOUCLE: mc_dowhile po exp_cnd pf LIST_INSTRUCTION mc_enddo;
+
+
+
+EQ: mc_equivalence po LIST_PARAMETRE pf vg po LIST_PARAMETRE pf;
+
+
+
+CST: cst_int 
+
+   | cst_float;
+
+
+
+OPLOG: op_and 
+     
+     | op_or;
+
+
+
+OPCOMP: op_gt 
+
+      | op_lt 
+      
+      | op_eq 
+      
+      | op_ge 
+      
+      | op_le 
+      
+      | op_ne;
+
 
 
 

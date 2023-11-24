@@ -282,26 +282,26 @@ static void yy_fatal_error YY_PROTO(( yyconst char msg[] ));
 	*yy_cp = '\0'; \
 	yy_c_buf_p = yy_cp;
 
-#define YY_NUM_RULES 47
-#define YY_END_OF_BUFFER 48
-static yyconst short int yy_accept[143] =
+#define YY_NUM_RULES 49
+#define YY_END_OF_BUFFER 50
+static yyconst short int yy_accept[142] =
     {   0,
-        0,    0,   48,   46,   44,   45,   46,   46,    7,    8,
-        4,    2,    9,    3,    6,    5,   42,   10,    1,   43,
-       43,   43,   43,   43,   43,   43,   43,   43,   43,   43,
-       43,   43,   43,   43,    0,   41,    0,   40,   42,    0,
-       43,   43,   43,   43,   43,   43,   43,   43,   37,   43,
-       28,   26,   12,   43,   30,   43,   27,   29,   31,   43,
-       43,   43,   43,   43,   43,   42,   32,   43,   43,   43,
-       43,   43,   34,   43,   43,   43,   43,   43,   43,   43,
-       43,   43,   43,   43,   35,   43,   43,   43,   13,   43,
-       43,   22,   43,   43,   43,   43,   43,   19,   17,   43,
+        0,    0,   50,   48,   46,   47,   48,   48,    7,    8,
+        4,    2,    9,    3,    6,    5,   41,   10,    1,   45,
+       45,   45,   45,   45,   45,   45,   45,   45,   45,   45,
+       45,   45,   45,   45,    0,   40,    0,   39,   43,    0,
+       41,   45,   45,   45,   45,   45,   45,   45,   45,   36,
+       45,   27,   25,   12,   45,   29,   45,   26,   28,   30,
+       45,   45,   45,   45,   45,   45,    0,   42,   31,   45,
+       45,   45,   45,   45,   33,   45,   45,   45,   45,   45,
+       45,   45,   45,   45,   45,   44,   34,   45,   45,   45,
+       13,   45,   45,   22,   45,   45,   45,   45,   45,   19,
 
-       43,   11,   39,   43,   43,   43,   43,   18,   15,   43,
-       43,   43,   43,   43,   43,   20,   43,   43,   43,   43,
-       43,   43,   43,   24,   43,   43,   43,   33,   43,   21,
-       38,   14,   23,   43,   43,   43,   16,   36,   43,   43,
-       25,    0
+       17,   45,   11,   38,   45,   45,   45,   45,   18,   15,
+       45,   45,   45,   45,   45,   20,   45,   45,   45,   45,
+       45,   45,   45,   45,   45,   45,   32,   45,   21,   37,
+       14,   23,   45,   45,   45,   16,   35,   45,   45,   24,
+        0
     } ;
 
 static yyconst int yy_ec[256] =
@@ -344,44 +344,44 @@ static yyconst int yy_meta[38] =
         2,    2,    2,    2,    2,    2,    2
     } ;
 
-static yyconst short int yy_base[146] =
+static yyconst short int yy_base[145] =
     {   0,
         0,    0,  154,  155,  155,  155,  149,  137,  155,  155,
       155,  155,  155,  137,  155,  155,   26,  155,  155,  122,
         0,   22,   16,   16,  132,   22,   26,   28,  127,  115,
       114,   29,   27,  113,  140,  155,  128,  155,   41,  128,
-        0,  121,  114,  122,  111,  100,  103,  115,   99,  107,
-        0,    0,    0,   98,    0,  108,    0,    0,    0,  101,
-       35,   94,  107,   92,  101,  111,    0,   98,   91,  101,
-       97,   99,   40,   94,   85,   96,   91,   92,   41,   79,
-       79,   84,   90,   76,    0,   92,   80,   82,    0,   77,
-       83,    0,   68,   82,   79,   82,   68,    0,    0,   67,
+       49,    0,  121,  114,  122,  111,  100,  103,  115,   99,
+      107,    0,    0,    0,   98,    0,  108,    0,    0,    0,
+      101,  112,   93,  106,   91,  100,  110,  109,    0,   96,
+       89,   99,   95,   97,   40,   92,   83,   94,   89,   90,
+       44,   78,   83,   89,   75,   94,    0,   90,   78,   80,
+        0,   75,   81,    0,   66,   80,   77,   80,   66,    0,
 
-       73,    0,    0,   76,   77,   62,   68,    0,    0,   76,
-       71,   74,   73,   61,   60,    0,   53,   61,   64,   58,
-       51,   56,   54,    0,   59,   58,   49,    0,   56,    0,
-        0,    0,    0,   39,   42,   40,    0,    0,   47,   43,
-        0,  155,   72,   74,   61
+        0,   72,    0,    0,   75,   76,   61,   67,    0,    0,
+       75,   70,   73,   72,   60,    0,   53,   61,   64,   58,
+       51,   56,   54,   59,   58,   49,    0,   56,    0,    0,
+        0,    0,   39,   41,   40,    0,    0,   48,   45,    0,
+      155,   72,   74,   50
     } ;
 
-static yyconst short int yy_def[146] =
+static yyconst short int yy_def[145] =
     {   0,
-      142,    1,  142,  142,  142,  142,  143,  144,  142,  142,
-      142,  142,  142,  142,  142,  142,  142,  142,  142,  145,
-      145,  145,  145,  145,  145,  145,  145,  145,  145,  145,
-      145,  145,  145,  145,  143,  142,  144,  142,  142,  142,
-      145,  145,  145,  145,  145,  145,  145,  145,  145,  145,
-      145,  145,  145,  145,  145,  145,  145,  145,  145,  145,
-      145,  145,  145,  145,  145,  142,  145,  145,  145,  145,
-      145,  145,  145,  145,  145,  145,  145,  145,  145,  145,
-      145,  145,  145,  145,  145,  145,  145,  145,  145,  145,
-      145,  145,  145,  145,  145,  145,  145,  145,  145,  145,
+      141,    1,  141,  141,  141,  141,  142,  143,  141,  141,
+      141,  141,  141,  141,  141,  141,  141,  141,  141,  144,
+      144,  144,  144,  144,  144,  144,  144,  144,  144,  144,
+      144,  144,  144,  144,  142,  141,  143,  141,  141,  141,
+      141,  144,  144,  144,  144,  144,  144,  144,  144,  144,
+      144,  144,  144,  144,  144,  144,  144,  144,  144,  144,
+      144,  144,  144,  144,  144,  144,  141,  141,  144,  144,
+      144,  144,  144,  144,  144,  144,  144,  144,  144,  144,
+      144,  144,  144,  144,  144,  141,  144,  144,  144,  144,
+      144,  144,  144,  144,  144,  144,  144,  144,  144,  144,
 
-      145,  145,  145,  145,  145,  145,  145,  145,  145,  145,
-      145,  145,  145,  145,  145,  145,  145,  145,  145,  145,
-      145,  145,  145,  145,  145,  145,  145,  145,  145,  145,
-      145,  145,  145,  145,  145,  145,  145,  145,  145,  145,
-      145,    0,  142,  142,  142
+      144,  144,  144,  144,  144,  144,  144,  144,  144,  144,
+      144,  144,  144,  144,  144,  144,  144,  144,  144,  144,
+      144,  144,  144,  144,  144,  144,  144,  144,  144,  144,
+      144,  144,  144,  144,  144,  144,  144,  144,  144,  144,
+        0,  141,  141,  141
     } ;
 
 static yyconst short int yy_nxt[193] =
@@ -389,24 +389,24 @@ static yyconst short int yy_nxt[193] =
         4,    5,    6,    7,    8,    9,   10,   11,   12,   13,
        14,   15,   16,   17,   18,   19,   20,   21,   22,   23,
        24,   25,   26,   21,   27,   28,   21,   29,   30,   31,
-       21,   32,   21,   33,   21,   21,   34,   40,   43,   39,
-       45,   47,   51,   48,   46,   44,   49,   53,   55,   61,
-       63,   79,   40,   54,   39,   52,   56,   62,   64,   90,
-       98,   57,   41,  141,   91,  140,   99,  139,   80,  138,
-      137,   92,   35,   35,   37,   37,  136,  135,  134,  133,
-      132,  131,  130,  129,  128,  127,  126,  125,  124,  123,
-      122,  121,  120,  119,  118,  117,  116,  115,  114,  113,
+       21,   32,   21,   33,   21,   21,   34,   40,   44,   41,
+       46,   48,   52,   49,   47,   45,   50,   54,   56,   62,
+       64,   42,   67,   55,   39,   53,   57,   63,   65,   92,
+       40,   58,   41,  100,   93,  140,  139,  138,  137,  101,
+      136,   94,   35,   35,   37,   37,  135,  134,  133,  132,
+      131,  130,  129,  128,  127,  126,  125,  124,  123,  122,
+      121,  120,  119,  118,  117,  116,  115,  114,  113,  112,
 
-      112,  111,  103,  110,  109,  108,  107,  106,  105,  104,
-      103,  102,  101,  100,   97,   96,   95,   94,   93,   89,
-       88,   87,   86,   85,   66,   84,   83,   82,   81,   78,
-       77,   76,   75,   74,   73,   72,   71,   70,   69,   68,
-       67,   66,   38,   36,   65,   60,   59,   58,   50,   42,
-       39,   38,   36,  142,    3,  142,  142,  142,  142,  142,
-      142,  142,  142,  142,  142,  142,  142,  142,  142,  142,
-      142,  142,  142,  142,  142,  142,  142,  142,  142,  142,
-      142,  142,  142,  142,  142,  142,  142,  142,  142,  142,
-      142,  142
+      104,  111,  110,  109,  108,  107,  106,   86,  105,  104,
+      103,  102,   99,   98,   97,   96,   95,   91,   90,   89,
+       88,   87,   68,   86,   85,   84,   83,   82,   81,   80,
+       79,   78,   77,   76,   75,   74,   73,   72,   71,   70,
+       69,   68,   38,   36,   66,   61,   60,   59,   51,   43,
+       39,   38,   36,  141,    3,  141,  141,  141,  141,  141,
+      141,  141,  141,  141,  141,  141,  141,  141,  141,  141,
+      141,  141,  141,  141,  141,  141,  141,  141,  141,  141,
+      141,  141,  141,  141,  141,  141,  141,  141,  141,  141,
+      141,  141
 
     } ;
 
@@ -417,22 +417,22 @@ static yyconst short int yy_chk[193] =
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,   17,   22,   17,
        23,   24,   26,   24,   23,   22,   24,   27,   28,   32,
-       33,   61,   39,   27,   39,   26,   28,   32,   33,   73,
-       79,   28,  145,  140,   73,  139,   79,  136,   61,  135,
-      134,   73,  143,  143,  144,  144,  129,  127,  126,  125,
+       33,  144,   39,   27,   39,   26,   28,   32,   33,   75,
+       41,   28,   41,   81,   75,  139,  138,  135,  134,   81,
+      133,   75,  142,  142,  143,  143,  128,  126,  125,  124,
       123,  122,  121,  120,  119,  118,  117,  115,  114,  113,
-      112,  111,  110,  107,  106,  105,  104,  101,  100,   97,
+      112,  111,  108,  107,  106,  105,  102,   99,   98,   97,
 
-       96,   95,   94,   93,   91,   90,   88,   87,   86,   84,
-       83,   82,   81,   80,   78,   77,   76,   75,   74,   72,
-       71,   70,   69,   68,   66,   65,   64,   63,   62,   60,
-       56,   54,   50,   49,   48,   47,   46,   45,   44,   43,
-       42,   40,   37,   35,   34,   31,   30,   29,   25,   20,
-       14,    8,    7,    3,  142,  142,  142,  142,  142,  142,
-      142,  142,  142,  142,  142,  142,  142,  142,  142,  142,
-      142,  142,  142,  142,  142,  142,  142,  142,  142,  142,
-      142,  142,  142,  142,  142,  142,  142,  142,  142,  142,
-      142,  142
+       96,   95,   93,   92,   90,   89,   88,   86,   85,   84,
+       83,   82,   80,   79,   78,   77,   76,   74,   73,   72,
+       71,   70,   68,   67,   66,   65,   64,   63,   62,   61,
+       57,   55,   51,   50,   49,   48,   47,   46,   45,   44,
+       43,   40,   37,   35,   34,   31,   30,   29,   25,   20,
+       14,    8,    7,    3,  141,  141,  141,  141,  141,  141,
+      141,  141,  141,  141,  141,  141,  141,  141,  141,  141,
+      141,  141,  141,  141,  141,  141,  141,  141,  141,  141,
+      141,  141,  141,  141,  141,  141,  141,  141,  141,  141,
+      141,  141
 
     } ;
 
@@ -454,8 +454,8 @@ char *yytext;
 #include<stdlib.h>
 #include<string.h>
 #include "synt.tab.h"
-int nb_ligne = 1;
-int nb_colonne = 1;
+extern int nb_ligne, nb_colonne;
+int semligne, semcol;
 #line 460 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
@@ -607,7 +607,7 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 16 "lexical.l"
+#line 19 "lexical.l"
 
 #line 613 "lex.yy.c"
 
@@ -660,7 +660,7 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 143 )
+				if ( yy_current_state >= 142 )
 					yy_c = yy_meta[(unsigned int) yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
@@ -694,264 +694,292 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 17 "lexical.l"
-{printf(" = reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return aff;}
+#line 20 "lexical.l"
+{printf("= reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return aff;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 18 "lexical.l"
-{printf(" + reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opar_plus;}
+#line 21 "lexical.l"
+{printf("+ reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opar_plus;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 19 "lexical.l"
-{printf(" - reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opar_moins;}
+#line 22 "lexical.l"
+{printf("- reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opar_moins;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 20 "lexical.l"
-{printf(" * reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opar_mult;}
+#line 23 "lexical.l"
+{printf("* reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opar_mult;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 21 "lexical.l"
-{printf(" / reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opar_div;}
+#line 24 "lexical.l"
+{printf("/ reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opar_div;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 22 "lexical.l"
-{printf(" . reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return point;}
+#line 25 "lexical.l"
+{printf(". reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return point;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 23 "lexical.l"
-{printf(" ( reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return po;}
+#line 26 "lexical.l"
+{printf("( reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return po;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 24 "lexical.l"
-{printf(" ) reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return pf;}
+#line 27 "lexical.l"
+{printf(") reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return pf;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 25 "lexical.l"
-{printf(" , reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return vg;}
+#line 28 "lexical.l"
+{printf(", reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return vg;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 26 "lexical.l"
-{printf(" ; reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return pvg;}
+#line 29 "lexical.l"
+{printf("; reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return pvg;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 27 "lexical.l"
+#line 30 "lexical.l"
 {printf("keyword THEN reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_then;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 28 "lexical.l"
+#line 31 "lexical.l"
 {printf("keyword IF reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_if;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 29 "lexical.l"
+#line 32 "lexical.l"
 {printf("keyword ELSE reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_else;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 30 "lexical.l"
+#line 33 "lexical.l"
 {printf("keyword PROGRAM reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_program;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 31 "lexical.l"
+#line 34 "lexical.l"
 {printf("keyword ENDIF reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_endif;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 32 "lexical.l"
+#line 35 "lexical.l"
 {printf("keyword CHARACTER reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_character;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 33 "lexical.l"
+#line 36 "lexical.l"
 {printf("keyword REAL reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_real;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 34 "lexical.l"
-{printf("keyword ENDDO reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext);	return mc_enddo;}
+#line 37 "lexical.l"
+{printf("keyword ENDDO reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_enddo;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 35 "lexical.l"
+#line 38 "lexical.l"
 {printf("keyword READ reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_read;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 36 "lexical.l"
+#line 39 "lexical.l"
 {printf("keyword WRITE reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_write;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 37 "lexical.l"
+#line 40 "lexical.l"
 {printf("keyword INTEGER reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_integer;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 38 "lexical.l"
+#line 41 "lexical.l"
 {printf("keyword ENDR reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_endr;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 39 "lexical.l"
+#line 42 "lexical.l"
 {printf("keyword ROUTINE reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_routine;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 40 "lexical.l"
-{printf("keyword RETURN reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_return;}
+#line 43 "lexical.l"
+{printf("keyword EQUIVALENCE reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_equivalence;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 41 "lexical.l"
-{printf("keyword EQUIVALENCE reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_equivalence;}
+#line 44 "lexical.l"
+{printf(" GT reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return op_gt;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 42 "lexical.l"
-{printf(" GT reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opcomp;}
+#line 45 "lexical.l"
+{printf(" LT reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return op_lt;}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 43 "lexical.l"
-{printf(" LT reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opcomp;}
+#line 46 "lexical.l"
+{printf(" GE reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return op_ge;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 44 "lexical.l"
-{printf(" GE reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opcomp;}
+#line 47 "lexical.l"
+{printf(" NE reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return op_ne;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 45 "lexical.l"
-{printf(" NE reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opcomp;}
+#line 48 "lexical.l"
+{printf(" LE reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return op_le;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 46 "lexical.l"
-{printf(" LE reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opcomp;}
+#line 49 "lexical.l"
+{printf("keyword OR reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return op_or;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 47 "lexical.l"
-{printf("keyword OR reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return oplog;}
+#line 50 "lexical.l"
+{printf("keyword AND reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return op_and;}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 48 "lexical.l"
-{printf("keyword AND reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return oplog;}
+#line 51 "lexical.l"
+{printf("keyword DOWHILE reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_dowhile;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 49 "lexical.l"
-{printf("keyword DOWHILE reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_dowhile;}
+#line 52 "lexical.l"
+{printf("keyword END reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_end;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 50 "lexical.l"
-{printf("keyword END reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_end;}
+#line 53 "lexical.l"
+{printf("keyword CALL reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_call;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 51 "lexical.l"
-{printf("keyword CALL reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_call;}
+#line 54 "lexical.l"
+{printf("DIMENSION reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_dimension;}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 52 "lexical.l"
-{printf("DIMENSION reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_dimension;}
+#line 55 "lexical.l"
+{printf("EQ reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return op_eq;}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 53 "lexical.l"
-{printf("EQ reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); 
-nb_colonne=nb_colonne+strlen(yytext); return opcomp;}
+#line 56 "lexical.l"
+{printf("LOGICAL reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_logical;}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 55 "lexical.l"
-{printf("LOGICAL reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_logical;}
+#line 57 "lexical.l"
+{printf("LOGICAL reconnu(%s) a la ligne %d, colonne %d\n", yytext, nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return cst_bool;}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 56 "lexical.l"
-{printf("LOGICAL reconnu(%s) a la ligne %d, colonne %d\n", yytext, nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return cst_bool;}
+#line 58 "lexical.l"
+{ nb_colonne = nb_colonne + strlen(yytext); }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 57 "lexical.l"
-{
-	nb_colonne = nb_colonne + strlen(yytext);
-}
+#line 59 "lexical.l"
+{ printf("CHAINE DE CHARACTERS reconnu %s a la ligne %d, colonne %d\n", yytext, nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return cst_char;}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
 #line 60 "lexical.l"
 {
-	printf("CHAINE DE CHARACTERS reconnu %s a la ligne %d, colonne %d\n", yytext, nb_ligne, nb_colonne);
-	nb_colonne=nb_colonne+strlen(yytext);
-	return cst_char;
+    if (atoi(yytext) > 32767) {
+        printf("WARNING: ligne %d, colonne %d, nombre trop grand\n", nb_ligne, nb_colonne);
+    } else {
+        nb_colonne = nb_colonne + strlen(yytext);
+        printf("UNSIGNED_INT reconnu(%s) a la ligne %d, colonne %d\n", yytext, nb_ligne, nb_colonne);
+        return cst_int;
+    }
 }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 65 "lexical.l"
+#line 69 "lexical.l"
 {
-    if(atof(yytext) > 32767 || atof(yytext) < -32768){
+    if (atof(yytext) > 32767 || atof(yytext) < -32768) {
         printf("WARNING: ligne %d, colonne %d, nombre trop grand\n", nb_ligne, nb_colonne);
     } else {
-        printf("CST reconnu(%s) a la ligne %d, colonne %d\n", yytext, nb_ligne, nb_colonne);
-	nb_colonne=nb_colonne+strlen(yytext);
-	return cst;
+        nb_colonne = nb_colonne + strlen(yytext);
+        printf("UNSIGNED_FLOAT reconnu(%s) a la ligne %d, colonne %d\n", yytext, nb_ligne, nb_colonne);
+        return cst_float;
     }
 }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 74 "lexical.l"
+#line 78 "lexical.l"
 {
-	if(yyleng > 60){
-		printf("WARNING: ligne %d, identificateur trop long\n",nb_ligne);
-	}
-	else{
-		printf("IDF reconnu %s a la ligne %d, colonne %d\n",yytext, nb_ligne, nb_colonne);
-	}
-	nb_colonne=nb_colonne+strlen(yytext);
-	return idf;
+    if (atoi(yytext) > 32767 || atoi(yytext) < -32768) {
+        printf("WARNING: ligne %d, colonne %d, nombre trop grand\n", nb_ligne, nb_colonne);
+    } else {
+        nb_colonne = nb_colonne + strlen(yytext);
+        printf("SIGNED_INT reconnu(%s) a la ligne %d, colonne %d\n", yytext, nb_ligne, nb_colonne);
+        return cst_int;
+    }
 }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 84 "lexical.l"
-nb_colonne=nb_colonne+strlen(yytext);
+#line 87 "lexical.l"
+{
+    if (atof(yytext) > 32767 || atof(yytext) < -32768) {
+        printf("WARNING: ligne %d, colonne %d, nombre trop grand\n", nb_ligne, nb_colonne);
+    } else {
+        nb_colonne = nb_colonne + strlen(yytext);
+        printf("SIGNED_FLOAT reconnu(%s) a la ligne %d, colonne %d\n", yytext, nb_ligne, nb_colonne);
+        return cst_float;
+    }
+}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 85 "lexical.l"
-{ nb_ligne++; nb_colonne = 1; return saut_ligne;}
+#line 96 "lexical.l"
+{
+    if(yyleng > 60){
+        printf("WARNING: identificateur trop long\n");
+    }
+    else{
+			printf("IDF reconnu(%s) a la ligne %d, colonne %d\n", yytext, nb_ligne, nb_colonne);
+	}
+    nb_colonne=nb_colonne+strlen(yytext);
+    return idf;
+
+}
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 86 "lexical.l"
-printf("erreur lexicale %s a la ligne %d, colonne %d (non reconnu) \n",yytext, nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext);
+#line 107 "lexical.l"
+nb_colonne=nb_colonne+strlen(yytext);
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 87 "lexical.l"
+#line 108 "lexical.l"
+nb_ligne++; nb_colonne = 1; 
+	YY_BREAK
+case 48:
+YY_RULE_SETUP
+#line 109 "lexical.l"
+{ printf("erreur lexicale (non reconnu)\n"); nb_colonne=nb_colonne+strlen(yytext); }
+	YY_BREAK
+case 49:
+YY_RULE_SETUP
+#line 110 "lexical.l"
 ECHO;
 	YY_BREAK
-#line 955 "lex.yy.c"
+#line 983 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1243,7 +1271,7 @@ static yy_state_type yy_get_previous_state()
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 143 )
+			if ( yy_current_state >= 142 )
 				yy_c = yy_meta[(unsigned int) yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
@@ -1278,11 +1306,11 @@ yy_state_type yy_current_state;
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 143 )
+		if ( yy_current_state >= 142 )
 			yy_c = yy_meta[(unsigned int) yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
-	yy_is_jam = (yy_current_state == 142);
+	yy_is_jam = (yy_current_state == 141);
 
 	return yy_is_jam ? 0 : yy_current_state;
 	}
@@ -1837,5 +1865,5 @@ int main()
 	return 0;
 	}
 #endif
-#line 87 "lexical.l"
+#line 110 "lexical.l"
 

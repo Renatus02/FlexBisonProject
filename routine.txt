@@ -1,0 +1,9 @@
+
+INTEGER ROUTINE aa()
+chakib = 1
+ENDR
+
+
+
+PROGRAM chakib
+END
