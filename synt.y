@@ -28,6 +28,8 @@ CORP_PROGRAM: LIST_DECLARATION LIST_INSTRUCTION mc_end;
 ROUTINE: TYPE mc_routine idf po LIST_PARAMETRE pf CORP_FONCTION;
 
        | mc_character mc_routine idf opar_mult CST po LIST_PARAMETRE pf CORP_FONCTION;
+       
+       | mc_character mc_routine idf po LIST_PARAMETRE pf CORP_FONCTION;
 
 
 
