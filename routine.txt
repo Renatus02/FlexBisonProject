@@ -1,9 +1,11 @@
-
 INTEGER ROUTINE aa()
-chakib = 1
+chakib = 1;
 ENDR
 
 
 
 PROGRAM chakib
 END
+
+INTEGER ROUTINE AA() 
+ENDR

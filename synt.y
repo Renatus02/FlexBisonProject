@@ -183,7 +183,9 @@ BOUCLE: mc_dowhile po exp_cnd pf LIST_INSTRUCTION mc_enddo;
 
 
 
-EQ: mc_equivalence po LIST_PARAMETRE pf vg po LIST_PARAMETRE pf;
+EQ: mc_equivalence po LIST_PARAMETRE pf vg po LIST_PARAMETRE pf 
+
+  | mc_equivalence po LIST_PARAMETRE pf;
 
 
 
@@ -218,7 +220,7 @@ OPCOMP: op_gt
 
 #include <stdio.h>
 int yyerror(char *msg) {
-    printf("%s\n", msg);
+    printf("Erreur Syntaxique");
     return 1;
 }
 

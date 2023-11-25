@@ -6,7 +6,22 @@ INTEGER ROUTINE MultiplyNumbers(a, b)
 
 
 %Instructions;
-
+IF (((A.EQ.(B+(2))).OR.(FALSE.EQ.TRUE)))
+THEN A = A - B ;
+ELSE
+A = A + B;
+ENDIF
+IF (A.EQ.B) THEN 
+A = A - B ;
+ELSE
+A = A + B;
+A = 1 + 2;
+A = a + b;
+ENDIF
+EQUIVALENCE (A, B, C), (Y, TAB(3));
+A = 0;
+DOWHILE ((A.LT.10).AND.(B.LE.20)) A = A + 1;
+ENDDO
 variable1 = 10;
 realVar = 3.14;
 stringVar = "Hello, Compiler!";
@@ -33,11 +48,11 @@ variable1 = 123;
 variable2 = -123;
 realVar1 = 3276.01;
 realVar2 = -123.01;
-
+MultiplyNumbers = 123 + "Hello, Compiler!" +  ((((((((5)))))))); 
+A = 5
 ENDR
 
-PROGRAM
-SampleProgram
+PROGRAM SampleProgram
 %Declarations;
 INTEGER variable1, variable2;
 CHARACTER stringVar*20;

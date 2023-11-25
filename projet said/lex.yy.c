@@ -453,7 +453,7 @@ char *yytext;
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include "synt.tab.h"
+#include "syntaxe-copy.tab.h"
 int nb_ligne = 1;
 int nb_colonne = 1;
 #line 460 "lex.yy.c"
