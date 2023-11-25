@@ -105,6 +105,6 @@ COMMENTAIRE %[^;]*;
 
 }
 [ \t] nb_colonne=nb_colonne+strlen(yytext);
-[\n]  nb_ligne++; nb_colonne = 1; 
+\n  nb_ligne++; nb_colonne = 1; 
 . { printf("erreur lexicale (non reconnu)\n"); nb_colonne=nb_colonne+strlen(yytext); }
 %%
