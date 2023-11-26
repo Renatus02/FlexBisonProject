@@ -1,12 +1,4 @@
-CHARACTER ROUTINE chakib*30()
-a = "TRUE"
+INTEGER ROUTINE chakib()
+a = 5
 ENDR
 
-CHARACTER ROUTINE chakib(a,b,TAB(30))
-a = "TRUE"
-ENDR
-
-PROGRAM chakib
-CHARACTER typevariable;
-CHARACTER typevariable2*20;
-END

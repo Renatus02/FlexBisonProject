@@ -13,7 +13,9 @@
 %%
 
 //l'axiome de la grammaire
-PROG: ROUTINE PROG | PP PROG | {printf("syntaxe correcte"); YYACCEPT;};
+PROG: ROUTINE PROG | PP {printf("syntaxe correcte"); YYACCEPT;}
+
+
 
 //la grammaire
 
@@ -35,7 +37,11 @@ ROUTINE: TYPE mc_routine idf po LIST_PARAMETRE pf CORP_FONCTION;
 
 CORP_FONCTION: LIST_DECLARATION LIST_INSTRUCTION RETURN mc_endr;
 
+
+
 RETURN: idf aff EXPRESSION;
+
+
 
 OPAR: opar_plus
 
@@ -222,7 +228,7 @@ OPCOMP: op_gt
 
 #include <stdio.h>
 int yyerror(char *msg) {
-    printf("Erreur Syntaxique");
+    printf(" ------------------------------------------ Erreur Syntaxique ------------------------------------------");
     return 1;
 }
 

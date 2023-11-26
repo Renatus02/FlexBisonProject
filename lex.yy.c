@@ -948,7 +948,7 @@ case 45:
 YY_RULE_SETUP
 #line 96 "lexical.l"
 {
-    if(yyleng > 60){
+    if(yyleng > 10){
         printf("WARNING: identificateur trop long\n");
     }
     else{

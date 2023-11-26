@@ -1,0 +1,3 @@
+INTEGER ROUTINE a()
+aa = 2
+ENDR

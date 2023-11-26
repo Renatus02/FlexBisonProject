@@ -94,7 +94,7 @@ COMMENTAIRE %[^;]*;
     }
 }
 {IDF} {
-    if(yyleng > 60){
+    if(yyleng > 10){
         printf("WARNING: identificateur trop long\n");
     }
     else{
