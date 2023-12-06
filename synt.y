@@ -1,5 +1,6 @@
 %{
     #include <string.h>
+    char sauv[20];
 %}
 
 %union 
@@ -9,7 +10,7 @@
    char* str;
 }
 
-%token aff point po pf vg idf pvg mc_then mc_if mc_else mc_program mc_endif mc_character mc_real mc_enddo mc_read mc_write mc_integer mc_endr mc_routine mc_equivalence mc_dowhile mc_end mc_call mc_dimension mc_logical cst_char opar_plus opar_moins opar_div opar_mult cst_bool cst_int cst_real op_gt op_lt op_eq op_ge op_le op_and op_or op_ne;
+%token aff point po pf vg <str>idf pvg mc_then mc_if mc_else mc_program mc_endif mc_character mc_real mc_enddo mc_read mc_write mc_integer mc_endr mc_routine mc_equivalence mc_dowhile mc_end mc_call mc_dimension mc_logical <str>cst_char opar_plus opar_moins opar_div opar_mult <str>cst_bool <entier>cst_int <reel>cst_real op_gt op_lt op_eq op_ge op_le op_and op_or op_ne;
 %left op_and op_or;
 %left op_gt op_ge op_eq op_ne op_le op_lt;
 %left opar_plus opar_moins;
@@ -24,7 +25,7 @@ PROG: ROUTINE PROG | PP {printf("syntaxe correcte\n"); YYACCEPT;}
 
 //la grammaire
 
-PP: mc_program idf CORP_PROGRAM;
+PP: mc_program idf CORP_PROGRAM {if(doubleDeclaration($2) == 1) printf("Erreur Semantique: %s idf deja declaree pour un routine\n", $2);};
 
 
 
@@ -32,11 +33,17 @@ CORP_PROGRAM: LIST_DECLARATION LIST_INSTRUCTION mc_end;
 
 
 
-ROUTINE: TYPE mc_routine idf po LIST_PARAMETRE pf CORP_FONCTION;
+ROUTINE: TYPE mc_routine idf po LIST_PARAMETRE pf CORP_FONCTION {
+    
+    if(doubleDeclaration($3) == 1)
+     printf("Erreur Semantique: %s routine deja declaree\n", $3);
+    
+    
+    }
 
-       | mc_character mc_routine idf opar_mult CST po LIST_PARAMETRE pf CORP_FONCTION;
+       | mc_character mc_routine idf opar_mult CST po LIST_PARAMETRE pf CORP_FONCTION {if(doubleDeclaration($3) == 1) printf("Erreur Semantique: %s routine deja declaree\n", $3);}
        
-       | mc_character mc_routine idf po LIST_PARAMETRE pf CORP_FONCTION;
+       | mc_character mc_routine idf po LIST_PARAMETRE pf CORP_FONCTION {if(doubleDeclaration($3) == 1) printf("Erreur Semantique: %s routine deja declaree\n", $3); else insererTYPE($3, sauv);};
 
 
 
@@ -44,7 +51,7 @@ CORP_FONCTION: LIST_DECLARATION LIST_INSTRUCTION RETURN mc_endr;
 
 
 
-RETURN: idf aff EXPRESSION;
+RETURN: idf aff EXPRESSION {if(doubleDeclaration($1) == 0) printf("Erreur Semantique: %s routine non declaree\n", $1);}
 
 
 
@@ -58,25 +65,25 @@ OPAR: opar_plus
 
 
 
-TYPE: mc_integer 
+TYPE: mc_integer {strcpy(sauv, $1);}
 
-    | mc_real 
+    | mc_real {strcpy(sauv, $1);}
     
-    | mc_logical;
+    | mc_logical {strcpy(sauv, $1);};
 
 
 
-LIST_PARAMETRE: idf     
+LIST_PARAMETRE: idf {if(doubleDeclaration($1) == 0) printf("Erreur Semantique: %s variable non declare\n", $1);}
 
-              | LIST_PARAMETRE vg idf 
+              | LIST_PARAMETRE vg idf { if(doubleDeclaration($3) == 0) printf("Erreur Semantique: %s variable non declare\n", $3);}
 
               | CST 
 
               | LIST_PARAMETRE vg CST 
 
-              | LIST_PARAMETRE vg idf po CST pf 
+              | LIST_PARAMETRE vg idf po CST pf  {if(doubleDeclaration($3) == 0) printf("Erreur Semantique: %s variable non declare\n", $3);}
 
-              | LIST_PARAMETRE vg idf po CST vg CST pf 
+              | LIST_PARAMETRE vg idf po CST vg CST pf {if(doubleDeclaration($3) == 0) printf("Erreur Semantique: %s variable non declare\n", $3);}
 
               | ;
 
@@ -90,9 +97,9 @@ LIST_DECLARATION: LIST_DECLARATION TYPE DECLARATION pvg
 
 
 
-DECLARATION: idf 
+DECLARATION: idf {if(doubleDeclaration($1) == 1) printf("Erreur Semantique: %s variable deja declaree\n", $1); else insererTYPE($1, sauv);}
 
-           | DECLARATION vg idf 
+       | DECLARATION vg idf {if(doubleDeclaration($3) == 1) printf("Erreur Semantique: %s variable deja declaree\n", $3); else insererTYPE($3, sauv);}
            
            | DECLARATION mc_dimension po CST pf 
            
@@ -102,19 +109,21 @@ DECLARATION: idf
 
 
 
-AFFECT: idf aff EXPRESSION;
+AFFECT: idf aff EXPRESSION {
+if(doubleDeclaration($1) == 0) 
+    printf("Erreur Semantique: %s variable non declaree\n", $1);
 
-
+};
 
 EXPRESSION: CST 
 
-          | idf 
+          | idf {if(doubleDeclaration($1) == 0) printf("Erreur Semantique: %s variable non declaree\n", $1);}
           
-          | cst_char 
+          | cst_char {if(doubleDeclaration($1) == 0) printf("Erreur Semantique: %s variable non declaree\n", $1);}
           
-          | cst_bool 
+          | cst_bool {if(doubleDeclaration($1) == 0) printf("Erreur Semantique: %s variable non declaree\n", $1);}
           
-          | EXPRESSION OPAR idf 
+          | EXPRESSION OPAR idf {if(doubleDeclaration($3) == 0) printf("Erreur Semantique: %s variable non declaree\n", $3);}
           
           | EXPRESSION OPAR CST 
           
@@ -122,7 +131,7 @@ EXPRESSION: CST
           
           | CALL 
           
-          | EXPRESSION OPAR cst_char 
+          | EXPRESSION OPAR cst_char {if(doubleDeclaration($3) == 0) printf("Erreur Semantique: %s variable non declaree\n", $3);}
           
           | EXPRESSION po CST pf 
           
@@ -136,7 +145,7 @@ CALL: mc_call idf po LIST_PARAMETRE pf;
 
 
 
-READ: mc_read po idf pf;
+READ: mc_read po idf pf {if(doubleDeclaration($3) == 0) printf("Erreur Semantique: %s variable non declaree\n", $3);};
 
 
 
@@ -144,13 +153,13 @@ WRITE: mc_write po WRITE_ARGS pf;
 
 
 
-WRITE_ARGS: cst_char 
+WRITE_ARGS: cst_char
 
-          | idf 
+          | idf {if(doubleDeclaration($1) == 0) printf("Erreur Semantique: %s variable non declaree\n", $1);} 
           
-          | WRITE_ARGS vg cst_char 
+          | WRITE_ARGS vg cst_char {if(doubleDeclaration($3) == 0) printf("Erreur Semantique: %s variable non declaree\n", $3);}
           
-          | WRITE_ARGS vg idf;
+          | WRITE_ARGS vg idf {if(doubleDeclaration($3) == 0) printf("Erreur Semantique: %s variable non declaree\n", $3);};
 
 
 
@@ -202,7 +211,7 @@ EQ: mc_equivalence po LIST_PARAMETRE pf vg po LIST_PARAMETRE pf
 
 
 
-CST: cst_int 
+CST: cst_int
 
    | cst_real;
 

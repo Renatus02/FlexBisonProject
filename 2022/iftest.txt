@@ -1,0 +1,12 @@
+float Z
+
+#commentaireeee
+Z= (-4) + 23 * 34 - (20+2) -Z
+
+if(Z >= 5.98):
+    Lei=89
+    Ay = 21.3
+else:
+    May = 's'
+    Sokka = false
+

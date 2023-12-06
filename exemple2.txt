@@ -1,4 +1,4 @@
-CHARACTER ROUTINE c(a,b)
+CHARACTER ROUTINE fff(a,b)
 WRITE("HELLO", A, "\n");
 c = "HELLO"
 ENDR
@@ -11,6 +11,8 @@ A = A + B;
 ENDIF
 IF (A.EQ.B) THEN 
 A = A - B ;
+B = C / D;
+X = Y / Z;
 ELSE
 A = A + B;
 A = 1 + 2;
@@ -19,7 +21,7 @@ ENDIF
 EQUIVALENCE (A, B, C), (Y, TAB(3));
 A = 0;
 DOWHILE ((A.LT.10).AND.(B.LE.20)) A = A + 1;
-EQUIVALENCE (A, B, C), (Y, TAB(3));
+EQUIVALENCE (A, B, C), (Y, A(3));
 
 ENDDO
 END

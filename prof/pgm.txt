@@ -1,0 +1,7 @@
+Programme       Test
+{
+  VAR REAL :: Xe ,Acad ,ACad ;
+  INTEGER :: Xee ;
+  Xey:= ACad  / 15;
+  Xee:= Xe  / 15;
+}

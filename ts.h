@@ -1,215 +1,260 @@
-/****************CREATION DE LA TABLE DES SYMBOLES ******************/
-/***Step 1: Definition des structures de données ***/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-typedef struct
-{
-   int state;
-   char name[20];
-   char code[20];
-   char type[20];
-   float val;
-   char valstr[50];
- } element;
+typedef struct listidf listidf;
+ struct listidf {
+    int state;
+    char name[20];
+    char code[20];
+    char type[20];
+    float val;
+    char valstr[50];
+    struct listidf* next;
+};
 
-typedef struct
-{ 
-   int state; 
-   char name[20];
-   char type[20];
-} elt;
+typedef struct m m;
 
-element tab[1000]; //table des symboles IDF et CONST
-elt tabs[40],tabm[40]; // tabs: table des separateurs, tabm: table des mots cles
-extern char sav[20];
-char chaine [] = "";
-int cpt, cpts, cptm;
+    struct m {
+        int state;
+        char name[20];
+        char type[20];
+        struct m* next;
+    };
+
+typedef struct s s;
+    struct s {
+        int state;
+        char name[20];
+        char type[20];
+        struct s* next;
+    };
 
 
-/***Step 2: initialisation de l'état des cases des tables des symbloles***/
-/*0: la case est libre    1: la case est occupée*/
-
-void initialisation()
-{
-  int i;
-  for (i=0;i<1000;i++)  tab[i].state=0; 	   
-  for (i=0;i<40;i++) {tabs[i].state=0; tabm[i].state=0;}
-cpt=0; cpts=0; cptm=0;
+// Head pointers for the linked lists
+listidf* symbolTable;
+m* keywordTable;
+s* separatorTable;
+extern char sauv[20];
+char chaine[] = "";
+int cpt = 0;
+int cptm = 0;
+int cpts = 0;
+void initialisation() {
+    symbolTable = NULL;
+    keywordTable = NULL;
+    separatorTable = NULL;
 }
 
+// Function to insert an entity into the symbol table
+void inserer(char entite[], char code[], char type[], float val, char valstr[], int y) {
+    if (y == 0) {
+        // Insert into symbolTable as FIFO
+        listidf* newEntry = (listidf*)malloc(sizeof(listidf));
+        newEntry->state = 1;
+        strcpy(newEntry->name, entite);
+        strcpy(newEntry->code, code);
+        strcpy(newEntry->type, type);
+        newEntry->val = val;
+        strcpy(newEntry->valstr, valstr);
+        newEntry->next = NULL;
 
-/***Step 3: insertion des entititées lexicales dans les tables des symboles ***/
-
-void inserer (char entite[], char code[],char type[],float val, char valstr[], int i,int y)
-{
-  switch (y)
- { 
-   case 0:/*insertion dans la table des IDF et CONST*/
-       tab[i].state=1;
-       strcpy(tab[i].name,entite);
-       strcpy(tab[i].code,code);
-	   strcpy(tab[i].type,type);
-	   tab[i].val=val;
-       strcpy(tab[i].valstr,valstr);
-       cpt++;
-	   break;
-
-   case 1:/*insertion dans la table des mots clés*/
-       tabm[i].state=1;
-       strcpy(tabm[i].name,entite);
-       strcpy(tabm[i].type,code);
-       cptm++;
-       break; 
-    
-   case 2:/*insertion dans la table des séparateurs*/
-      tabs[i].state=1;
-      strcpy(tabs[i].name,entite);
-      strcpy(tabs[i].type,code);
-      cpts++;
-      break;
- }
-
-}
-
-/***Step 4: La fonction Rechercher permet de verifier  si l'entité existe dèja dans la table des symboles */
-void rechercher (char entite[], char code[],char type[],float val,char valstr[], int y)	
-{
-
-int j,i;
-
-switch(y) 
-  {
-   case 0:
-      /*verifier si la case dans la tables des IDF et CONST est libre*/
-        if(cpt==0)  inserer(entite,code,type,val,valstr,0,0); 
-        else{
-        for (i=0; ((i<1000)&&(tab[i].state==1))&&(strcmp(entite,tab[i].name)!=0);i++); 
-        if((i<1000)&&(strcmp(entite,tab[i].name)!=0))
-        { 
-	        
-			inserer(entite,code,type,val,valstr,i,0); 
-	      
-         }
-       // else
-         // printf("entité existe déjà\n");
+        if (symbolTable == NULL) {
+            // If symbolTable is empty, set the new entry as the head
+            symbolTable = newEntry;
+        } else {
+            // Find the last element in the list and add the new entry
+            listidf* last = symbolTable;
+            while (last->next != NULL) {
+                last = last->next;
+            }
+            last->next = newEntry;
         }
-        break;
+        cpt++;
+    } else if (y == 1) {
+        // Insert into keywordTable as FIFO
+        m* newEntry = (m*)malloc(sizeof(m));
+        newEntry->state = 1;
+        strcpy(newEntry->name, entite);
+        strcpy(newEntry->type, code);
+        newEntry->next = NULL;
 
-   case 1:/*verifier si la case dans la tables des mots clés est libre*/
-       if(cptm==0) inserer(entite,code,type,val,valstr,0,1); 
-       else{
-       for (i=0;((i<40)&&(tabm[i].state==1))&&(strcmp(entite,tab[i].name)!=0);i++); 
-        if(i<40)
-          inserer(entite,code,type,val,valstr,i,1);
-        //else
-         // printf("entité existe déjà\n");
-       }
-        break; 
-    
-   case 2:/*verifier si la case dans la tables des séparateurs est libre*/
-         if(cpts==0) inserer(entite,code,type,val,valstr,0,2);
-         else{
-         for (i=0;((i<40)&&(tabs[i].state==1))&&(strcmp(entite,tab[i].name)!=0);i++); 
-        if(i<40)
-         inserer(entite,code,type,val,valstr,i,2);
-        //else
-   	     //  printf("entité existe déjà\n");
-         }
-        break;
+        if (keywordTable == NULL) {
+            // If keywordTable is empty, set the new entry as the head
+            keywordTable = newEntry;
+        } else {
+            // Find the last element in the list and add the new entry
+            m* last = keywordTable;
+            while (last->next != NULL) {
+                last = last->next;
+            }
+            last->next = newEntry;
+        }
+        cptm++;
+    } else if (y == 2) {
+        // Insert into separatorTable as FIFO
+        s* newEntry = (s*)malloc(sizeof(s));
+        newEntry->state = 1;
+        strcpy(newEntry->name, entite);
+        strcpy(newEntry->type, code);
+        newEntry->next = NULL;
 
-  }
-
+        if (separatorTable == NULL) {
+            // If separatorTable is empty, set the new entry as the head
+            separatorTable = newEntry;
+        } else {
+            // Find the last element in the list and add the new entry
+            s* last = separatorTable;
+            while (last->next != NULL) {
+                last = last->next;
+            }
+            last->next = newEntry;
+        }
+        cpts++;
+    }
 }
 
 
-/***Step 5 L'affichage du contenue de la table des symboles ***/
-
-void afficher()
-{int i;
- 
+// Function to display the contents of the symbol table
+void afficher() {
+    listidf* courant = symbolTable;
 printf("\n\n/****************** Table des symboles ******************/\n\n");
 printf("\n/*************** Table des symboles IDF ***************/\n");
 printf("_______________________________________________________________________________\n");
 printf("\t|   Nom_Entite   |  Code_Entite   |   Type_Entite   |   Val_Entite    |\n");
 printf("_______________________________________________________________________________\n");
-  
-  // si idf or cst a une valeur numerique on affiche val sinon on affiche val_string 
 
-for(i=0;i<cpt;i++)
-{	
-	
-    if(tab[i].state==1)
-      { 
-		if((strcmp(tab[i].type,"chainec")==0) || (strcmp(tab[i].type,"LOGICAL")==0))
-		{
-        	printf("\t|%15s |%15s | %15s | %15s | \n",tab[i].name,tab[i].code,tab[i].type,tab[i].valstr);}
-		else{
-			printf("\t|%15s |%15s | %15s | %15f |  \n",tab[i].name,tab[i].code,tab[i].type,tab[i].val);
-		}	
-         
-      }
-}
+    while (courant != NULL) {
+            if ((strcmp(courant->type, "chainec") == 0) || (strcmp(courant->type, "LOGICAL") == 0)) {
+                printf("\t|%15s |%15s | %15s | %15s | \n", courant->name, courant->code, courant->type, courant->valstr);
+            } else {
+                printf("\t|%15s |%15s | %15s | %15f |  \n", courant->name, courant->code, courant->type, courant->val);
+            }
+        courant = courant->next;
+    }
 
- 
-printf("\n/*************** Table des symboles mots cles ***************\n");
-
-printf("___________________________________________\n");
-printf("\t|    NomEntite   |    CodeEntite  | \n");
-printf("___________________________________________\n");
-  
-for(i=0;i<cptm;i++)
-    if(tabm[i].state==1)
-      { 
-        printf("\t|%15s |%15s | \n",tabm[i].name, tabm[i].type);
-               
-      }
-
-printf("\n/*************** Table des symboles separateurs ***************\n");
-
-printf("___________________________________________\n");
-printf("\t|    NomEntite   |    CodeEntite  | \n");
-printf("___________________________________________\n");
-  
-for(i=0;i<cpts;i++)
-    if(tabs[i].state==1)
-      { 
-        printf("\t|%15s |%15s | \n",tabs[i].name,tabs[i].type );
-        
-      }
-
-}
-
-		
-    int Recherche_position(char entite[])
-		{
-		int i=0;
-		while(i<1000)
-		{
-		
-		if (strcmp(entite,tab[i].name)==0) return i;	
-		i++;
-		}
- 
-		return -1;
-		
-		}
-
-	 void insererTYPE(char entite[], char type[])
-	{
-       int pos;
-	   pos=Recherche_position(entite);
-	   if(pos!=-1)  { strcpy(tab[pos].type,type); }
-	}
     
-	
-	int doubleDeclaration(char entite[]){
-	int pos;
-	pos= Recherche_position(entite);
-	if(strcmp(tab[pos].type,"")==0) return 0;
-	   else return -1;
-	  
-	
-	}
+    m* current1 = keywordTable;
+printf("\n/*************** Table des symboles mots cles ***************\n");
+printf("___________________________________________\n");
+printf("\t|    NomEntite   |    CodeEntite  | \n");
+printf("___________________________________________\n");
 
 
+    while (current1 != NULL) {
+        printf("\t|%15s |%15s | \n", current1->name, current1->type);
+        current1 = current1->next;
+    }
+
+
+    s* current2 = separatorTable;
+printf("\n/*************** Table des symboles separateurs ***************\n");
+printf("___________________________________________\n");
+printf("\t|    NomEntite   |    CodeEntite  | \n");
+printf("___________________________________________\n");
+
+    while (current2 != NULL) {
+        printf("\t|%15s |%15s | \n", current2->name, current2->type);
+        current2 = current2->next;
+    }
+
+    printf("\n");
+
+
+ 
+
+}
+
+
+void rechercher(char entite[], char code[], char type[], float val, char valstr[], int y) {
+    int i;
+
+    switch (y) {
+        case 0: 
+
+            if(cpt==0) {
+                inserer(entite, code, type, val, valstr, 0);
+            }
+            else
+            {
+                listidf* current = symbolTable;
+                while (current != NULL && strcmp(entite, current->name) != 0) {
+                    current = current->next;
+                }
+
+                if (current == NULL) {
+                    // Entity not found, insert into the symbol table
+                    inserer(entite, code, type, val, valstr, 0);
+                }
+                // else
+                // printf("Entity already exists\n");
+            }
+            break;
+
+        case 1: // Check if the case in the keyword table is free
+            if(cptm==0) {
+                inserer(entite, code, type, val, valstr, 1);
+            }
+            else {
+                m* current = keywordTable;
+                while (current != NULL && strcmp(entite, current->name) != 0) {
+                    current = current->next;
+                }
+
+                if (current == NULL) {
+                    // Entity not found, insert into the keyword table
+                    inserer(entite, code, type, val, valstr, 1);
+                }
+                // else
+                // printf("Entity already exists\n");
+            }
+            break;
+
+        case 2: // Check if the case in the separator table is free
+            if(cpts==0) {
+                inserer(entite, code, type, val, valstr, 2);
+            }
+            else {
+                s* current = separatorTable;
+                while (current != NULL && strcmp(entite, current->name) != 0) {
+                    current = current->next;
+                }
+
+                if (current == NULL) {
+                    // Entity not found, insert into the separator table
+                inserer(entite, code, type, val, valstr, 2);
+                }
+                // else
+                // printf("Entity already exists\n");
+            }
+            break;
+    }
+}
+
+
+int Recherche_position(char entite[]) {
+    int i = 0;
+    listidf* current = symbolTable;
+    while (current != NULL) {
+        if (strcmp(entite, current->name) == 0) {
+            return i;
+        }
+        current = current->next;
+        i++;
+    }
+    return -1;
+}
+
+void insererTYPE(char entite[], char type[]) {
+    int pos = Recherche_position(entite);
+    if (pos != -1) {
+        strcpy(symbolTable[pos].type, type);
+    }
+}
+
+int doubleDeclaration(char entite[]) {
+    int pos = Recherche_position(entite);
+    if (pos == -1) {
+        return 0;  // Not found, not a double declaration
+    }
+    return (strcmp(symbolTable[pos].type, "") == 0) ? 0 : -1;
+}

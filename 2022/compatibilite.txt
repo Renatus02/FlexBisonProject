@@ -1,0 +1,22 @@
+
+float Z
+char Carac1
+bool Bool1
+
+#tests sur affecter a boolean
+
+Bool1= 89.6 + 8 -(5)
+Bool1 = 'S'
+Bool1 = Z
+Bool1 = false
+
+#test sur affecter a caracter
+
+Carac1 = 'A'
+Carac1 = true
+Carac1 = Bool1
+
+# test sur les float
+int Valint 
+Z= Valint + 10
+Valint = Carac1

@@ -39,48 +39,30 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     aff = 258,
-     point = 259,
-     po = 260,
-     pf = 261,
-     vg = 262,
-     idf = 263,
-     pvg = 264,
-     mc_then = 265,
-     mc_if = 266,
-     mc_else = 267,
-     mc_program = 268,
-     mc_endif = 269,
-     mc_character = 270,
-     mc_real = 271,
-     mc_enddo = 272,
-     mc_read = 273,
-     mc_write = 274,
-     mc_integer = 275,
-     mc_endr = 276,
-     mc_routine = 277,
-     mc_equivalence = 278,
-     mc_dowhile = 279,
-     mc_end = 280,
-     mc_call = 281,
-     mc_dimension = 282,
-     mc_logical = 283,
-     cst_char = 284,
-     opar_plus = 285,
-     opar_moins = 286,
-     opar_div = 287,
-     opar_mult = 288,
-     cst_bool = 289,
-     cst_int = 290,
-     cst_real = 291,
-     op_gt = 292,
-     op_lt = 293,
-     op_eq = 294,
-     op_ge = 295,
-     op_le = 296,
-     op_and = 297,
-     op_or = 298,
-     op_ne = 299
+     mc_pgm = 258,
+     soustraction = 259,
+     mc_entier = 260,
+     mc_reel = 261,
+     mc_str = 262,
+     mc_array = 263,
+     mc_var = 264,
+     mc_const = 265,
+     mc_eg = 266,
+     idf = 267,
+     cst = 268,
+     dz = 269,
+     division = 270,
+     addition = 271,
+     multi = 272,
+     dpts = 273,
+     egale = 274,
+     aff = 275,
+     acco = 276,
+     accf = 277,
+     crov = 278,
+     crof = 279,
+     fin = 280,
+     sep = 281
    };
 #endif
 
@@ -91,16 +73,15 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 7 "synt.y"
+#line 9 "synt.y"
  
    int entier; 
-   float reel;
    char* str;
 
 
 
 /* Line 1676 of yacc.c  */
-#line 104 "synt.tab.h"
+#line 85 "synt.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

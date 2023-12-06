@@ -1,0 +1,8 @@
+int Z 
+Z= 12
+while(Z > 1):
+    X = Z+1
+    Said = 'S'
+    Soumia = 23.87 * 0.1
+
+Moula = (-2.8)+8 *3
