@@ -1,4 +1,23 @@
-INTEGER ROUTINE chakib()
-a = 5
-ENDR
-
+PROGRAM chakib
+LOGICAL M;
+REAL S;
+M = TRUE;
+S= 5.2;
+IF (((A.EQ.(B+(2))).OR.(FALSE.EQ.TRUE)))
+THEN A = A - B ;
+ELSE
+A = A + B;
+ENDIF
+IF (A.EQ.B) THEN 
+A = A - B ;
+A = 2.5;
+ELSE
+A = A + B;
+A = 1 + 2;
+A = a + b;
+ENDIF
+EQUIVALENCE (A, B, C), (Y, TAB(3));
+A = 0;
+DOWHILE ((A.LT.10).AND.(B.LE.20)) A = A + 1;
+ENDDO
+END

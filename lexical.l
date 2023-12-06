@@ -2,95 +2,101 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include "ts.h"
 #include "synt.tab.h"
 int nb_ligne = 1;
 int nb_colonne = 1;
+extern YYSTYPE yylval;
 %}
 lettre [a-zA-Z]
 chiffre [0-9]
 IDF {lettre}({lettre}|{chiffre})*
 UNSIGNED_INT [0-9]+
-UNSIGNED_FLOAT [0-9]+\.[0-9]+
+UNSIGNED_REAL [0-9]+\.[0-9]+
 SIGNED_INT [-]?[0-9]+
-SIGNED_FLOAT [-]?[0-9]+\.[0-9]+
+SIGNED_REAL [-]?[0-9]+\.[0-9]+
 LOGICAL "TRUE"|"FALSE" 
 chainec \"[^\"]*\"
 COMMENTAIRE %[^;]*;	
 %%
-"=" {printf("= reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return aff;}
-"+" {printf("+ reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opar_plus;}
-"-" {printf("- reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opar_moins;}
-"*" {printf("* reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opar_mult;}
-"/" {printf("/ reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return opar_div;}
-"." {printf(". reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return point;}
-"(" {printf("( reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return po;}
-")" {printf(") reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return pf;}
-"," {printf(", reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return vg;}
-";" {printf("; reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return pvg;}
-"THEN" {printf("keyword THEN reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_then;}
-"IF" {printf("keyword IF reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_if;}
-"ELSE" {printf("keyword ELSE reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_else;}
-"PROGRAM" {printf("keyword PROGRAM reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_program;}
-"ENDIF" {printf("keyword ENDIF reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_endif;}
-"CHARACTER" {printf("keyword CHARACTER reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_character;}
-"REAL" {printf("keyword REAL reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_real;}
-"ENDDO" {printf("keyword ENDDO reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_enddo;}
-"READ" {printf("keyword READ reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_read;}
-"WRITE" {printf("keyword WRITE reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_write;}
-"INTEGER" {printf("keyword INTEGER reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_integer;}
-"ENDR" {printf("keyword ENDR reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_endr;}
-"ROUTINE" {printf("keyword ROUTINE reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_routine;}
-"EQUIVALENCE" {printf("keyword EQUIVALENCE reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_equivalence;}
-"GT" {printf(" GT reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return op_gt;}
-"LT" {printf(" LT reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return op_lt;}
-"GE" {printf(" GE reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return op_ge;}
-"NE" {printf(" NE reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return op_ne;}
-"LE" {printf(" LE reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return op_le;}
-"OR" {printf("keyword OR reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return op_or;}
-"AND" {printf("keyword AND reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return op_and;}
-"DOWHILE" {printf("keyword DOWHILE reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_dowhile;}
-"END" {printf("keyword END reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_end;}
-"CALL" {printf("keyword CALL reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_call;}
-"DIMENSION" {printf("DIMENSION reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_dimension;}
-"EQ" {printf("EQ reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return op_eq;}
-"LOGICAL" {printf("LOGICAL reconnu a la ligne %d, colonne %d\n", nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return mc_logical;}
-{LOGICAL} {printf("LOGICAL reconnu(%s) a la ligne %d, colonne %d\n", yytext, nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return cst_bool;}
-{COMMENTAIRE} { nb_colonne = nb_colonne + strlen(yytext); }
-{chainec} { printf("CHAINE DE CHARACTERS reconnu %s a la ligne %d, colonne %d\n", yytext, nb_ligne, nb_colonne); nb_colonne=nb_colonne+strlen(yytext); return cst_char;}
+"=" { rechercher (yytext,"egalite","",0,"", 2); nb_colonne=nb_colonne+strlen(yytext); return aff;}
+"-" { rechercher (yytext,"soustraction","",0,"", 2); nb_colonne=nb_colonne+strlen(yytext); return opar_moins;}
+"+" { rechercher (yytext,"addition","",0,"", 2); nb_colonne=nb_colonne+strlen(yytext); return opar_plus;}
+"*" { rechercher (yytext,"multiplication","",0,"", 2); nb_colonne=nb_colonne+strlen(yytext); return opar_mult;}
+"/" { rechercher (yytext,"division","",0,"", 2); nb_colonne=nb_colonne+strlen(yytext); return opar_div;}
+"." { rechercher (yytext,"point","",0,"", 2); nb_colonne=nb_colonne+strlen(yytext); return point;}
+"(" { rechercher (yytext,"par_ouvr","",0,"", 2); nb_colonne=nb_colonne+strlen(yytext); return po;}
+")" { rechercher (yytext,"par_ferm","",0,"", 2); nb_colonne=nb_colonne+strlen(yytext); return pf;}
+"," { rechercher (yytext,"virgule","",0,"", 2); nb_colonne=nb_colonne+strlen(yytext); return vg;}
+";" { rechercher (yytext,"point_virgule","",0,"", 2); nb_colonne=nb_colonne+strlen(yytext); return pvg;}
+"THEN" {rechercher (yytext,"Mot cle","",0, "", 1); nb_colonne=nb_colonne+strlen(yytext); return mc_then;}
+"IF" {rechercher (yytext,"Mot cle","",0, "", 1); nb_colonne=nb_colonne+strlen(yytext); return mc_if;}
+"ELSE" {rechercher (yytext,"Mot cle","",0, "", 1); nb_colonne=nb_colonne+strlen(yytext); return mc_else;}
+"PROGRAM" {rechercher (yytext,"Mot cle","",0, "", 1); nb_colonne=nb_colonne+strlen(yytext); return mc_program;}
+"ENDIF" {rechercher (yytext,"Mot cle","",0, "", 1); nb_colonne=nb_colonne+strlen(yytext); return mc_endif;}
+"CHARACTER" {yylval.str=strdup(yytext);rechercher (yytext,"Mot cle","",0, "", 1); nb_colonne=nb_colonne+strlen(yytext); return mc_character;}
+"REAL" {yylval.str=strdup(yytext);rechercher (yytext,"Mot cle","",0, "", 1); nb_colonne=nb_colonne+strlen(yytext); return mc_real;}
+"ENDDO" {rechercher (yytext,"Mot cle","",0, "", 1); nb_colonne=nb_colonne+strlen(yytext); return mc_enddo;}
+"READ" {rechercher (yytext,"Mot cle","",0, "", 1); nb_colonne=nb_colonne+strlen(yytext); return mc_read;}
+"WRITE" {rechercher (yytext,"Mot cle","",0, "", 1); nb_colonne=nb_colonne+strlen(yytext); return mc_write;}
+"INTEGER" {yylval.str=strdup(yytext);rechercher (yytext,"Mot cle","",0, "", 1); yylval.str=strdup(yytext); rechercher (yytext,"Mot cle","",0, "", 1);  nb_colonne=nb_colonne+strlen(yytext); return mc_integer;}
+"ENDR" {rechercher (yytext,"Mot cle","",0, "", 1);nb_colonne=nb_colonne+strlen(yytext); return mc_endr;}
+"ROUTINE" {rechercher (yytext,"Mot cle","",0, "", 1); nb_colonne=nb_colonne+strlen(yytext); return mc_routine;}
+"EQUIVALENCE" {rechercher (yytext,"Mot cle","",0, "", 1); nb_colonne=nb_colonne+strlen(yytext); return mc_equivalence;}
+"GT" {rechercher (yytext,"Mot Cle","",0,"", 1); nb_colonne=nb_colonne+strlen(yytext); return op_gt;}
+"LT" {rechercher (yytext,"Mot Cle","",0,"", 1); nb_colonne=nb_colonne+strlen(yytext); return op_lt;}
+"GE" {rechercher (yytext,"Mot Cle","",0,"", 1); nb_colonne=nb_colonne+strlen(yytext); return op_ge;}
+"NE" {rechercher (yytext,"Mot Cle","",0,"", 1); nb_colonne=nb_colonne+strlen(yytext); return op_ne;}
+"LE" {rechercher (yytext,"Mot Cle","",0,"", 1); nb_colonne=nb_colonne+strlen(yytext); return op_le;}
+"OR" {rechercher (yytext,"Mot cle","",0, "", 1); nb_colonne=nb_colonne+strlen(yytext); return op_or;}
+"AND" {rechercher (yytext,"Mot cle","",0, "", 1);nb_colonne=nb_colonne+strlen(yytext); return op_and;}
+"DOWHILE" {rechercher (yytext,"Mot cle","",0, "", 1); nb_colonne=nb_colonne+strlen(yytext); return mc_dowhile;}
+"END" {rechercher (yytext,"Mot cle","",0, "", 1); nb_colonne=nb_colonne+strlen(yytext); return mc_end;}
+"CALL" {rechercher (yytext,"Mot cle","",0, "", 1); nb_colonne=nb_colonne+strlen(yytext); return mc_call;}
+"DIMENSION" {rechercher (yytext,"Mot cle","",0, "", 1); nb_colonne=nb_colonne+strlen(yytext); return mc_dimension;}
+"EQ" {rechercher (yytext,"mot cle","",0,"", 1); nb_colonne=nb_colonne+strlen(yytext); return op_eq;}
+"LOGICAL" {rechercher (yytext,"Mot cle","",0, "", 1); nb_colonne=nb_colonne+strlen(yytext); return mc_logical;}
+{LOGICAL} {yylval.str=strdup(yytext);rechercher (yytext,"cst LOGICAL","LOGICAL",0,yytext, 0); nb_colonne=nb_colonne+strlen(yytext); return cst_bool;}
+{COMMENTAIRE} {nb_colonne = nb_colonne + strlen(yytext);}
+{chainec} {rechercher (yytext,"CST CHARACTER","chainec",0,yytext, 0); yylval.str=strdup(yytext); nb_colonne=nb_colonne+strlen(yytext); return cst_char;}
 {UNSIGNED_INT} {
     if (atoi(yytext) > 32767) {
         printf("WARNING: ligne %d, colonne %d, nombre trop grand\n", nb_ligne, nb_colonne);
     } else {
+        rechercher (yytext,"Cst INTEGER ","INTEGER",atoi(yytext),"", 0);
         nb_colonne = nb_colonne + strlen(yytext);
-        printf("UNSIGNED_INT reconnu(%s) a la ligne %d, colonne %d\n", yytext, nb_ligne, nb_colonne);
+        yylval.entier= atoi(yytext);
         return cst_int;
     }
 }
-{UNSIGNED_FLOAT} {
+{UNSIGNED_REAL} {
     if (atof(yytext) > 32767 || atof(yytext) < -32768) {
         printf("WARNING: ligne %d, colonne %d, nombre trop grand\n", nb_ligne, nb_colonne);
     } else {
+        rechercher (yytext,"Cst REAL","REAL",atof(yytext),"", 0);
         nb_colonne = nb_colonne + strlen(yytext);
-        printf("UNSIGNED_FLOAT reconnu(%s) a la ligne %d, colonne %d\n", yytext, nb_ligne, nb_colonne);
-        return cst_float;
+        yylval.str=strdup(yytext);
+        return cst_real;
     }
 }
 {SIGNED_INT} {
     if (atoi(yytext) > 32767 || atoi(yytext) < -32768) {
         printf("WARNING: ligne %d, colonne %d, nombre trop grand\n", nb_ligne, nb_colonne);
     } else {
+        rechercher (yytext,"Cst INTEGER ","INTEGER",atoi(yytext),"", 0);
         nb_colonne = nb_colonne + strlen(yytext);
-        printf("SIGNED_INT reconnu(%s) a la ligne %d, colonne %d\n", yytext, nb_ligne, nb_colonne);
+        yylval.reel= atof(yytext);
         return cst_int;
     }
 }
-{SIGNED_FLOAT} {
+{SIGNED_REAL} {
     if (atof(yytext) > 32767 || atof(yytext) < -32768) {
         printf("WARNING: ligne %d, colonne %d, nombre trop grand\n", nb_ligne, nb_colonne);
     } else {
+        rechercher (yytext,"Cst REEL","REEL",atof(yytext),"",0);
         nb_colonne = nb_colonne + strlen(yytext);
-        printf("SIGNED_FLOAT reconnu(%s) a la ligne %d, colonne %d\n", yytext, nb_ligne, nb_colonne);
-        return cst_float;
+        yylval.reel=atof(yytext);
+        return cst_real;
     }
 }
 {IDF} {
@@ -98,9 +104,9 @@ COMMENTAIRE %[^;]*;
         printf("WARNING: identificateur trop long\n");
     }
     else{
-			printf("IDF reconnu(%s) a la ligne %d, colonne %d\n", yytext, nb_ligne, nb_colonne);
-	}
-    nb_colonne=nb_colonne+strlen(yytext);
+            rechercher (yytext,"IDF ","",0,"", 0); 
+			yylval.str=strdup(yytext); }
+            nb_colonne=nb_colonne+strlen(yytext);
     return idf;
 
 }
@@ -108,3 +114,6 @@ COMMENTAIRE %[^;]*;
 \n  nb_ligne++; nb_colonne = 1; 
 . { printf("erreur lexicale (non reconnu)\n"); nb_colonne=nb_colonne+strlen(yytext); }
 %%
+
+
+

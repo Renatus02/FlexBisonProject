@@ -1,5 +1,10 @@
+CHARACTER ROUTINE c(a,b)
+WRITE("HELLO", A, "\n");
+c = "HELLO"
+ENDR
+
 PROGRAM chakib
-IF (((A.EQ.(B+(2))).OR.(FALSE.EQ.TRUE)))
+IF (((((((((((A.EQ.(B+(2))).OR.(FALSE.EQ.TRUE)))))))))))
 THEN A = A - B ;
 ELSE
 A = A + B;
@@ -14,5 +19,7 @@ ENDIF
 EQUIVALENCE (A, B, C), (Y, TAB(3));
 A = 0;
 DOWHILE ((A.LT.10).AND.(B.LE.20)) A = A + 1;
+EQUIVALENCE (A, B, C), (Y, TAB(3));
+
 ENDDO
 END
