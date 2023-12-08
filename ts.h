@@ -3,13 +3,13 @@
 #include <string.h>
 typedef struct listidf listidf;
 struct listidf {
-    int state;  // 0: not used, 1: used
+    int state;  
     char name[20];
     char code[20];
     char type[20];
     float val;
     char valstr[50];
-    int scope;  // 0: global, >0: local scope
+    int scope;  //cet variable pour savoir si la variable est locale ou globale (0: global, >0: local)
     struct listidf* next;
 };
 typedef struct m m;
@@ -30,7 +30,6 @@ typedef struct s s;
     };
 
 int currentScope = 0;
-// Head pointers for the linked lists
 listidf* symbolTable;
 m* keywordTable;
 s* separatorTable;
@@ -45,10 +44,8 @@ void initialisation() {
     separatorTable = NULL;
 }
 
-// Function to insert an entity into the symbol table
 void inserer(char entite[], char code[], char type[], float val, char valstr[], int y) {
     if (y == 0) {
-        // Insert into symbolTable as FIFO
         listidf *newEntry = (listidf*)malloc(sizeof(listidf));
         newEntry->state = 1;
         strcpy(newEntry->name, entite);
@@ -60,10 +57,8 @@ void inserer(char entite[], char code[], char type[], float val, char valstr[], 
         newEntry->next = NULL;
 
         if (symbolTable == NULL) {
-            // If symbolTable is empty, set the new entry as the head
             symbolTable = newEntry;
         } else {
-            // Find the last element in the list and add the new entry
             listidf* last = symbolTable;
             while (last->next != NULL) {
                 last = last->next;
@@ -72,7 +67,6 @@ void inserer(char entite[], char code[], char type[], float val, char valstr[], 
         }
         cpt++;
     } else if (y == 1) {
-        // Insert into keywordTable as FIFO
         m* newEntry = (m*)malloc(sizeof(m));
         newEntry->state = 1;
         strcpy(newEntry->name, entite);
@@ -80,10 +74,8 @@ void inserer(char entite[], char code[], char type[], float val, char valstr[], 
         newEntry->next = NULL;
 
         if (keywordTable == NULL) {
-            // If keywordTable is empty, set the new entry as the head
             keywordTable = newEntry;
         } else {
-            // Find the last element in the list and add the new entry
             m* last = keywordTable;
             while (last->next != NULL) {
                 last = last->next;
@@ -92,7 +84,6 @@ void inserer(char entite[], char code[], char type[], float val, char valstr[], 
         }
         cptm++;
     } else if (y == 2) {
-        // Insert into separatorTable as FIFO
         s* newEntry = (s*)malloc(sizeof(s));
         newEntry->state = 1;
         strcpy(newEntry->name, entite);
@@ -100,10 +91,8 @@ void inserer(char entite[], char code[], char type[], float val, char valstr[], 
         newEntry->next = NULL;
 
         if (separatorTable == NULL) {
-            // If separatorTable is empty, set the new entry as the head
             separatorTable = newEntry;
         } else {
-            // Find the last element in the list and add the new entry
             s* last = separatorTable;
             while (last->next != NULL) {
                 last = last->next;
@@ -113,12 +102,10 @@ void inserer(char entite[], char code[], char type[], float val, char valstr[], 
         cpts++;
     }
 
-    // Set the scope for local variables
 }
 
 
 
-// Function to display the contents of the symbol table
 void afficher() {
     listidf* courant = symbolTable;
     printf("\n\n/****************** Table des symboles ******************/\n\n");
@@ -183,17 +170,15 @@ void rechercher(char entite[], char code[], char type[], float val, char valstr[
                 }
 
                 if (current == NULL) {
-                    // Entity not found, insert into the symbol table with the current scope information
                     inserer(entite, code, type, val, valstr, 0);
                 }
                 else if(strcmp(entite, current->name) == 0 && currentScope != current->scope)
                 {
-                    // Entity found with different scope, insert into the symbol table with the current scope information
                         inserer(entite, code, type, val, valstr, 0);
             }
             break;
 
-        case 1: // Check if the case in the keyword table is free
+        case 1: 
             if(strcmp("ROUTINE", entite) == 0){
                 currentScope++;
               }
@@ -210,14 +195,14 @@ void rechercher(char entite[], char code[], char type[], float val, char valstr[
                 }
 
                 if (current == NULL) {
-                    // Entity not found, insert into the keyword table
+
                     inserer(entite, code, type, val, valstr, 1);
                 }
                 }
             }
             break;
 
-        case 2: // Check if the case in the separator table is free
+        case 2: 
             if(cpts==0) {
                 inserer(entite, code, type, val, valstr, 2);
             }
@@ -228,7 +213,7 @@ void rechercher(char entite[], char code[], char type[], float val, char valstr[
                 }
 
                 if (current == NULL) {
-                    // Entity not found, insert into the separator table
+ 
                 inserer(entite, code, type, val, valstr, 2);
                 }
                 // else
@@ -263,18 +248,18 @@ int doubleDeclaration(char entite[], int currentScope) {
     int pos = Recherche_position(entite);
     
     if (pos == -1) {
-        return 0;  // Not found, not a double declaration
+        return 0;  
     }
 
     if (symbolTable[pos].state == 0) {
-        // Variable is not in the current scope, so it's not a double declaration
+        
         return 0;
     }
 
     if (symbolTable[pos].state == currentScope) {
-        // Variable is in the same scope, it's a double declaration
+        // la variable a le meme scope que la variable courante, donc double declaration
         return -1;
     }
 
-    return 0;  // Variable is in a different scope, not a double declaration
+    return 0; 
 }
