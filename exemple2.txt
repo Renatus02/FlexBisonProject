@@ -4,8 +4,10 @@ c = "HELLO"
 ENDR
 
 PROGRAM chakib
+INTEGER A;
 IF (((((((((((A.EQ.(B+(2))).OR.(FALSE.EQ.TRUE)))))))))))
-THEN A = A - B ;
+THEN
+A = A - B ;
 ELSE
 A = A + B;
 ENDIF

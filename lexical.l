@@ -2,8 +2,9 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include "syntgl.tab.h"
 #include "ts.h"
-#include "synt.tab.h"
+
 int nb_ligne = 1;
 int nb_colonne = 1;
 extern YYSTYPE yylval;

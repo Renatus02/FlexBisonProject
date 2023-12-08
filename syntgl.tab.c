@@ -68,14 +68,14 @@
 /* Copy the first part of user declarations.  */
 
 /* Line 189 of yacc.c  */
-#line 1 "synt.y"
+#line 1 "syntgl.y"
 
     #include <string.h>
-    char sauv[20];
+    extern int currentScope;
 
 
 /* Line 189 of yacc.c  */
-#line 79 "synt.tab.c"
+#line 79 "syntgl.tab.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -154,16 +154,16 @@ typedef union YYSTYPE
 {
 
 /* Line 214 of yacc.c  */
-#line 7 "synt.y"
- 
-   int entier; 
+#line 7 "syntgl.y"
+
+   int entier;
    float reel;
    char* str;
 
 
 
 /* Line 214 of yacc.c  */
-#line 167 "synt.tab.c"
+#line 167 "syntgl.tab.c"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -175,7 +175,7 @@ typedef union YYSTYPE
 
 
 /* Line 264 of yacc.c  */
-#line 179 "synt.tab.c"
+#line 179 "syntgl.tab.c"
 
 #ifdef short
 # undef short
@@ -497,14 +497,14 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    22,    22,    22,    28,    32,    36,    44,    46,    50,
-      54,    58,    60,    62,    64,    68,    70,    72,    76,    78,
-      80,    82,    84,    86,    88,    92,    94,    96,   100,   102,
-     104,   106,   108,   112,   118,   120,   122,   124,   126,   128,
-     130,   132,   134,   136,   138,   140,   144,   148,   152,   156,
-     158,   160,   162,   166,   168,   172,   174,   176,   180,   184,
-     186,   188,   190,   192,   194,   198,   200,   204,   208,   210,
-     214,   216,   220,   222,   226,   228,   230,   232,   234,   236
+       0,    22,    22,    22,    25,    27,    29,    31,    33,    35,
+      37,    39,    39,    39,    39,    41,    41,    41,    43,    44,
+      45,    46,    47,    48,    49,    51,    52,    53,    55,    56,
+      57,    58,    59,    61,    63,    64,    65,    66,    67,    68,
+      69,    70,    71,    72,    73,    74,    76,    78,    80,    82,
+      83,    84,    85,    87,    88,    90,    91,    92,    94,    96,
+      97,    98,    99,   100,   101,   103,   104,   106,   108,   109,
+     111,   111,   113,   113,   115,   115,   115,   115,   115,   115
 };
 #endif
 
@@ -1537,192 +1537,42 @@ yyreduce:
         case 3:
 
 /* Line 1455 of yacc.c  */
-#line 22 "synt.y"
-    {printf("syntaxe correcte\n"); YYACCEPT;;}
-    break;
-
-  case 4:
-
-/* Line 1455 of yacc.c  */
-#line 28 "synt.y"
-    {if(doubleDeclaration((yyvsp[(2) - (3)].str)) == 1) printf("Erreur Semantique: %s idf deja declaree pour un routine\n", (yyvsp[(2) - (3)].str));;}
+#line 22 "syntgl.y"
+    {printf("----------syntaxe correcte----------\n"); YYACCEPT;;}
     break;
 
   case 6:
 
 /* Line 1455 of yacc.c  */
-#line 36 "synt.y"
-    {
-    
-    if(doubleDeclaration((yyvsp[(3) - (7)].str)) == 1)
-     printf("Erreur Semantique: %s routine deja declaree\n", (yyvsp[(3) - (7)].str));
-    
-    
-    ;}
+#line 29 "syntgl.y"
+    {;}
     break;
 
   case 7:
 
 /* Line 1455 of yacc.c  */
-#line 44 "synt.y"
-    {if(doubleDeclaration((yyvsp[(3) - (9)].str)) == 1) printf("Erreur Semantique: %s routine deja declaree\n", (yyvsp[(3) - (9)].str));;}
+#line 31 "syntgl.y"
+    {;}
     break;
 
   case 8:
 
 /* Line 1455 of yacc.c  */
-#line 46 "synt.y"
-    {if(doubleDeclaration((yyvsp[(3) - (7)].str)) == 1) printf("Erreur Semantique: %s routine deja declaree\n", (yyvsp[(3) - (7)].str)); else insererTYPE((yyvsp[(3) - (7)].str), sauv);;}
+#line 33 "syntgl.y"
+    {;}
     break;
 
-  case 10:
+  case 9:
 
 /* Line 1455 of yacc.c  */
-#line 54 "synt.y"
-    {if(doubleDeclaration((yyvsp[(1) - (3)].str)) == 0) printf("Erreur Semantique: %s routine non declaree\n", (yyvsp[(1) - (3)].str));;}
-    break;
-
-  case 15:
-
-/* Line 1455 of yacc.c  */
-#line 68 "synt.y"
-    {strcpy(sauv, (yyvsp[(1) - (1)].str));;}
-    break;
-
-  case 16:
-
-/* Line 1455 of yacc.c  */
-#line 70 "synt.y"
-    {strcpy(sauv, (yyvsp[(1) - (1)].str));;}
-    break;
-
-  case 17:
-
-/* Line 1455 of yacc.c  */
-#line 72 "synt.y"
-    {strcpy(sauv, (yyvsp[(1) - (1)].str));;}
-    break;
-
-  case 18:
-
-/* Line 1455 of yacc.c  */
-#line 76 "synt.y"
-    {if(doubleDeclaration((yyvsp[(1) - (1)].str)) == 0) printf("Erreur Semantique: %s variable non declare\n", (yyvsp[(1) - (1)].str));;}
-    break;
-
-  case 19:
-
-/* Line 1455 of yacc.c  */
-#line 78 "synt.y"
-    { if(doubleDeclaration((yyvsp[(3) - (3)].str)) == 0) printf("Erreur Semantique: %s variable non declare\n", (yyvsp[(3) - (3)].str));;}
-    break;
-
-  case 22:
-
-/* Line 1455 of yacc.c  */
-#line 84 "synt.y"
-    {if(doubleDeclaration((yyvsp[(3) - (6)].str)) == 0) printf("Erreur Semantique: %s variable non declare\n", (yyvsp[(3) - (6)].str));;}
-    break;
-
-  case 23:
-
-/* Line 1455 of yacc.c  */
-#line 86 "synt.y"
-    {if(doubleDeclaration((yyvsp[(3) - (8)].str)) == 0) printf("Erreur Semantique: %s variable non declare\n", (yyvsp[(3) - (8)].str));;}
-    break;
-
-  case 28:
-
-/* Line 1455 of yacc.c  */
-#line 100 "synt.y"
-    {if(doubleDeclaration((yyvsp[(1) - (1)].str)) == 1) printf("Erreur Semantique: %s variable deja declaree\n", (yyvsp[(1) - (1)].str)); else insererTYPE((yyvsp[(1) - (1)].str), sauv);;}
-    break;
-
-  case 29:
-
-/* Line 1455 of yacc.c  */
-#line 102 "synt.y"
-    {if(doubleDeclaration((yyvsp[(3) - (3)].str)) == 1) printf("Erreur Semantique: %s variable deja declaree\n", (yyvsp[(3) - (3)].str)); else insererTYPE((yyvsp[(3) - (3)].str), sauv);;}
-    break;
-
-  case 33:
-
-/* Line 1455 of yacc.c  */
-#line 112 "synt.y"
-    {
-if(doubleDeclaration((yyvsp[(1) - (3)].str)) == 0) 
-    printf("Erreur Semantique: %s variable non declaree\n", (yyvsp[(1) - (3)].str));
-
-;}
-    break;
-
-  case 35:
-
-/* Line 1455 of yacc.c  */
-#line 120 "synt.y"
-    {if(doubleDeclaration((yyvsp[(1) - (1)].str)) == 0) printf("Erreur Semantique: %s variable non declaree\n", (yyvsp[(1) - (1)].str));;}
-    break;
-
-  case 36:
-
-/* Line 1455 of yacc.c  */
-#line 122 "synt.y"
-    {if(doubleDeclaration((yyvsp[(1) - (1)].str)) == 0) printf("Erreur Semantique: %s variable non declaree\n", (yyvsp[(1) - (1)].str));;}
-    break;
-
-  case 37:
-
-/* Line 1455 of yacc.c  */
-#line 124 "synt.y"
-    {if(doubleDeclaration((yyvsp[(1) - (1)].str)) == 0) printf("Erreur Semantique: %s variable non declaree\n", (yyvsp[(1) - (1)].str));;}
-    break;
-
-  case 38:
-
-/* Line 1455 of yacc.c  */
-#line 126 "synt.y"
-    {if(doubleDeclaration((yyvsp[(3) - (3)].str)) == 0) printf("Erreur Semantique: %s variable non declaree\n", (yyvsp[(3) - (3)].str));;}
-    break;
-
-  case 42:
-
-/* Line 1455 of yacc.c  */
-#line 134 "synt.y"
-    {if(doubleDeclaration((yyvsp[(3) - (3)].str)) == 0) printf("Erreur Semantique: %s variable non declaree\n", (yyvsp[(3) - (3)].str));;}
-    break;
-
-  case 47:
-
-/* Line 1455 of yacc.c  */
-#line 148 "synt.y"
-    {if(doubleDeclaration((yyvsp[(3) - (4)].str)) == 0) printf("Erreur Semantique: %s variable non declaree\n", (yyvsp[(3) - (4)].str));;}
-    break;
-
-  case 50:
-
-/* Line 1455 of yacc.c  */
-#line 158 "synt.y"
-    {if(doubleDeclaration((yyvsp[(1) - (1)].str)) == 0) printf("Erreur Semantique: %s variable non declaree\n", (yyvsp[(1) - (1)].str));;}
-    break;
-
-  case 51:
-
-/* Line 1455 of yacc.c  */
-#line 160 "synt.y"
-    {if(doubleDeclaration((yyvsp[(3) - (3)].str)) == 0) printf("Erreur Semantique: %s variable non declaree\n", (yyvsp[(3) - (3)].str));;}
-    break;
-
-  case 52:
-
-/* Line 1455 of yacc.c  */
-#line 162 "synt.y"
-    {if(doubleDeclaration((yyvsp[(3) - (3)].str)) == 0) printf("Erreur Semantique: %s variable non declaree\n", (yyvsp[(3) - (3)].str));;}
+#line 35 "syntgl.y"
+    {;}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 1726 "synt.tab.c"
+#line 1576 "syntgl.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1934,10 +1784,11 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 241 "synt.y"
+#line 117 "syntgl.y"
 
 
 #include <stdio.h>
+
 int yyerror(char *msg) {
     printf(" ------------------------------------------ Erreur Syntaxique ------------------------------------------");
     return 1;
@@ -1953,3 +1804,4 @@ int main() {
     afficher();
     return 0;
 }
+
