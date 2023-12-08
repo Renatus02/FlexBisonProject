@@ -2,7 +2,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include "syntgl.tab.h"
+#include "synt.tab.h"
 #include "ts.h"
 
 int nb_ligne = 1;
