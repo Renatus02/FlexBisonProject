@@ -2,12 +2,12 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include "synt.tab.h"
 #include "ts.h"
-
+#include "synt.tab.h"
 int nb_ligne = 1;
 int nb_colonne = 1;
 extern YYSTYPE yylval;
+
 %}
 lettre [a-zA-Z]
 chiffre [0-9]
@@ -115,6 +115,5 @@ COMMENTAIRE %[^;]*;
 \n  nb_ligne++; nb_colonne = 1; 
 . { printf("erreur lexicale (non reconnu)\n"); nb_colonne=nb_colonne+strlen(yytext); }
 %%
-
 
 

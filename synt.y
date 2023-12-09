@@ -1,16 +1,18 @@
 %{
     #include <string.h>
-
+    extern nb_ligne;
+    extern nb_colonne;
+    char sauvType[25];
 %}
 
 %union 
 { 
    int entier; 
-   float reel;
    char* str;
+   float reel;
 }
 
-%token aff point po pf vg idf pvg mc_then mc_if mc_else mc_program mc_endif mc_character mc_real mc_enddo mc_read mc_write mc_integer mc_endr mc_routine mc_equivalence mc_dowhile mc_end mc_call mc_dimension mc_logical cst_char opar_plus opar_moins opar_div opar_mult cst_bool cst_int cst_real op_gt op_lt op_eq op_ge op_le op_and op_or op_ne;
+%token aff point po pf vg <str>idf pvg mc_then mc_if mc_else mc_program mc_endif mc_character mc_real mc_enddo mc_read mc_write mc_integer mc_endr mc_routine mc_equivalence mc_dowhile mc_end mc_call mc_dimension mc_logical <str>cst_char opar_plus opar_moins opar_div opar_mult <str>cst_bool <entier>cst_int <reel>cst_real op_gt op_lt op_eq op_ge op_le op_and op_or op_ne;
 %left op_and op_or;
 %left op_gt op_ge op_eq op_ne op_le op_lt;
 %left opar_plus opar_moins;
@@ -19,7 +21,7 @@
 %%
 
 //l'axiome de la grammaire
-PROG: ROUTINE PROG | PP {printf("syntaxe correcte\n"); YYACCEPT;}
+PROG: ROUTINE PROG | PP {printf("syntaxe correcte"); YYACCEPT;}
 
 
 
@@ -59,15 +61,15 @@ OPAR: opar_plus
 
 
 
-TYPE: mc_integer 
+TYPE: mc_integer {strcpy(sauvType, $1);}
 
-    | mc_real 
+    | mc_real {strcpy(sauvType, $1);}
     
-    | mc_logical;
+    | mc_logical {strcpy(sauvType, $1);};
 
 
 
-LIST_PARAMETRE: idf  
+LIST_PARAMETRE: idf     
 
               | LIST_PARAMETRE vg idf 
 
@@ -234,7 +236,7 @@ OPCOMP: op_gt
 
 #include <stdio.h>
 int yyerror(char *msg) {
-    printf(" ------------------------------------------ Erreur Syntaxique ------------------------------------------");
+    printf(" --------------Erreur Syntaxique ligne : %d ,colonne: %d ------------",nb_ligne,nb_colonne);
     return 1;
 }
 

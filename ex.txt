@@ -1,15 +1,17 @@
 INTEGER ROUTINE a()
 INTEGER B;
-INTEGER A, A, A;
+REAL C;
+REAL B;
+INTEGER A;
 WRITE("hello");
-X = 5;
+X = 5.5;
 X = 5;
 X = 5;
 X = 5;
 
-x = 5
+y = 5
 ENDR
 
 PROGRAM chakib
-INTEGER A, B;
+INTEGER B;
 END

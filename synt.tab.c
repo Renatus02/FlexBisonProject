@@ -71,11 +71,13 @@
 #line 1 "synt.y"
 
     #include <string.h>
-
+    extern nb_ligne;
+    extern nb_colonne;
+    char sauvType[25];
 
 
 /* Line 189 of yacc.c  */
-#line 79 "synt.tab.c"
+#line 81 "synt.tab.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -154,16 +156,16 @@ typedef union YYSTYPE
 {
 
 /* Line 214 of yacc.c  */
-#line 7 "synt.y"
+#line 9 "synt.y"
  
    int entier; 
-   float reel;
    char* str;
+   float reel;
 
 
 
 /* Line 214 of yacc.c  */
-#line 167 "synt.tab.c"
+#line 169 "synt.tab.c"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -175,7 +177,7 @@ typedef union YYSTYPE
 
 
 /* Line 264 of yacc.c  */
-#line 179 "synt.tab.c"
+#line 181 "synt.tab.c"
 
 #ifdef short
 # undef short
@@ -497,14 +499,14 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    22,    22,    22,    28,    32,    36,    38,    40,    44,
-      48,    52,    54,    56,    58,    62,    64,    66,    70,    72,
-      74,    76,    78,    80,    82,    86,    88,    90,    94,    96,
-      98,   100,   102,   106,   110,   112,   114,   116,   118,   120,
-     122,   124,   126,   128,   130,   132,   136,   140,   144,   148,
-     150,   152,   154,   158,   160,   164,   166,   168,   172,   176,
-     178,   180,   182,   184,   186,   190,   192,   196,   200,   202,
-     206,   208,   212,   214,   218,   220,   222,   224,   226,   228
+       0,    24,    24,    24,    30,    34,    38,    40,    42,    46,
+      50,    54,    56,    58,    60,    64,    66,    68,    72,    74,
+      76,    78,    80,    82,    84,    88,    90,    92,    96,    98,
+     100,   102,   104,   108,   112,   114,   116,   118,   120,   122,
+     124,   126,   128,   130,   132,   134,   138,   142,   146,   150,
+     152,   154,   156,   160,   162,   166,   168,   170,   174,   178,
+     180,   182,   184,   186,   188,   192,   194,   198,   202,   204,
+     208,   210,   214,   216,   220,   222,   224,   226,   228,   230
 };
 #endif
 
@@ -1537,14 +1539,35 @@ yyreduce:
         case 3:
 
 /* Line 1455 of yacc.c  */
-#line 22 "synt.y"
-    {printf("syntaxe correcte\n"); YYACCEPT;;}
+#line 24 "synt.y"
+    {printf("syntaxe correcte"); YYACCEPT;;}
+    break;
+
+  case 15:
+
+/* Line 1455 of yacc.c  */
+#line 64 "synt.y"
+    {strcpy(sauvType, (yyvsp[(1) - (1)].str));;}
+    break;
+
+  case 16:
+
+/* Line 1455 of yacc.c  */
+#line 66 "synt.y"
+    {strcpy(sauvType, (yyvsp[(1) - (1)].str));;}
+    break;
+
+  case 17:
+
+/* Line 1455 of yacc.c  */
+#line 68 "synt.y"
+    {strcpy(sauvType, (yyvsp[(1) - (1)].str));;}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 1548 "synt.tab.c"
+#line 1571 "synt.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1756,12 +1779,12 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 233 "synt.y"
+#line 235 "synt.y"
 
 
 #include <stdio.h>
 int yyerror(char *msg) {
-    printf(" ------------------------------------------ Erreur Syntaxique ------------------------------------------");
+    printf(" --------------Erreur Syntaxique ligne : %d ,colonne: %d ------------",nb_ligne,nb_colonne);
     return 1;
 }
 

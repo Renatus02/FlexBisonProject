@@ -234,26 +234,30 @@ int Recherche_position(char entite[]) {
 }
 
 void insererTYPE(char entite[], char type[]) {
-    int pos = Recherche_position(entite);
-    if (pos != -1) {
-        strcpy(symbolTable[pos].type, type);
+    listidf* current = symbolTable;
+
+    while (current != NULL) {
+        if (strcmp(entite, current->name) == 0) {
+            strcpy(current->type, type);
+        }
+        current = current->next;
     }
 }
+
 
 int doubleDeclaration(char entite[]) {
     listidf* current = symbolTable;
 
     while (current != NULL) {
-        if (strcmp(entite, current->name) == 0) {
-            if (current->state == 0 && current->scope != currentScope) {
-                return 0;
+        if (current->state == 1 && strcmp(entite, current->name) == 0) {
+            if (current->scope == currentScope) {
+                return -1; 
+            } else {
+                return 0;   
             }
-
-            return -1;
         }
         current = current->next;
     }
 
-    return 0;
+    return 0;  
 }
-

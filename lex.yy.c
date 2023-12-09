@@ -453,12 +453,12 @@ char *yytext;
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include "synt.tab.h"
 #include "ts.h"
-
+#include "synt.tab.h"
 int nb_ligne = 1;
 int nb_colonne = 1;
 extern YYSTYPE yylval;
+
 #line 463 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
@@ -1873,7 +1873,6 @@ int main()
 	}
 #endif
 #line 117 "lexical.l"
-
 
 
 
