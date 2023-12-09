@@ -245,21 +245,24 @@ void insererTYPE(char entite[], char type[]) {
 }
 
 int doubleDeclaration(char entite[], int currentScope) {
-    int pos = Recherche_position(entite);
-    
-    if (pos == -1) {
-        return 0;  
+    listidf* current = symbolTable;
+
+    while (current != NULL) {
+        if (strcmp(entite, current->name) == 0) {
+            if (current->state == 0 && current->scope != currentScope) {
+                // The entity is declared but not yet used and is in a different scope
+                return 0;
+            }
+            
+            // The entity is either declared and used in the same scope (double declaration) or not used in a different scope
+            return -1;
+        }
+        current = current->next;
     }
 
-    if (symbolTable[pos].state == 0) {
-        
-        return 0;
-    }
-
-    if (symbolTable[pos].state == currentScope) {
-        // la variable a le meme scope que la variable courante, donc double declaration
-        return -1;
-    }
-
-    return 0; 
+    // The entity is not found, so there is no double declaration error
+    return 0;
 }
+
+     
+     

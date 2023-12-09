@@ -1541,10 +1541,17 @@ yyreduce:
     {printf("syntaxe correcte\n"); YYACCEPT;;}
     break;
 
+  case 28:
+
+/* Line 1455 of yacc.c  */
+#line 94 "synt.y"
+    {if(doubleDeclaration((yyvsp[(1) - (1)].str))==-1) {printf("double declaration de la variable %s\n",(yyvsp[(1) - (1)].str));};}
+    break;
+
 
 
 /* Line 1455 of yacc.c  */
-#line 1548 "synt.tab.c"
+#line 1555 "synt.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);

@@ -1,3 +1,9 @@
 INTEGER ROUTINE a()
-aa = 2
+INTEGER x;
+INTEGER x;
+Y = 5
 ENDR
+
+PROGRAM chakib
+INTEGER x;
+END
