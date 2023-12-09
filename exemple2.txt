@@ -1,4 +1,4 @@
-CHARACTER ROUTINE fff(a,b)
+INTEGER ROUTINE fff(a,b)
 WRITE("HELLO", A, "\n");
 c = "HELLO"
 ENDR

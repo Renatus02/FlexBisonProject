@@ -160,64 +160,60 @@ void rechercher(char entite[], char code[], char type[], float val, char valstr[
     int i;
 
     switch (y) {
-        case 0: 
-            if (cpt == 0) {
-                inserer(entite, code, type, val, valstr, 0);
-            } else {
-                listidf* current = symbolTable;
-                while (current != NULL && strcmp(entite, current->name) != 0) {
-                    current = current->next;
-                }
-
-                if (current == NULL) {
-                    inserer(entite, code, type, val, valstr, 0);
-                }
-                else if(strcmp(entite, current->name) == 0 && currentScope != current->scope)
-                {
-                        inserer(entite, code, type, val, valstr, 0);
+   case 0: 
+    if (cpt == 0) {
+        inserer(entite, code, type, val, valstr, 0);
+    } else {
+        listidf* current = symbolTable;
+        while (current != NULL && current->state == 1) {
+            if (strcmp(entite, current->name) == 0 && currentScope == current->scope) {
+                // variable existe deja avec le meme scope et le meme nom
+                return;
             }
-            break;
+            current = current->next;
+        }
+
+        // variable n'existe pas
+        inserer(entite, code, type, val, valstr, 0);
+    }
+    break;
+
 
         case 1: 
             if(strcmp("ROUTINE", entite) == 0){
                 currentScope++;
-              }
+            }
             if(strcmp("PROGRAM", entite) == 0){
                 currentScope = 0;
             }
-            if(cptm==0) {
+            if(cptm == 0) {
                 inserer(entite, code, type, val, valstr, 1);
             }
             else {
                 m* current = keywordTable;
-                while (current != NULL && strcmp(entite, current->name) != 0) {
+                while (current != NULL && strcmp(entite, current->name) != 0 && current->state == 1) {
                     current = current->next;
                 }
 
                 if (current == NULL) {
-
                     inserer(entite, code, type, val, valstr, 1);
-                }
                 }
             }
             break;
 
         case 2: 
-            if(cpts==0) {
+            if(cpts == 0) {
                 inserer(entite, code, type, val, valstr, 2);
             }
             else {
                 s* current = separatorTable;
-                while (current != NULL && strcmp(entite, current->name) != 0) {
+                while (current != NULL && strcmp(entite, current->name) != 0 && current->state == 1) {
                     current = current->next;
                 }
 
                 if (current == NULL) {
- 
-                inserer(entite, code, type, val, valstr, 2);
+                    inserer(entite, code, type, val, valstr, 2);
                 }
-                // else
-                // printf("Entity already exists\n");
             }
             break;
     }
@@ -244,25 +240,20 @@ void insererTYPE(char entite[], char type[]) {
     }
 }
 
-int doubleDeclaration(char entite[], int currentScope) {
+int doubleDeclaration(char entite[]) {
     listidf* current = symbolTable;
 
     while (current != NULL) {
         if (strcmp(entite, current->name) == 0) {
             if (current->state == 0 && current->scope != currentScope) {
-                // The entity is declared but not yet used and is in a different scope
                 return 0;
             }
-            
-            // The entity is either declared and used in the same scope (double declaration) or not used in a different scope
+
             return -1;
         }
         current = current->next;
     }
 
-    // The entity is not found, so there is no double declaration error
     return 0;
 }
 
-     
-     
