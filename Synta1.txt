@@ -1,14 +1,14 @@
 INTEGER ROUTINE Comp (X,Y,Z)
-% Déclarations;
+% Déclaration;
 
 INTEGER A,B; 
-REAL Z, T;
+REAL Z, T; 
 CHARACTER C*20; 
 INTEGER var4 DIMENSION (20); 
 REAL MAT DIMENSION (20, 200);
-LOGICAL D;
+LOGICAL a;
 
-% Instructions;
+% Instructions
 A = MAT(5,4) + (B * 5);
 B = 30;
 C = "L3";
@@ -34,12 +34,12 @@ Comp = A
 ENDR
 
 PROGRAM HelloAcad
-% Déclarations;
+% Déclarations
 INTEGER A,B,C ; 
 REAL Y ; 
 INTEGER TAB DIMENSION (10) ; 
 
-% Instructions;
+% Instructions
 A = TAB(11) + (B * 7);
 B = 30;
 C = 22+10*B;

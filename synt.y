@@ -1,18 +1,20 @@
 %{
     #include <string.h>
-    extern nb_ligne;
-    extern nb_colonne;
-    char sauvType[25];
+    #include <stdio.h>
+    #include <stdlib.h>
+    extern char currentScope[10];
+    extern char typeidf[10];
+
 %}
 
 %union 
 { 
    int entier; 
-   char* str;
    float reel;
+   char* str;
 }
 
-%token aff point po pf vg <str>idf pvg mc_then mc_if mc_else mc_program mc_endif mc_character mc_real mc_enddo mc_read mc_write mc_integer mc_endr mc_routine mc_equivalence mc_dowhile mc_end mc_call mc_dimension mc_logical <str>cst_char opar_plus opar_moins opar_div opar_mult <str>cst_bool <entier>cst_int <reel>cst_real op_gt op_lt op_eq op_ge op_le op_and op_or op_ne;
+%token aff point po pf vg <str>idf pvg mc_then mc_if mc_else mc_program mc_endif mc_character mc_real mc_enddo mc_read mc_write mc_integer mc_endr mc_routine mc_equivalence mc_dowhile mc_end mc_call mc_dimension mc_logical cst_char opar_plus opar_moins opar_div opar_mult cst_bool cst_int cst_real op_gt op_lt op_eq op_ge op_le op_and op_or op_ne;
 %left op_and op_or;
 %left op_gt op_ge op_eq op_ne op_le op_lt;
 %left opar_plus opar_moins;
@@ -21,13 +23,13 @@
 %%
 
 //l'axiome de la grammaire
-PROG: ROUTINE PROG | PP {printf("syntaxe correcte"); YYACCEPT;}
+PROG: ROUTINE PROG | PP {printf("syntaxe correcte\n"); YYACCEPT;}
 
 
 
 //la grammaire
 
-PP: mc_program idf CORP_PROGRAM;
+PP: mc_program idf {strcpy(currentScope, $2);} CORP_PROGRAM
 
 
 
@@ -35,15 +37,15 @@ CORP_PROGRAM: LIST_DECLARATION LIST_INSTRUCTION mc_end;
 
 
 
-ROUTINE: TYPE mc_routine idf po LIST_PARAMETRE pf CORP_FONCTION;
+ROUTINE: TYPE mc_routine idf {strcpy(currentScope, $3);} po LIST_PARAMETRE pf CORP_FONCTION 
 
-       | mc_character mc_routine idf opar_mult CST po LIST_PARAMETRE pf CORP_FONCTION;
+       | mc_character mc_routine idf{strcpy(currentScope, $3);} opar_mult CST po LIST_PARAMETRE pf CORP_FONCTION 
        
-       | mc_character mc_routine idf po LIST_PARAMETRE pf CORP_FONCTION;
+       | mc_character mc_routine idf{strcpy(currentScope, $3);} po LIST_PARAMETRE pf CORP_FONCTION 
 
 
 
-CORP_FONCTION: LIST_DECLARATION LIST_INSTRUCTION RETURN mc_endr;
+CORP_FONCTION: LIST_DECLARATION LIST_INSTRUCTION RETURN mc_endr {strcpy(currentScope, "");}
 
 
 
@@ -61,15 +63,15 @@ OPAR: opar_plus
 
 
 
-TYPE: mc_integer {strcpy(sauvType, $1);}
+TYPE: mc_integer {strcpy(typeidf, "INTEGER");}
 
-    | mc_real {strcpy(sauvType, $1);}
+    | mc_real {strcpy(typeidf, "REAL");}
     
-    | mc_logical {strcpy(sauvType, $1);};
+    | mc_logical {strcpy(typeidf, "LOGICAL");}
 
 
 
-LIST_PARAMETRE: idf     
+LIST_PARAMETRE: idf  
 
               | LIST_PARAMETRE vg idf 
 
@@ -93,14 +95,34 @@ LIST_DECLARATION: LIST_DECLARATION TYPE DECLARATION pvg
 
 
 
-DECLARATION: idf 
+DECLARATION: idf {
+    
+    if (doubleDeclaration($1, currentScope)) {
+        
+        printf("double declaration de la variable %s\n", $1);
+        
+    }
+    else 
+    insererTYPE($1, typeidf, currentScope);
+    
+    }
 
-           | DECLARATION vg idf 
+           | DECLARATION vg idf {
+    
+    if (doubleDeclaration($3, currentScope)) {
+        
+        printf("double declaration de la variable %s\n", $3);
+        
+    }
+    else 
+    insererTYPE($3, typeidf, currentScope);
+    
+    }
            
            | DECLARATION mc_dimension po CST pf 
            
            | DECLARATION mc_dimension po CST vg CST pf; 
-           
+        
            | DECLARATION opar_mult CST;
 
 
@@ -236,7 +258,7 @@ OPCOMP: op_gt
 
 #include <stdio.h>
 int yyerror(char *msg) {
-    printf(" --------------Erreur Syntaxique ligne : %d ,colonne: %d ------------",nb_ligne,nb_colonne);
+    printf(" ------------------------------------------ Erreur Syntaxique ------------------------------------------");
     return 1;
 }
 

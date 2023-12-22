@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 typedef struct listidf listidf;
 struct listidf {
     int state;  
@@ -9,7 +10,7 @@ struct listidf {
     char type[20];
     float val;
     char valstr[50];
-    int scope;  //cet variable pour savoir si la variable est locale ou globale (0: global, >0: local)
+    char scope[20];
     struct listidf* next;
 };
 typedef struct m m;
@@ -29,7 +30,6 @@ typedef struct s s;
         struct s* next;
     };
 
-int currentScope = 0;
 listidf* symbolTable;
 m* keywordTable;
 s* separatorTable;
@@ -42,9 +42,10 @@ void initialisation() {
     symbolTable = NULL;
     keywordTable = NULL;
     separatorTable = NULL;
+
 }
 
-void inserer(char entite[], char code[], char type[], float val, char valstr[], int y) {
+void inserer(char entite[], char code[], char type[], float val, char valstr[], int y, char scope[]) {
     if (y == 0) {
         listidf *newEntry = (listidf*)malloc(sizeof(listidf));
         newEntry->state = 1;
@@ -52,7 +53,7 @@ void inserer(char entite[], char code[], char type[], float val, char valstr[], 
         strcpy(newEntry->code, code);
         strcpy(newEntry->type, type);
         newEntry->val = val;
-        newEntry->scope = currentScope;
+        strcpy(newEntry->scope, scope);
         strcpy(newEntry->valstr, valstr);
         newEntry->next = NULL;
 
@@ -111,14 +112,14 @@ void afficher() {
     printf("\n\n/****************** Table des symboles ******************/\n\n");
     printf("\n/*************** Table des symboles IDF ***************/\n");
     printf("___________________________________________________________________________________________\n");
-    printf("\t|   Nom_Entite   |  Code_Entite   |   Type_Entite   |   Val_Entite    |    Scope   |\n");
+    printf("\t|   Nom_Entite   |  Code_Entite   |   Type_Entite   |   Val_Entite    |    scope   |\n");
     printf("___________________________________________________________________________________________\n");
 
     while (courant != NULL) {
         if ((strcmp(courant->type, "chainec") == 0) || (strcmp(courant->type, "LOGICAL") == 0)) {
-            printf("\t|%15s |%15s | %15s | %15s | %10d |\n", courant->name, courant->code, courant->type, courant->valstr, courant->scope);
+            printf("\t|%15s |%15s | %15s | %15s | %10s |\n", courant->name, courant->code, courant->type, courant->valstr, courant->scope);
         } else {
-            printf("\t|%15s |%15s | %15s | %15f | %10d |\n", courant->name, courant->code, courant->type, courant->val, courant->scope);
+            printf("\t|%15s |%15s | %15s | %15f | %10s |\n", courant->name, courant->code, courant->type, courant->val, courant->scope);
         }
         courant = courant->next;
     }
@@ -156,17 +157,17 @@ printf("___________________________________________\n");
 }
 
 
-void rechercher(char entite[], char code[], char type[], float val, char valstr[], int y) {
+void rechercher(char entite[], char code[], char type[], float val, char valstr[], int y, char scope[]) {
     int i;
 
     switch (y) {
    case 0: 
     if (cpt == 0) {
-        inserer(entite, code, type, val, valstr, 0);
+        inserer(entite, code, type, val, valstr, 0, scope);
     } else {
         listidf* current = symbolTable;
         while (current != NULL && current->state == 1) {
-            if (strcmp(entite, current->name) == 0 && currentScope == current->scope) {
+            if (strcmp(entite, current->name) == 0 && strcmp(current->scope, scope) == 0) {
                 // variable existe deja avec le meme scope et le meme nom
                 return;
             }
@@ -174,20 +175,11 @@ void rechercher(char entite[], char code[], char type[], float val, char valstr[
         }
 
         // variable n'existe pas
-        inserer(entite, code, type, val, valstr, 0);
+        inserer(entite, code, type, val, valstr, 0, scope);
     }
     break;
-
-
-        case 1: 
-            if(strcmp("ROUTINE", entite) == 0){
-                currentScope++;
-            }
-            if(strcmp("PROGRAM", entite) == 0){
-                currentScope = 0;
-            }
             if(cptm == 0) {
-                inserer(entite, code, type, val, valstr, 1);
+                inserer(entite, code, type, val, valstr, 1, "");
             }
             else {
                 m* current = keywordTable;
@@ -196,14 +188,14 @@ void rechercher(char entite[], char code[], char type[], float val, char valstr[
                 }
 
                 if (current == NULL) {
-                    inserer(entite, code, type, val, valstr, 1);
+                    inserer(entite, code, type, val, valstr, 1, "");
                 }
             }
             break;
 
         case 2: 
             if(cpts == 0) {
-                inserer(entite, code, type, val, valstr, 2);
+                inserer(entite, code, type, val, valstr, 2, "");
             }
             else {
                 s* current = separatorTable;
@@ -212,7 +204,7 @@ void rechercher(char entite[], char code[], char type[], float val, char valstr[
                 }
 
                 if (current == NULL) {
-                    inserer(entite, code, type, val, valstr, 2);
+                    inserer(entite, code, type, val, valstr, 2, "");
                 }
             }
             break;
@@ -230,14 +222,13 @@ int Recherche_position(char entite[]) {
         current = current->next;
         i++;
     }
-    return -1;
+    return -1;  
 }
 
-void insererTYPE(char entite[], char type[]) {
+void insererTYPE(char entite[], char type[], char scope[]) {
     listidf* current = symbolTable;
-
     while (current != NULL) {
-        if (strcmp(entite, current->name) == 0) {
+        if (strcmp(entite, current->name) == 0 && strcmp(current->scope, scope) == 0) {
             strcpy(current->type, type);
         }
         current = current->next;
@@ -245,19 +236,19 @@ void insererTYPE(char entite[], char type[]) {
 }
 
 
-int doubleDeclaration(char entite[]) {
+bool doubleDeclaration(char entite[], char scope[]) {
     listidf* current = symbolTable;
-
+    bool trouve = false;
     while (current != NULL) {
-        if (current->state == 1 && strcmp(entite, current->name) == 0) {
-            if (current->scope == currentScope) {
-                return -1; 
-            } else {
-                return 0;   
-            }
+        if (strcmp(current->type, "") != 0 && strcmp(entite, current->name) == 0 && strcmp(current->scope, scope) == 0) {
+            trouve = true;
         }
         current = current->next;
     }
-
-    return 0;  
+    return trouve;
 }
+
+
+
+
+

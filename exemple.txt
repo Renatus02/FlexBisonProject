@@ -1,21 +1,5 @@
-INTEGER ROUTINE r()
-INTEGER t;
-INTEGER t;
-Y = 5
-ENDR
-INTEGER ROUTINE r2()
-INTEGER t;
-Y = 5
-ENDR
-
-
 PROGRAM chakib
 INTEGER x;
-INTEGER x;
-INTEGER x;
-INTEGER c;
-x = 5;
-x = 5;
-x = 5;
-
+REAL y;
+REAL x,y,y,y,y;
 END
