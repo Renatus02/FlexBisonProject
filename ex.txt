@@ -1,7 +1,7 @@
 INTEGER ROUTINE Comp (X,Y,Z)
 % Déclarations;
 
-INTEGER A,B; 
+INTEGER A,B;
 REAL Z, T;
 CHARACTER C*20; 
 INTEGER var4 DIMENSION (20); 
@@ -44,7 +44,7 @@ A = TAB(11) + (B * 7);
 B = 30;
 C = 22+10*B;
 
-A = CALL nomroutine (A,B,C);
+A = CALL routine (A,B,C);
 EQUIVALENCE (A, B, C), (Y, TAB(3));
 
 END

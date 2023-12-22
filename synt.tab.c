@@ -75,11 +75,13 @@
     #include <stdlib.h>
     extern char currentScope[10];
     extern char typeidf[10];
+    int nb_ligne = 1;
+    int nb_colonne = 1;
 
 
 
 /* Line 189 of yacc.c  */
-#line 83 "synt.tab.c"
+#line 85 "synt.tab.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -158,7 +160,7 @@ typedef union YYSTYPE
 {
 
 /* Line 214 of yacc.c  */
-#line 11 "synt.y"
+#line 13 "synt.y"
  
    int entier; 
    float reel;
@@ -167,7 +169,7 @@ typedef union YYSTYPE
 
 
 /* Line 214 of yacc.c  */
-#line 171 "synt.tab.c"
+#line 173 "synt.tab.c"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -179,7 +181,7 @@ typedef union YYSTYPE
 
 
 /* Line 264 of yacc.c  */
-#line 183 "synt.tab.c"
+#line 185 "synt.tab.c"
 
 #ifdef short
 # undef short
@@ -503,15 +505,15 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    26,    26,    26,    32,    32,    36,    40,    40,    42,
-      42,    44,    44,    48,    52,    56,    58,    60,    62,    66,
-      68,    70,    74,    76,    78,    80,    82,    84,    86,    90,
-      92,    94,    98,   110,   122,   124,   126,   130,   134,   136,
-     138,   140,   142,   144,   146,   148,   150,   152,   154,   156,
-     160,   164,   168,   172,   174,   176,   178,   182,   184,   188,
-     190,   192,   196,   200,   202,   204,   206,   208,   210,   214,
-     216,   220,   224,   226,   230,   232,   236,   238,   242,   244,
-     246,   248,   250,   252
+       0,    28,    28,    28,    34,    34,    38,    42,    42,    44,
+      44,    46,    46,    50,    54,    58,    60,    62,    64,    68,
+      70,    72,    76,    78,    80,    82,    84,    86,    88,    92,
+      94,    96,   100,   112,   124,   126,   128,   132,   136,   138,
+     140,   142,   144,   146,   148,   150,   152,   154,   156,   158,
+     162,   166,   170,   174,   176,   178,   180,   184,   186,   190,
+     192,   194,   198,   202,   204,   206,   208,   210,   212,   216,
+     218,   222,   226,   228,   232,   234,   238,   240,   244,   246,
+     248,   250,   252,   254
 };
 #endif
 
@@ -1550,70 +1552,70 @@ yyreduce:
         case 3:
 
 /* Line 1455 of yacc.c  */
-#line 26 "synt.y"
+#line 28 "synt.y"
     {printf("syntaxe correcte\n"); YYACCEPT;;}
     break;
 
   case 4:
 
 /* Line 1455 of yacc.c  */
-#line 32 "synt.y"
+#line 34 "synt.y"
     {strcpy(currentScope, (yyvsp[(2) - (2)].str));;}
     break;
 
   case 7:
 
 /* Line 1455 of yacc.c  */
-#line 40 "synt.y"
+#line 42 "synt.y"
     {strcpy(currentScope, (yyvsp[(3) - (3)].str));;}
     break;
 
   case 9:
 
 /* Line 1455 of yacc.c  */
-#line 42 "synt.y"
+#line 44 "synt.y"
     {strcpy(currentScope, (yyvsp[(3) - (3)].str));;}
     break;
 
   case 11:
 
 /* Line 1455 of yacc.c  */
-#line 44 "synt.y"
+#line 46 "synt.y"
     {strcpy(currentScope, (yyvsp[(3) - (3)].str));;}
     break;
 
   case 13:
 
 /* Line 1455 of yacc.c  */
-#line 48 "synt.y"
+#line 50 "synt.y"
     {strcpy(currentScope, "");;}
     break;
 
   case 19:
 
 /* Line 1455 of yacc.c  */
-#line 66 "synt.y"
+#line 68 "synt.y"
     {strcpy(typeidf, "INTEGER");;}
     break;
 
   case 20:
 
 /* Line 1455 of yacc.c  */
-#line 68 "synt.y"
+#line 70 "synt.y"
     {strcpy(typeidf, "REAL");;}
     break;
 
   case 21:
 
 /* Line 1455 of yacc.c  */
-#line 70 "synt.y"
+#line 72 "synt.y"
     {strcpy(typeidf, "LOGICAL");;}
     break;
 
   case 32:
 
 /* Line 1455 of yacc.c  */
-#line 98 "synt.y"
+#line 100 "synt.y"
     {
     
     if (doubleDeclaration((yyvsp[(1) - (1)].str), currentScope)) {
@@ -1630,7 +1632,7 @@ yyreduce:
   case 33:
 
 /* Line 1455 of yacc.c  */
-#line 110 "synt.y"
+#line 112 "synt.y"
     {
     
     if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
@@ -1647,7 +1649,7 @@ yyreduce:
 
 
 /* Line 1455 of yacc.c  */
-#line 1651 "synt.tab.c"
+#line 1653 "synt.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1859,12 +1861,12 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 257 "synt.y"
+#line 259 "synt.y"
 
 
 #include <stdio.h>
 int yyerror(char *msg) {
-    printf(" ------------------------------------------ Erreur Syntaxique ------------------------------------------");
+    printf(" ------------------------------- Erreur Syntaxique at ligne: %d et colonne: %d -------------------------------", nb_ligne, nb_colonne);
     return 1;
 }
 

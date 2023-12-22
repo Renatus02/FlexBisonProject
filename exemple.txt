@@ -1,5 +1,3 @@
 PROGRAM chakib
-INTEGER x;
-REAL y;
-REAL x,y,y,y,y;
+INTEGER b__c;
 END

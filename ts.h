@@ -178,6 +178,7 @@ void rechercher(char entite[], char code[], char type[], float val, char valstr[
         inserer(entite, code, type, val, valstr, 0, scope);
     }
     break;
+    case 1:
             if(cptm == 0) {
                 inserer(entite, code, type, val, valstr, 1, "");
             }

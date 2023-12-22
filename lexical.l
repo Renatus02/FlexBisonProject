@@ -4,8 +4,8 @@
 #include<string.h>
 #include "ts.h"
 #include "synt.tab.h"
-int nb_ligne = 1;
-int nb_colonne = 1;
+extern nb_ligne;
+extern nb_colonne;
 char currentScope[10];
 char typeidf[10];
 extern YYSTYPE yylval;
@@ -105,7 +105,7 @@ COMMENTAIRE %[^;]*;
 }
 {IDF} {
     if(yyleng > 10){
-        printf("WARNING: identificateur trop long\n");
+        printf("WARNING: identificateur trop long at ligne %d, colonne %d\n", nb_ligne, nb_colonne);
     }
     else{
             rechercher (yytext,"IDF" , "" ,0,"", 0, currentScope); 
