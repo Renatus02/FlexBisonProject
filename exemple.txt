@@ -1,3 +1,5 @@
 PROGRAM chakib
-INTEGER b__c;
+INTEGER x DIMENSION (10,20);
+
+x(5,2) = 10;
 END

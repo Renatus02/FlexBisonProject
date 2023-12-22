@@ -31,7 +31,11 @@ PROG: ROUTINE PROG | PP {printf("syntaxe correcte\n"); YYACCEPT;}
 
 //la grammaire
 
-PP: mc_program idf {strcpy(currentScope, $2);} CORP_PROGRAM
+PP: mc_program idf {
+    strcpy(currentScope, "main");
+
+} 
+CORP_PROGRAM
 
 
 
@@ -39,11 +43,40 @@ CORP_PROGRAM: LIST_DECLARATION LIST_INSTRUCTION mc_end;
 
 
 
-ROUTINE: TYPE mc_routine idf {strcpy(currentScope, $3);} po LIST_PARAMETRE pf CORP_FONCTION 
+ROUTINE: TYPE mc_routine idf {
+    strcpy(currentScope, $3);
 
-       | mc_character mc_routine idf{strcpy(currentScope, $3);} opar_mult CST po LIST_PARAMETRE pf CORP_FONCTION 
+if (doubleDeclaration($3, currentScope)) {
+        
+        printf("double declaration de la variable %s\n", $3);
+        
+    }
+    else 
+    insererTYPE($3, typeidf, currentScope);
+
+} po LIST_PARAMETRE pf CORP_FONCTION 
+
+       | mc_character mc_routine idf{
+        strcpy(currentScope, $3);
+        if (doubleDeclaration($3, currentScope)) {
+        
+        printf("double declaration de la variable %s\n", $3);
+        
+    }
+    else 
+    insererTYPE($3, typeidf, currentScope);
+        } opar_mult CST po LIST_PARAMETRE pf CORP_FONCTION 
        
-       | mc_character mc_routine idf{strcpy(currentScope, $3);} po LIST_PARAMETRE pf CORP_FONCTION 
+       | mc_character mc_routine idf{
+        strcpy(currentScope, $3);
+        if (doubleDeclaration($3, currentScope)) {
+        
+        printf("double declaration de la variable %s\n", $3);
+        
+    }
+    else 
+    insererTYPE($3, typeidf, currentScope);
+        } po LIST_PARAMETRE pf CORP_FONCTION 
 
 
 
@@ -129,7 +162,9 @@ DECLARATION: idf {
 
 
 
-AFFECT: idf aff EXPRESSION;
+AFFECT: idf aff EXPRESSION 
+| idf po CST pf aff EXPRESSION;
+| idf po CST vg CST pf aff EXPRESSION;
 
 
 
