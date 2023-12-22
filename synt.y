@@ -162,9 +162,9 @@ DECLARATION: idf {
 
 
 
-AFFECT: idf aff EXPRESSION 
-| idf po CST pf aff EXPRESSION;
-| idf po CST vg CST pf aff EXPRESSION;
+AFFECT: idf aff EXPRESSION {if(!doubleDeclaration($1, currentScope)) printf("la variable %s n'est pas declarer\n", $1);}
+| idf po CST pf aff EXPRESSION {if(!doubleDeclaration($1, currentScope)) printf("la variable %s n'est pas declarer\n", $1);}
+| idf po CST vg CST pf aff EXPRESSION {if(!doubleDeclaration($1, currentScope)) printf("la variable %s n'est pas declarer\n", $1);};
 
 
 

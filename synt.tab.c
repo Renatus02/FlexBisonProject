@@ -1684,10 +1684,31 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
     ;}
     break;
 
+  case 37:
+
+/* Line 1455 of yacc.c  */
+#line 165 "synt.y"
+    {if(!doubleDeclaration((yyvsp[(1) - (3)].str), currentScope)) printf("la variable %s n'est pas declarer\n", (yyvsp[(1) - (3)].str));;}
+    break;
+
+  case 38:
+
+/* Line 1455 of yacc.c  */
+#line 166 "synt.y"
+    {if(!doubleDeclaration((yyvsp[(1) - (6)].str), currentScope)) printf("la variable %s n'est pas declarer\n", (yyvsp[(1) - (6)].str));;}
+    break;
+
+  case 39:
+
+/* Line 1455 of yacc.c  */
+#line 167 "synt.y"
+    {if(!doubleDeclaration((yyvsp[(1) - (8)].str), currentScope)) printf("la variable %s n'est pas declarer\n", (yyvsp[(1) - (8)].str));;}
+    break;
+
 
 
 /* Line 1455 of yacc.c  */
-#line 1691 "synt.tab.c"
+#line 1712 "synt.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
