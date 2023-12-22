@@ -92,8 +92,6 @@ OPAR: opar_plus
 
     | opar_moins 
  
-    | opar_div 
- 
     | opar_mult;
 
 
@@ -177,14 +175,23 @@ EXPRESSION: CST
           | cst_bool 
           
           | EXPRESSION OPAR idf 
+          |EXPRESSION opar_div idf
           
           | EXPRESSION OPAR CST 
+
+          | EXPRESSION opar_div cst_int  {   if ($3==0)
+			      {
+				    printf ("Erreur semantique division par 0 a la ligne %d et a la colonne %d \n",nb_ligne,nb_colonne); 
+				  }
+          }
           
           | po EXPRESSION pf 
           
           | CALL 
           
+
           | EXPRESSION OPAR cst_char 
+          | EXPRESSION opar_div cst_char
           
           | EXPRESSION po CST pf 
           

@@ -239,15 +239,15 @@ void insererTYPE(char entite[], char type[], char scope[]) {
 
 bool doubleDeclaration(char entite[], char scope[]) {
     listidf* current = symbolTable;
-    bool trouve = false;
     while (current != NULL) {
         if (strcmp(current->type, "") != 0 && strcmp(entite, current->name) == 0 && strcmp(current->scope, scope) == 0) {
-            trouve = true;
+            return true;  // Variable found, check type compatibility
         }
         current = current->next;
     }
-    return trouve;
+    return false;  // Variable not found or not type-compatible
 }
+
 
 
 

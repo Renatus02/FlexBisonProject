@@ -1,5 +1,4 @@
 PROGRAM chakib
-INTEGER x DIMENSION (10,20);
-
-x(5,2) = 10;
+INTEGER x;
+x = ((((X+1) / 5) * 6 - 1 + 2 * 3)/3) / 0.0;
 END
