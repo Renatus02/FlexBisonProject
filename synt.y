@@ -168,14 +168,14 @@ AFFECT: idf aff EXPRESSION {if(!doubleDeclaration($1, currentScope)) printf("la 
 
 EXPRESSION: CST 
 
-          | idf 
+          | idf {if(!doubleDeclaration($1, currentScope)) printf("la variable %s n'est pas declarer\n", $1);}
           
           | cst_char 
           
           | cst_bool 
           
-          | EXPRESSION OPAR idf 
-          |EXPRESSION opar_div idf
+          | EXPRESSION OPAR idf {if(!doubleDeclaration($3, currentScope)) printf("la variable %s n'est pas declarer\n", $3);}
+          |EXPRESSION opar_div idf {if(!doubleDeclaration($3, currentScope)) printf("la variable %s n'est pas declarer\n", $3);}
           
           | EXPRESSION OPAR CST 
 
@@ -198,6 +198,7 @@ EXPRESSION: CST
           | EXPRESSION po CST vg CST pf 
           
           | EXPRESSION OPAR po EXPRESSION pf;
+          | EXPRESSION opar_div po EXPRESSION pf;
 
 
 
