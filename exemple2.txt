@@ -1,10 +1,11 @@
 INTEGER ROUTINE fff(a,b)
 WRITE("HELLO", A, "\n");
-c = "HELLO"
+fff = "HELLO"
 ENDR
 
 PROGRAM chakib
 INTEGER A;
+INTEGER B, C;
 IF (((((((((((A.EQ.(B+(2))).OR.(FALSE.EQ.TRUE)))))))))))
 THEN
 A = A - B ;

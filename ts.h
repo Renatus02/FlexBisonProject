@@ -249,7 +249,13 @@ bool doubleDeclaration(char entite[], char scope[]) {
 }
 
 
-
-
-
-
+char *getidfType(char entite[], char scope[]) {
+    listidf* current = symbolTable;
+    while (current != NULL) {
+        if (strcmp(entite, current->name) == 0 && strcmp(current->scope, scope) == 0) {
+            return current->type;
+        }
+        current = current->next;
+    }
+    return "";  // Variable not found
+}

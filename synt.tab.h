@@ -91,16 +91,20 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 13 "synt.y"
+#line 17 "synt.y"
  
    int entier; 
    float reel;
    char* str;
+   struct 
+   {
+       char *type;
+   }exp;
 
 
 
 /* Line 1676 of yacc.c  */
-#line 104 "synt.tab.h"
+#line 108 "synt.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
