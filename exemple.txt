@@ -1,4 +1,15 @@
+INTEGER ROUTINE routine()
+routine = 1
+ENDR
+
+INTEGER ROUTINE routine2(x,y)
+INTEGER x,y;
+routine2 = x + y
+ENDR
+
 PROGRAM chakib
-LOGICAL y, z;
-y = FALSE;
+REAL a,b;
+a = CALL routine();
+b = CALL routine2(1,2);
+
 END

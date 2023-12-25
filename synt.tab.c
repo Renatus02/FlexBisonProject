@@ -523,15 +523,15 @@ static const yytype_int8 yyrhs[] =
 static const yytype_uint16 yyrline[] =
 {
        0,    42,    42,    42,    42,    48,    48,    55,    59,    59,
-      74,    78,    82,    84,    86,    90,    92,    94,    95,    99,
-     101,   103,   105,   107,   109,   111,   115,   117,   117,   119,
-     121,   121,   123,   128,   138,   149,   155,   163,   172,   184,
-     186,   191,   193,   195,   200,   205,   209,   213,   218,   220,
-     223,   226,   229,   232,   235,   237,   242,   249,   253,   257,
-     259,   261,   263,   267,   269,   273,   275,   277,   281,   285,
-     287,   289,   291,   293,   295,   299,   301,   305,   307,   309,
-     311,   313,   315,   317,   319,   321,   323,   327,   329,   333,
-     335,   339,   341,   343,   345,   347,   349
+      73,    77,    81,    83,    85,    89,    91,    93,    94,    98,
+     100,   102,   104,   106,   108,   110,   114,   116,   116,   118,
+     120,   120,   122,   127,   137,   148,   154,   162,   171,   183,
+     185,   190,   192,   194,   199,   204,   208,   212,   217,   219,
+     222,   225,   228,   231,   234,   236,   241,   247,   251,   255,
+     257,   259,   261,   265,   267,   271,   273,   275,   279,   283,
+     285,   287,   289,   291,   293,   297,   299,   303,   305,   307,
+     309,   311,   313,   315,   317,   319,   321,   325,   327,   331,
+     333,   337,   339,   341,   343,   345,   347
 };
 #endif
 
@@ -1606,7 +1606,6 @@ yyreduce:
 #line 59 "synt.y"
     {
     strcpy(currentScope, (yyvsp[(3) - (3)].str));
-
 if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
         
         printf("double declaration de la routine %s\n", (yyvsp[(3) - (3)].str));
@@ -1621,42 +1620,42 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 10:
 
 /* Line 1455 of yacc.c  */
-#line 74 "synt.y"
+#line 73 "synt.y"
     {strcpy(currentScope, "main");;}
     break;
 
   case 15:
 
 /* Line 1455 of yacc.c  */
-#line 90 "synt.y"
+#line 89 "synt.y"
     {strcpy(typeidf, "INTEGER");;}
     break;
 
   case 16:
 
 /* Line 1455 of yacc.c  */
-#line 92 "synt.y"
+#line 91 "synt.y"
     {strcpy(typeidf, "REAL");;}
     break;
 
   case 17:
 
 /* Line 1455 of yacc.c  */
-#line 94 "synt.y"
+#line 93 "synt.y"
     {strcpy(typeidf, "LOGICAL");;}
     break;
 
   case 18:
 
 /* Line 1455 of yacc.c  */
-#line 95 "synt.y"
+#line 94 "synt.y"
     {strcpy(typeidf, "CHARACTER");;}
     break;
 
   case 32:
 
 /* Line 1455 of yacc.c  */
-#line 123 "synt.y"
+#line 122 "synt.y"
     {
     if (doubleDeclaration((yyvsp[(1) - (1)].str), currentScope)) erreur_dd((yyvsp[(1) - (1)].str));
     else insererTYPE((yyvsp[(1) - (1)].str), typeidf, currentScope);
@@ -1666,7 +1665,7 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 33:
 
 /* Line 1455 of yacc.c  */
-#line 128 "synt.y"
+#line 127 "synt.y"
     {
        if(doubleDeclaration((yyvsp[(1) - (5)].str), currentScope)) erreur_dd((yyvsp[(1) - (5)].str)); 
        else
@@ -1682,7 +1681,7 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 34:
 
 /* Line 1455 of yacc.c  */
-#line 139 "synt.y"
+#line 138 "synt.y"
     {
             if(doubleDeclaration((yyvsp[(1) - (7)].str), currentScope)) erreur_dd((yyvsp[(1) - (7)].str)); 
             else
@@ -1697,7 +1696,7 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 35:
 
 /* Line 1455 of yacc.c  */
-#line 149 "synt.y"
+#line 148 "synt.y"
     {if(doubleDeclaration((yyvsp[(1) - (3)].str), currentScope)) erreur_dd((yyvsp[(1) - (3)].str));
             else insererTYPE((yyvsp[(1) - (3)].str), typeidf, currentScope);
             ;}
@@ -1706,7 +1705,7 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 36:
 
 /* Line 1455 of yacc.c  */
-#line 155 "synt.y"
+#line 154 "synt.y"
     {
     if(!doubleDeclaration((yyvsp[(1) - (3)].str), currentScope)) erreur_nondec((yyvsp[(1) - (3)].str));
     else
@@ -1718,7 +1717,7 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 37:
 
 /* Line 1455 of yacc.c  */
-#line 163 "synt.y"
+#line 162 "synt.y"
     {
     if (!doubleDeclaration((yyvsp[(1) - (6)].str), currentScope)) 
         erreur_nondec((yyvsp[(1) - (6)].str)); else
@@ -1732,7 +1731,7 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 38:
 
 /* Line 1455 of yacc.c  */
-#line 172 "synt.y"
+#line 171 "synt.y"
     {
     if (!doubleDeclaration((yyvsp[(1) - (8)].str), currentScope)) erreur_nondec((yyvsp[(1) - (8)].str));
     else
@@ -1745,14 +1744,14 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 39:
 
 /* Line 1455 of yacc.c  */
-#line 184 "synt.y"
+#line 183 "synt.y"
     {(yyval.exp) = (yyvsp[(1) - (1)].exp);;}
     break;
 
   case 40:
 
 /* Line 1455 of yacc.c  */
-#line 186 "synt.y"
+#line 185 "synt.y"
     { 
             if(!doubleDeclaration((yyvsp[(1) - (1)].str), currentScope)) erreur_nondec((yyvsp[(1) - (1)].str));
             (yyval.exp).type = type_idf((yyvsp[(1) - (1)].str), currentScope);
@@ -1762,21 +1761,21 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 41:
 
 /* Line 1455 of yacc.c  */
-#line 191 "synt.y"
+#line 190 "synt.y"
     {(yyval.exp).type = "CHARACTER";;}
     break;
 
   case 42:
 
 /* Line 1455 of yacc.c  */
-#line 193 "synt.y"
+#line 192 "synt.y"
     {(yyval.exp).type = "LOGICAL";;}
     break;
 
   case 43:
 
 /* Line 1455 of yacc.c  */
-#line 195 "synt.y"
+#line 194 "synt.y"
     { 
             if(!doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) erreur_nondec((yyvsp[(3) - (3)].str));
             (yyval.exp).type = incomp_type((yyvsp[(1) - (3)].exp).type, type_idf((yyvsp[(3) - (3)].str), currentScope));
@@ -1786,7 +1785,7 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 44:
 
 /* Line 1455 of yacc.c  */
-#line 200 "synt.y"
+#line 199 "synt.y"
     { 
              if (!doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) erreur_nondec((yyvsp[(3) - (3)].str));
             (yyval.exp).type = incomp_type((yyvsp[(1) - (3)].exp).type, type_idf((yyvsp[(3) - (3)].str), currentScope));
@@ -1796,7 +1795,7 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 45:
 
 /* Line 1455 of yacc.c  */
-#line 205 "synt.y"
+#line 204 "synt.y"
     { 
             (yyval.exp).type = incomp_type((yyvsp[(1) - (3)].exp).type, (yyvsp[(3) - (3)].exp).type);
           ;}
@@ -1805,7 +1804,7 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 46:
 
 /* Line 1455 of yacc.c  */
-#line 209 "synt.y"
+#line 208 "synt.y"
     { 
             (yyval.exp).type = incomp_type((yyvsp[(1) - (3)].exp).type, "REAL");
           ;}
@@ -1814,7 +1813,7 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 47:
 
 /* Line 1455 of yacc.c  */
-#line 213 "synt.y"
+#line 212 "synt.y"
     { if ((yyvsp[(3) - (3)].entier)==0) 
           printf ("Erreur semantique division par 0 a la ligne %d et a la colonne %d \n",nb_ligne,nb_colonne); 
           (yyval.exp).type = incomp_type((yyvsp[(1) - (3)].exp).type, "INTEGER");
@@ -1824,21 +1823,21 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 48:
 
 /* Line 1455 of yacc.c  */
-#line 218 "synt.y"
+#line 217 "synt.y"
     { (yyval.exp) = (yyvsp[(2) - (3)].exp); ;}
     break;
 
   case 49:
 
 /* Line 1455 of yacc.c  */
-#line 220 "synt.y"
+#line 219 "synt.y"
     { (yyval.exp) = (yyvsp[(1) - (1)].exp); ;}
     break;
 
   case 50:
 
 /* Line 1455 of yacc.c  */
-#line 223 "synt.y"
+#line 222 "synt.y"
     { 
             (yyval.exp).type = incomp_type((yyvsp[(1) - (3)].exp).type, "CHARACTER");;}
     break;
@@ -1846,7 +1845,7 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 51:
 
 /* Line 1455 of yacc.c  */
-#line 226 "synt.y"
+#line 225 "synt.y"
     { 
             (yyval.exp).type = incomp_type((yyvsp[(1) - (3)].exp).type, "CHARACTER");;}
     break;
@@ -1854,7 +1853,7 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 52:
 
 /* Line 1455 of yacc.c  */
-#line 229 "synt.y"
+#line 228 "synt.y"
     { 
             (yyval.exp).type = type_idf((yyvsp[(1) - (4)].exp).type, currentScope);;}
     break;
@@ -1862,7 +1861,7 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 53:
 
 /* Line 1455 of yacc.c  */
-#line 232 "synt.y"
+#line 231 "synt.y"
     { 
             (yyval.exp).type = type_idf((yyvsp[(1) - (6)].exp).type, currentScope);;}
     break;
@@ -1870,7 +1869,7 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 55:
 
 /* Line 1455 of yacc.c  */
-#line 237 "synt.y"
+#line 236 "synt.y"
     { 
             (yyval.exp).type = incomp_type((yyvsp[(1) - (5)].exp).type, (yyvsp[(4) - (5)].exp).type);;}
     break;
@@ -1878,73 +1877,72 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 56:
 
 /* Line 1455 of yacc.c  */
-#line 242 "synt.y"
+#line 241 "synt.y"
     { 
-    if(!doubleDeclaration((yyvsp[(2) - (5)].str), currentScope)) erreur_nondec((yyvsp[(2) - (5)].str));
-    (yyval.exp).type = type_idf((yyvsp[(2) - (5)].str), currentScope);
+    (yyval.exp).type = type_idf((yyvsp[(2) - (5)].str), (yyvsp[(2) - (5)].str));
     ;}
     break;
 
   case 60:
 
 /* Line 1455 of yacc.c  */
-#line 259 "synt.y"
+#line 257 "synt.y"
     { if(!doubleDeclaration((yyvsp[(1) - (1)].str), currentScope)) erreur_nondec((yyvsp[(1) - (1)].str));;}
     break;
 
   case 62:
 
 /* Line 1455 of yacc.c  */
-#line 263 "synt.y"
+#line 261 "synt.y"
     { if(!doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) erreur_nondec((yyvsp[(3) - (3)].str));;}
     break;
 
   case 78:
 
 /* Line 1455 of yacc.c  */
-#line 307 "synt.y"
+#line 305 "synt.y"
     { if(!doubleDeclaration((yyvsp[(1) - (1)].str), currentScope)) erreur_nondec((yyvsp[(1) - (1)].str));;}
     break;
 
   case 79:
 
 /* Line 1455 of yacc.c  */
-#line 309 "synt.y"
+#line 307 "synt.y"
     { if(!doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) erreur_nondec((yyvsp[(3) - (3)].str));;}
     break;
 
   case 82:
 
 /* Line 1455 of yacc.c  */
-#line 315 "synt.y"
+#line 313 "synt.y"
     { if(!doubleDeclaration((yyvsp[(3) - (6)].str), currentScope)) erreur_nondec((yyvsp[(3) - (6)].str));;}
     break;
 
   case 83:
 
 /* Line 1455 of yacc.c  */
-#line 317 "synt.y"
+#line 315 "synt.y"
     { if(!doubleDeclaration((yyvsp[(3) - (8)].str), currentScope)) erreur_nondec((yyvsp[(3) - (8)].str));;}
     break;
 
   case 87:
 
 /* Line 1455 of yacc.c  */
-#line 327 "synt.y"
+#line 325 "synt.y"
     {(yyval.exp).type = "INTEGER"; (yyval.exp).val = (yyvsp[(1) - (1)].entier);;}
     break;
 
   case 88:
 
 /* Line 1455 of yacc.c  */
-#line 329 "synt.y"
+#line 327 "synt.y"
     {(yyval.exp).type = "REAL"; (yyval.exp).val = (yyvsp[(1) - (1)].reel);;}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 1948 "synt.tab.c"
+#line 1946 "synt.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2156,7 +2154,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 354 "synt.y"
+#line 352 "synt.y"
 
 
 void erreur_dd(char *idf){

@@ -58,7 +58,6 @@ CORP_PROGRAM: LIST_DEC LIST_INSTRUCTION mc_end;
 
 ROUTINE: TYPE mc_routine idf {
     strcpy(currentScope, $3);
-
 if (doubleDeclaration($3, currentScope)) {
         
         printf("double declaration de la routine %s\n", $3);
@@ -240,8 +239,7 @@ EXPRESSION: CST {$$ = $1;}
 
 
 CALL: mc_call idf po LIST_PARAMETRE_RT pf { 
-    if(!doubleDeclaration($2, currentScope)) erreur_nondec($2);
-    $$.type = type_idf($2, currentScope);
+    $$.type = type_idf($2, $2);
     }
 
 
