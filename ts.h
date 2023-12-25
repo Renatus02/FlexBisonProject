@@ -229,7 +229,7 @@ int Recherche_position(char entite[]) {
 void insererTYPE(char entite[], char type[], char scope[]) {
     listidf* current = symbolTable;
     while (current != NULL) {
-        if (strcmp(entite, current->name) == 0 && strcmp(current->scope, scope) == 0) {
+        if (strcmp(current->code, "IDF") == 0 && strcmp(entite, current->name) == 0 && strcmp(current->scope, scope) == 0) {
             strcpy(current->type, type);
         }
         current = current->next;
@@ -240,7 +240,7 @@ void insererTYPE(char entite[], char type[], char scope[]) {
 bool doubleDeclaration(char entite[], char scope[]) {
     listidf* current = symbolTable;
     while (current != NULL) {
-        if (strcmp(current->type, "") != 0 && strcmp(entite, current->name) == 0 && strcmp(current->scope, scope) == 0) {
+        if (strcmp(current->code, "IDF") == 0 && strcmp(current->type, "") != 0 && strcmp(entite, current->name) == 0 && strcmp(current->scope, scope) == 0) {
             return true;  // Variable found, check type compatibility
         }
         current = current->next;
@@ -252,10 +252,25 @@ bool doubleDeclaration(char entite[], char scope[]) {
 char *getidfType(char entite[], char scope[]) {
     listidf* current = symbolTable;
     while (current != NULL) {
-        if (strcmp(entite, current->name) == 0 && strcmp(current->scope, scope) == 0) {
+        if (strcmp(current->code, "IDF") == 0 && strcmp(entite, current->name) == 0 && strcmp(current->scope, scope) == 0) {
             return current->type;
         }
         current = current->next;
     }
     return "";  // Variable not found
 }
+
+
+/* int getDimension(char entite[], char scope[]) {
+    listidf* current = symbolTable;
+    while (current != NULL) {
+        if (strcmp(current->code, "IDF") == 0 &&
+            strcmp(current->name, entite) == 0 &&
+            strcmp(current->scope, scope) == 0) {
+            if (strstr(current->type, "()()") != NULL) return 2; 
+            else if (strstr(current->type, "()") != NULL) return 1; 
+        }
+        current = current->next;
+    }
+    return 0;  
+} */

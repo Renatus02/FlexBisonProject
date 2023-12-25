@@ -1,4 +1,8 @@
+INTEGER ROUTINE c()
+c = 1
+ENDR
+
 PROGRAM chakib
-REAL x;
-x = 6.5 + 6.5;
+INTEGER A;
+A = CALL c();
 END

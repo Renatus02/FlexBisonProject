@@ -4,7 +4,10 @@
     #include <stdlib.h>
     extern char currentScope[10];
     extern char typeidf[10];
+    char arr[100];
     void erreur_dd(char* idf);
+    void erreur_dim(char* idf);
+    int getDimension(char entite[], char scope[]);
     void erreur_nondec(char* idf);
     char *determiner_type(char* type1, char* type2);
     char *getidfType(char entite[], char scope[]);
@@ -34,7 +37,7 @@
 %%
 
 //l'axiome de la grammaire
-PROG: ROUTINE PROG | PP {printf("syntaxe correcte\n"); YYACCEPT;}
+PROG: {strcpy(currentScope, "main");} ROUTINE PROG | PP {printf("syntaxe correcte\n"); YYACCEPT;}
 
 
 
@@ -43,8 +46,7 @@ PROG: ROUTINE PROG | PP {printf("syntaxe correcte\n"); YYACCEPT;}
 PP: mc_program idf {
     strcpy(currentScope, "main");
 
-} 
-CORP_PROGRAM
+} CORP_PROGRAM
 
 
 
@@ -57,43 +59,21 @@ ROUTINE: TYPE mc_routine idf {
 
 if (doubleDeclaration($3, currentScope)) {
         
-        printf("double declaration de la variable %s\n", $3);
+        printf("double declaration de la routine %s\n", $3);
         
     }
     else 
     insererTYPE($3, typeidf, currentScope);
 
-} po LIST_PARAMETRE pf CORP_FONCTION 
-
-       | mc_character mc_routine idf{
-        strcpy(currentScope, $3);
-        if (doubleDeclaration($3, currentScope)) {
-        
-        printf("double declaration de la variable %s\n", $3);
-        
-    }
-    else 
-    insererTYPE($3, typeidf, currentScope);
-        } opar_mult CST po LIST_PARAMETRE pf CORP_FONCTION 
-       
-       | mc_character mc_routine idf{
-        strcpy(currentScope, $3);
-        if (doubleDeclaration($3, currentScope)) {
-        
-        printf("double declaration de la variable %s\n", $3);
-        
-    }
-    else 
-    insererTYPE($3, typeidf, currentScope);
-        } po LIST_PARAMETRE pf CORP_FONCTION 
+} po LIST_PARAMETRE_RT pf CORP_FONCTION
 
 
 
-CORP_FONCTION: LIST_DECLARATION LIST_INSTRUCTION RETURN mc_endr {strcpy(currentScope, "");}
+CORP_FONCTION: LIST_DECLARATION LIST_INSTRUCTION RETURN mc_endr {strcpy(currentScope, "main");}
 
 
 
-RETURN: idf aff EXPRESSION;
+RETURN: idf aff EXPRESSION 
 
 
 
@@ -110,28 +90,27 @@ TYPE: mc_integer {strcpy(typeidf, "INTEGER");}
     | mc_real {strcpy(typeidf, "REAL");}
     
     | mc_logical {strcpy(typeidf, "LOGICAL");}
+    | mc_character {strcpy(typeidf, "CHARACTER");}
 
 
 
-LIST_PARAMETRE: idf 
+LIST_PARAMETRE_RT: idf 
 
-              | LIST_PARAMETRE vg idf 
+              | LIST_PARAMETRE_RT vg idf 
 
               | CST 
 
-              | LIST_PARAMETRE vg CST 
+              | LIST_PARAMETRE_RT vg CST 
 
-              | LIST_PARAMETRE vg idf po CST pf 
+              | LIST_PARAMETRE_RT vg idf po CST pf 
 
-              | LIST_PARAMETRE vg idf po CST vg CST pf 
+              | LIST_PARAMETRE_RT vg idf po CST vg CST pf 
 
               | ;
 
 
 
 LIST_DECLARATION: LIST_DECLARATION TYPE DECLARATION pvg 
-
-                | LIST_DECLARATION mc_character DECLARATION pvg 
                 
                 | ;
 
@@ -151,28 +130,32 @@ DECLARATION: idf {
            
            | DECLARATION mc_dimension po CST pf 
            
-           | DECLARATION mc_dimension po CST vg CST pf; 
+           
+           | DECLARATION mc_dimension po CST vg CST pf 
         
+
            | DECLARATION opar_mult CST;
 
 
 
 AFFECT: idf aff EXPRESSION {
+    if(!doubleDeclaration($1, currentScope)) erreur_nondec($1);
     determiner_type(getidfType($1, currentScope), $3.type);
 
     }
 
 
-      | idf po CST pf aff EXPRESSION {
+| idf po CST pf aff EXPRESSION {
+    if (!doubleDeclaration($1, currentScope)) 
+        erreur_nondec($1); 
         determiner_type(getidfType($1, currentScope), $6.type);
+    } 
 
-}
-      
+| idf po CST vg CST pf aff EXPRESSION {
+    if (!doubleDeclaration($1, currentScope)) erreur_nondec($1);
 
-      | idf po CST vg CST pf aff EXPRESSION {
         determiner_type(getidfType($1, currentScope), $8.type);
-
-}
+    }
       
 
 
@@ -190,10 +173,12 @@ EXPRESSION: CST {$$ = $1;}
           | cst_bool {$$.type = "LOGICAL";}
           
           | EXPRESSION OPAR idf { 
+            if(!doubleDeclaration($3, currentScope)) erreur_nondec($3);
             $$.type = determiner_type($1.type, getidfType($3, currentScope));
           }
 
           | EXPRESSION opar_div idf { 
+             if (!doubleDeclaration($3, currentScope)) erreur_nondec($3);
             $$.type = determiner_type($1.type, getidfType($3, currentScope));
           }
           
@@ -234,7 +219,7 @@ EXPRESSION: CST {$$ = $1;}
 
 
 
-CALL: mc_call idf po LIST_PARAMETRE pf { 
+CALL: mc_call idf po LIST_PARAMETRE_RT pf { 
     if(!doubleDeclaration($2, currentScope)) erreur_nondec($2);
     $$.type = getidfType($2, currentScope);
     }
@@ -299,11 +284,23 @@ LIST_INSTRUCTION: LIST_INSTRUCTION INSTRUCTION
 
 BOUCLE: mc_dowhile po exp_cnd pf LIST_INSTRUCTION mc_enddo;
 
+LIST_PARAMETRE_EQ: idf { if(!doubleDeclaration($1, currentScope)) erreur_nondec($1);}
 
+              | LIST_PARAMETRE_EQ vg idf { if(!doubleDeclaration($3, currentScope)) erreur_nondec($3);}
 
-EQ: mc_equivalence po LIST_PARAMETRE pf vg po LIST_PARAMETRE pf 
+              | CST 
 
-  | mc_equivalence po LIST_PARAMETRE pf;
+              | LIST_PARAMETRE_EQ vg CST 
+
+              | LIST_PARAMETRE_EQ vg idf po CST pf { if(!doubleDeclaration($3, currentScope)) erreur_nondec($3);}
+
+              | LIST_PARAMETRE_EQ vg idf po CST vg CST pf { if(!doubleDeclaration($3, currentScope)) erreur_nondec($3);}
+
+              | ;
+
+EQ: mc_equivalence po LIST_PARAMETRE_EQ pf vg po LIST_PARAMETRE_EQ pf 
+
+  | mc_equivalence po LIST_PARAMETRE_EQ pf;
 
 
 
@@ -346,8 +343,11 @@ void erreur_nondec(char *idf){
 
 char *determiner_type(char* type1, char* type2) {
     // Handle cases where either type is unspecified
-    if (type1[0] == ' ' || type2[0] == ' ') {
-        return type1[0] == ' ' ? type2 : type1;
+    if (type1[0] == ' ' || type1[0] == '\0') {
+        return type2;
+    }
+    if (type2[0] == ' ' || type2[0] == '\0') {
+        return type1;
     }
 
     // Handle cases where types are compatible or both are the same
@@ -359,6 +359,10 @@ char *determiner_type(char* type1, char* type2) {
     printf("Erreur semantique: incompatibilite de types a la ligne %d et a la colonne %d\n", nb_ligne, nb_colonne);
     return " ";
 }
+void erreur_dim(char* idf) {
+    printf("Erreur semantique: dimension de la variable %s incorrecte a la ligne %d et a la colonne %d\n", idf, nb_ligne, nb_colonne);
+}
+
 #include <stdio.h>
 int yyerror(char *msg) {
     printf(" ------------------------------- Erreur Syntaxique at ligne: %d et colonne: %d -------------------------------", nb_ligne, nb_colonne);
