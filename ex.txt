@@ -1,6 +1,4 @@
-INTEGER ROUTINE c()
-c = 5
-ENDR
+    
 
 INTEGER ROUTINE Comp (X,Y,Z)    
 % Déclarations;

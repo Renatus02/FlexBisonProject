@@ -96,7 +96,7 @@ not_equal
 
 %start S
 %%
-S:  List_Dec S | INST S | SAUT S| ; YYACCEPT;
+S:  List_Dec S | INST S | SAUT S| {YYACCEPT;}
 
 /* Declaration */
 

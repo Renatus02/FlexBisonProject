@@ -1,6 +1,3 @@
-INTEGER ROUTINE routine()
-routine = 1
-ENDR
 
 INTEGER ROUTINE routine2(x,y)
 INTEGER x,y;
@@ -9,7 +6,13 @@ ENDR
 
 PROGRAM chakib
 REAL a,b;
-a = CALL routine();
+INTEGER x,y;
+INTEGER c;
+CHARACTER MATRICE DIMENSION (10,10);
+MATRICE(10,10) = 1;
+MATRICE(1) = "Hello";
+a = 2 ;
+c = ( 3.5 ) / 0;
 b = CALL routine2(1,2);
 
 END

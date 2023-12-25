@@ -1,2 +1,0 @@
-mc_program test1
-mc_end

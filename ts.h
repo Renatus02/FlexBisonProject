@@ -260,7 +260,7 @@ char *type_idf(char entite[], char scope[]) {
     return "";  
 }
 
-
+// la fonction pour recuperer la dimension d'une variable pour tester 
 int getDimension(char entite[], char scope[]) {
     listidf* current = symbolTable;
     while (current != NULL) {

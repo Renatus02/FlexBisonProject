@@ -3,7 +3,7 @@
 #include<stdlib.h>
 #include<string.h>
 #include "ts.h"
-#include "synt.tab.h"
+#include "ChakibAmmarBoudjelal.tab.h"
 extern nb_ligne;
 extern nb_colonne;
 char currentScope[10];

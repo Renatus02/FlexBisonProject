@@ -2,17 +2,19 @@
     #include <string.h>
     #include <stdio.h>
     #include <stdlib.h>
+    void erreurdd(char* idf);
+    void erreur_dim(char* idf);
+    int getDimension(char entite[], char scope[]);
+    void erreurnondec(char* idf);
+    char *incomp_type(char* type1, char* type2);
+    char *type_idf(char entite[], char scope[]);
+
+    
+    int nb_ligne = 1;
+    int nb_colonne = 1;
     extern char currentScope[10];
     extern char typeidf[10];
     char arr[100];
-    void erreur_dd(char* idf);
-    void erreur_dim(char* idf);
-    int getDimension(char entite[], char scope[]);
-    void erreur_nondec(char* idf);
-    char *incomp_type(char* type1, char* type2);
-    char *type_idf(char entite[], char scope[]);
-    int nb_ligne = 1;
-    int nb_colonne = 1;
 
 %}
 
@@ -24,7 +26,6 @@
    struct 
    {
        char *type;
-       float val;
    }exp;
 }
 
@@ -45,10 +46,7 @@ PROG: {strcpy(currentScope, "main");} ROUTINE PROG | PP {printf("syntaxe correct
 
 //la grammaire
 
-PP: mc_program idf {
-    strcpy(currentScope, "main");
-
-} CORP_PROGRAM
+PP: mc_program idf {strcpy(currentScope, "main");} CORP_PROGRAM
 
 
 
@@ -111,23 +109,30 @@ LIST_PARAMETRE_RT: idf
 
 
 
-LIST_DECLARATION_IDF: DECLARATION 
+DECIDF: DECLARATION 
                 
-                | | DECLARATION vg LIST_DECLARATION_IDF;
+      | DECLARATION vg DECIDF;
 
-DEC: TYPE LIST_DECLARATION_IDF;
 
-LIST_DEC: | DEC pvg LIST_DEC;
+
+TYPEDEC: TYPE DECIDF;
+
+
+
+LIST_DEC: TYPEDEC pvg LIST_DEC | ;
+
+
 
 DECLARATION: idf {
-    if (doubleDeclaration($1, currentScope)) erreur_dd($1);
+    if (doubleDeclaration($1, currentScope)) erreurdd($1);
     else insererTYPE($1, typeidf, currentScope);
     }
            
        | idf mc_dimension po cst_int pf {
-       if(doubleDeclaration($1, currentScope)) erreur_dd($1); 
+       if(doubleDeclaration($1, currentScope)) erreurdd($1); 
        else
            {
+            // pour les tableaux a 1 dimension (assignation de la taille au type)
             strcpy(arr, typeidf);
             strcat(arr, "()");
             insererTYPE($1, arr, currentScope);
@@ -136,54 +141,52 @@ DECLARATION: idf {
            }
            | idf mc_dimension po cst_int vg cst_int pf 
            {
-            if(doubleDeclaration($1, currentScope)) erreur_dd($1); 
+            if(doubleDeclaration($1, currentScope)) erreurdd($1); 
             else
             {
+            // pour les tableaux a 2 dimensions (assignation de la taille au type)
             strcpy(arr, typeidf);
             strcat(arr, "(,)");
             insererTYPE($1, arr, currentScope);
             }
            }
 
-           | idf opar_mult cst_int {if(doubleDeclaration($1, currentScope)) erreur_dd($1);
+           | idf opar_mult cst_int {if(doubleDeclaration($1, currentScope)) erreurdd($1);
             else insererTYPE($1, typeidf, currentScope);
             }
 
 
 
 AFFECT: idf aff EXPRESSION {
-    if(!doubleDeclaration($1, currentScope)) erreur_nondec($1);
+    if(!doubleDeclaration($1, currentScope)) erreurnondec($1);
     else
     incomp_type(type_idf($1, currentScope), $3.type);
-
     }
 
 
 | idf po CST pf aff EXPRESSION {
     if (!doubleDeclaration($1, currentScope)) 
-        erreur_nondec($1); else
+        erreurnondec($1); else
         incomp_type(type_idf($1, currentScope), $6.type);
         if (getDimension($1, currentScope) != 1) 
-            erreur_dim($1);
-            
+            erreur_dim($1);      
     } 
 
 | idf po CST vg CST pf aff EXPRESSION {
-    if (!doubleDeclaration($1, currentScope)) erreur_nondec($1);
+    if (!doubleDeclaration($1, currentScope)) erreurnondec($1);
     else
      incomp_type(type_idf($1, currentScope), $8.type);
     if (getDimension($1, currentScope) != 2) erreur_dim($1);
-
 }
       
 
 
 
-
-EXPRESSION: CST {$$ = $1;}
+ 
+EXPRESSION: CST { $$ = $1; }     //pour recuperer la valeur semantique de la constante
 
           | idf { 
-            if(!doubleDeclaration($1, currentScope)) erreur_nondec($1);
+            if(!doubleDeclaration($1, currentScope)) erreurnondec($1);
             $$.type = type_idf($1, currentScope);
           }
           
@@ -192,12 +195,12 @@ EXPRESSION: CST {$$ = $1;}
           | cst_bool {$$.type = "LOGICAL";}
           
           | EXPRESSION OPAR idf { 
-            if(!doubleDeclaration($3, currentScope)) erreur_nondec($3);
+            if(!doubleDeclaration($3, currentScope)) erreurnondec($3);
             $$.type = incomp_type($1.type, type_idf($3, currentScope));
           }
 
           | EXPRESSION opar_div idf { 
-             if (!doubleDeclaration($3, currentScope)) erreur_nondec($3);
+             if (!doubleDeclaration($3, currentScope)) erreurnondec($3);
             $$.type = incomp_type($1.type, type_idf($3, currentScope));
           }
           
@@ -209,7 +212,8 @@ EXPRESSION: CST {$$ = $1;}
             $$.type = incomp_type($1.type, "REAL");
           }
 
-          | EXPRESSION opar_div cst_int  { if ($3==0) 
+          | EXPRESSION opar_div cst_int  {
+          if ($3==0) 
           printf ("Erreur semantique division par 0 a la ligne %d et a la colonne %d \n",nb_ligne,nb_colonne); 
           $$.type = incomp_type($1.type, "INTEGER");
           }
@@ -220,21 +224,26 @@ EXPRESSION: CST {$$ = $1;}
           
 
           | EXPRESSION OPAR cst_char { 
-            $$.type = incomp_type($1.type, "CHARACTER");}
+            $$.type = incomp_type($1.type, "CHARACTER");
+            }
 
           | EXPRESSION opar_div cst_char { 
-            $$.type = incomp_type($1.type, "CHARACTER");}
+            $$.type = incomp_type($1.type, "CHARACTER");
+            }
           
           | EXPRESSION po CST pf { 
-            $$.type = type_idf($1.type, currentScope);}
+            $$.type = type_idf($1.type, currentScope);
+            }
           
           | EXPRESSION po CST vg CST pf { 
-            $$.type = type_idf($1.type, currentScope);}
-          
-      | EXPRESSION OPAR po EXPRESSION pf 
+            $$.type = type_idf($1.type, currentScope);
+            }
+    
+          | EXPRESSION OPAR po EXPRESSION pf 
 
           | EXPRESSION opar_div po EXPRESSION pf { 
-            $$.type = incomp_type($1.type, $4.type);}
+            $$.type = incomp_type($1.type, $4.type);
+            }
 
 
 
@@ -254,11 +263,11 @@ WRITE: mc_write po WRITE_ARGS pf;
 
 WRITE_ARGS: cst_char 
 
-          | idf { if(!doubleDeclaration($1, currentScope)) erreur_nondec($1);}
+          | idf { if(!doubleDeclaration($1, currentScope)) erreurnondec($1);}
           
           | WRITE_ARGS vg cst_char 
           
-          | WRITE_ARGS vg idf { if(!doubleDeclaration($3, currentScope)) erreur_nondec($3);}
+          | WRITE_ARGS vg idf { if(!doubleDeclaration($3, currentScope)) erreurnondec($3);}
 
 
 
@@ -302,17 +311,17 @@ LIST_INSTRUCTION: LIST_INSTRUCTION INSTRUCTION
 
 BOUCLE: mc_dowhile po exp_cnd pf LIST_INSTRUCTION mc_enddo;
 
-LIST_PARAMETRE_EQ: idf { if(!doubleDeclaration($1, currentScope)) erreur_nondec($1);}
+LIST_PARAMETRE_EQ: idf { if(!doubleDeclaration($1, currentScope)) erreurnondec($1);}
 
-              | LIST_PARAMETRE_EQ vg idf { if(!doubleDeclaration($3, currentScope)) erreur_nondec($3);}
+              | LIST_PARAMETRE_EQ vg idf { if(!doubleDeclaration($3, currentScope)) erreurnondec($3);}
 
               | CST 
 
               | LIST_PARAMETRE_EQ vg CST 
 
-              | LIST_PARAMETRE_EQ vg idf po CST pf { if(!doubleDeclaration($3, currentScope)) erreur_nondec($3);}
+              | LIST_PARAMETRE_EQ vg idf po CST pf { if(!doubleDeclaration($3, currentScope)) erreurnondec($3);}
 
-              | LIST_PARAMETRE_EQ vg idf po CST vg CST pf { if(!doubleDeclaration($3, currentScope)) erreur_nondec($3);}
+              | LIST_PARAMETRE_EQ vg idf po CST vg CST pf { if(!doubleDeclaration($3, currentScope)) erreurnondec($3);}
 
               | ;
 
@@ -322,9 +331,9 @@ EQ: mc_equivalence po LIST_PARAMETRE_EQ pf vg po LIST_PARAMETRE_EQ pf
 
 
 
-CST: cst_int {$$.type = "INTEGER"; $$.val = $1;} 
+CST: cst_int {$$.type = "INTEGER";} 
 
-   | cst_real {$$.type = "REAL"; $$.val = $1;}
+   | cst_real {$$.type = "REAL";}
 
 
 
@@ -351,11 +360,11 @@ OPCOMP: op_gt
 
 %%
 
-void erreur_dd(char *idf){
+void erreurdd(char *idf){
     printf("Erreur semantique: double declaration de la variable %s a la ligne %d et la colonne %d\n", idf, nb_ligne, nb_colonne);
 }
 
-void erreur_nondec(char *idf){
+void erreurnondec(char *idf){
     printf("Erreur semantique: variable %s non declarer dans %s a la ligne %d et la colonne %d\n", idf, currentScope, nb_ligne, nb_colonne);
 }
 char *incomp_type(char* type1, char* type2) {
@@ -372,9 +381,6 @@ char *incomp_type(char* type1, char* type2) {
     printf("Erreur semantique: incompatibilite de types a la ligne %d et a la colonne %d\n", nb_ligne, nb_colonne);
     return " ";
 }
-
-
-
 
 void erreur_dim(char* idf) {
     printf("Erreur semantique: dimension de la variable %s incorrecte a la ligne %d et a la colonne %d\n", idf, nb_ligne, nb_colonne);

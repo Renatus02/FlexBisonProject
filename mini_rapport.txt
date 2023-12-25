@@ -1,0 +1,18 @@
+Les taches faites:
+-la reconaissance lexical 
+-la reconaissance syntaxique 
+- les routines : - la double déclaration des variables (cas du global et local)
+                 - la compatibilité de type en cas d'affectation (variable , tableau , routine)
+                 - la division par 0 
+                 - la déclaration d'un tableau / matrice (verification du dimension entre tableau et matrice) // ----BONUS----
+                 - la mise à jour de type de idf 
+                 - la mise a jour de la portée de idf (scope)
+
+
+
+on a changé un peu la grammaire du syntaxique pour s'adapter avec les routines et la semantique (changement de la logique du double declaration global et local et comment on verifie et ajouter le SCOPE (portée) des idf).
+
+
+
+
+
