@@ -99,12 +99,13 @@ typedef union YYSTYPE
    struct 
    {
        char *type;
+       float val;
    }exp;
 
 
 
 /* Line 1676 of yacc.c  */
-#line 108 "synt.tab.h"
+#line 109 "synt.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

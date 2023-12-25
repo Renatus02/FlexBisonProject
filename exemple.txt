@@ -1,8 +1,4 @@
-INTEGER ROUTINE c()
-c = 1
-ENDR
-
 PROGRAM chakib
-INTEGER A;
-A = CALL c();
+LOGICAL y, z;
+y = FALSE;
 END

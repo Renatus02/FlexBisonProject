@@ -9,8 +9,8 @@
     void erreur_dim(char* idf);
     int getDimension(char entite[], char scope[]);
     void erreur_nondec(char* idf);
-    char *determiner_type(char* type1, char* type2);
-    char *getidfType(char entite[], char scope[]);
+    char *incomp_type(char* type1, char* type2);
+    char *type_idf(char entite[], char scope[]);
     int nb_ligne = 1;
     int nb_colonne = 1;
 
@@ -24,11 +24,13 @@
    struct 
    {
        char *type;
+       float val;
    }exp;
 }
 
 %token aff point po pf vg <str>idf pvg mc_then mc_if mc_else mc_program mc_endif mc_character mc_real mc_enddo mc_read mc_write mc_integer mc_endr mc_routine mc_equivalence mc_dowhile mc_end mc_call mc_dimension mc_logical <str>cst_char opar_plus opar_moins opar_div opar_mult <str>cst_bool <entier>cst_int <reel>cst_real op_gt op_lt op_eq op_ge op_le op_and op_or op_ne;
-%type <exp> EXPRESSION AFFECT CALL CST;
+%type <str> TYPE;
+%type <exp> EXPRESSION AFFECT CALL CST DECLARATION;
 %left op_and op_or;
 %left op_gt op_ge op_eq op_ne op_le op_lt;
 %left opar_plus opar_moins;
@@ -50,7 +52,7 @@ PP: mc_program idf {
 
 
 
-CORP_PROGRAM: LIST_DECLARATION LIST_INSTRUCTION mc_end;
+CORP_PROGRAM: LIST_DEC LIST_INSTRUCTION mc_end;
 
 
 
@@ -69,7 +71,7 @@ if (doubleDeclaration($3, currentScope)) {
 
 
 
-CORP_FONCTION: LIST_DECLARATION LIST_INSTRUCTION RETURN mc_endr {strcpy(currentScope, "main");}
+CORP_FONCTION: LIST_DEC LIST_INSTRUCTION RETURN mc_endr {strcpy(currentScope, "main");}
 
 
 
@@ -110,52 +112,70 @@ LIST_PARAMETRE_RT: idf
 
 
 
-LIST_DECLARATION: LIST_DECLARATION TYPE DECLARATION pvg 
+LIST_DECLARATION_IDF: DECLARATION 
                 
-                | ;
+                | | DECLARATION vg LIST_DECLARATION_IDF;
 
+DEC: TYPE LIST_DECLARATION_IDF;
 
+LIST_DEC: | DEC pvg LIST_DEC;
 
 DECLARATION: idf {
     if (doubleDeclaration($1, currentScope)) erreur_dd($1);
     else insererTYPE($1, typeidf, currentScope);
     }
+           
+       | idf mc_dimension po cst_int pf {
+       if(doubleDeclaration($1, currentScope)) erreur_dd($1); 
+       else
+           {
+            strcpy(arr, typeidf);
+            strcat(arr, "()");
+            insererTYPE($1, arr, currentScope);
+           }
+           
+           }
+           | idf mc_dimension po cst_int vg cst_int pf 
+           {
+            if(doubleDeclaration($1, currentScope)) erreur_dd($1); 
+            else
+            {
+            strcpy(arr, typeidf);
+            strcat(arr, "(,)");
+            insererTYPE($1, arr, currentScope);
+            }
+           }
 
-           | DECLARATION vg idf {
-    
-    if (doubleDeclaration($3, currentScope)) erreur_dd($3); 
-    else insererTYPE($3, typeidf, currentScope);
-    
-    }
-           
-           | DECLARATION mc_dimension po CST pf 
-           
-           
-           | DECLARATION mc_dimension po CST vg CST pf 
-        
-
-           | DECLARATION opar_mult CST;
+           | idf opar_mult cst_int {if(doubleDeclaration($1, currentScope)) erreur_dd($1);
+            else insererTYPE($1, typeidf, currentScope);
+            }
 
 
 
 AFFECT: idf aff EXPRESSION {
     if(!doubleDeclaration($1, currentScope)) erreur_nondec($1);
-    determiner_type(getidfType($1, currentScope), $3.type);
+    else
+    incomp_type(type_idf($1, currentScope), $3.type);
 
     }
 
 
 | idf po CST pf aff EXPRESSION {
     if (!doubleDeclaration($1, currentScope)) 
-        erreur_nondec($1); 
-        determiner_type(getidfType($1, currentScope), $6.type);
+        erreur_nondec($1); else
+        incomp_type(type_idf($1, currentScope), $6.type);
+        if (getDimension($1, currentScope) != 1) 
+            erreur_dim($1);
+            
     } 
 
 | idf po CST vg CST pf aff EXPRESSION {
     if (!doubleDeclaration($1, currentScope)) erreur_nondec($1);
+    else
+     incomp_type(type_idf($1, currentScope), $8.type);
+    if (getDimension($1, currentScope) != 2) erreur_dim($1);
 
-        determiner_type(getidfType($1, currentScope), $8.type);
-    }
+}
       
 
 
@@ -165,7 +185,7 @@ EXPRESSION: CST {$$ = $1;}
 
           | idf { 
             if(!doubleDeclaration($1, currentScope)) erreur_nondec($1);
-            $$.type = getidfType($1, currentScope);
+            $$.type = type_idf($1, currentScope);
           }
           
           | cst_char {$$.type = "CHARACTER";}
@@ -174,25 +194,25 @@ EXPRESSION: CST {$$ = $1;}
           
           | EXPRESSION OPAR idf { 
             if(!doubleDeclaration($3, currentScope)) erreur_nondec($3);
-            $$.type = determiner_type($1.type, getidfType($3, currentScope));
+            $$.type = incomp_type($1.type, type_idf($3, currentScope));
           }
 
           | EXPRESSION opar_div idf { 
              if (!doubleDeclaration($3, currentScope)) erreur_nondec($3);
-            $$.type = determiner_type($1.type, getidfType($3, currentScope));
+            $$.type = incomp_type($1.type, type_idf($3, currentScope));
           }
           
           | EXPRESSION OPAR CST { 
-            $$.type = determiner_type($1.type, $3.type);
+            $$.type = incomp_type($1.type, $3.type);
           }
 
           | EXPRESSION opar_div cst_real { 
-            $$.type = determiner_type($1.type, "REAL");
+            $$.type = incomp_type($1.type, "REAL");
           }
 
           | EXPRESSION opar_div cst_int  { if ($3==0) 
           printf ("Erreur semantique division par 0 a la ligne %d et a la colonne %d \n",nb_ligne,nb_colonne); 
-          $$.type = determiner_type($1.type, "INTEGER");
+          $$.type = incomp_type($1.type, "INTEGER");
           }
           
           | po EXPRESSION pf { $$ = $2; }
@@ -201,27 +221,27 @@ EXPRESSION: CST {$$ = $1;}
           
 
           | EXPRESSION OPAR cst_char { 
-            $$.type = determiner_type($1.type, "CHARACTER");}
+            $$.type = incomp_type($1.type, "CHARACTER");}
 
           | EXPRESSION opar_div cst_char { 
-            $$.type = determiner_type($1.type, "CHARACTER");}
+            $$.type = incomp_type($1.type, "CHARACTER");}
           
           | EXPRESSION po CST pf { 
-            $$.type = determiner_type($1.type, $3.type);}
+            $$.type = type_idf($1.type, currentScope);}
           
           | EXPRESSION po CST vg CST pf { 
-            $$.type = determiner_type($1.type, $3.type);}
+            $$.type = type_idf($1.type, currentScope);}
           
       | EXPRESSION OPAR po EXPRESSION pf 
 
           | EXPRESSION opar_div po EXPRESSION pf { 
-            $$.type = determiner_type($1.type, $4.type);}
+            $$.type = incomp_type($1.type, $4.type);}
 
 
 
 CALL: mc_call idf po LIST_PARAMETRE_RT pf { 
     if(!doubleDeclaration($2, currentScope)) erreur_nondec($2);
-    $$.type = getidfType($2, currentScope);
+    $$.type = type_idf($2, currentScope);
     }
 
 
@@ -304,9 +324,9 @@ EQ: mc_equivalence po LIST_PARAMETRE_EQ pf vg po LIST_PARAMETRE_EQ pf
 
 
 
-CST: cst_int {$$.type = "INTEGER"; }
+CST: cst_int {$$.type = "INTEGER"; $$.val = $1;} 
 
-   | cst_real {$$.type = "REAL"; }
+   | cst_real {$$.type = "REAL"; $$.val = $1;}
 
 
 
@@ -340,9 +360,7 @@ void erreur_dd(char *idf){
 void erreur_nondec(char *idf){
     printf("Erreur semantique: variable %s non declarer dans %s a la ligne %d et la colonne %d\n", idf, currentScope, nb_ligne, nb_colonne);
 }
-
-char *determiner_type(char* type1, char* type2) {
-    // Handle cases where either type is unspecified
+char *incomp_type(char* type1, char* type2) {
     if (type1[0] == ' ' || type1[0] == '\0') {
         return type2;
     }
@@ -350,15 +368,16 @@ char *determiner_type(char* type1, char* type2) {
         return type1;
     }
 
-    // Handle cases where types are compatible or both are the same
-    if (strcmp(type1, type2) == 0) {
+    if (type1[0] == type2[0]) {
         return type1;
     }
-
-    // Handle cases where types are incompatible
     printf("Erreur semantique: incompatibilite de types a la ligne %d et a la colonne %d\n", nb_ligne, nb_colonne);
     return " ";
 }
+
+
+
+
 void erreur_dim(char* idf) {
     printf("Erreur semantique: dimension de la variable %s incorrecte a la ligne %d et a la colonne %d\n", idf, nb_ligne, nb_colonne);
 }

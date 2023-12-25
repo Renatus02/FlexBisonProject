@@ -241,15 +241,15 @@ bool doubleDeclaration(char entite[], char scope[]) {
     listidf* current = symbolTable;
     while (current != NULL) {
         if (strcmp(current->code, "IDF") == 0 && strcmp(current->type, "") != 0 && strcmp(entite, current->name) == 0 && strcmp(current->scope, scope) == 0) {
-            return true;  // Variable found, check type compatibility
+            return true;  
         }
         current = current->next;
     }
-    return false;  // Variable not found or not type-compatible
+    return false;  
 }
 
 
-char *getidfType(char entite[], char scope[]) {
+char *type_idf(char entite[], char scope[]) {
     listidf* current = symbolTable;
     while (current != NULL) {
         if (strcmp(current->code, "IDF") == 0 && strcmp(entite, current->name) == 0 && strcmp(current->scope, scope) == 0) {
@@ -257,20 +257,20 @@ char *getidfType(char entite[], char scope[]) {
         }
         current = current->next;
     }
-    return "";  // Variable not found
+    return "";  
 }
 
 
-/* int getDimension(char entite[], char scope[]) {
+int getDimension(char entite[], char scope[]) {
     listidf* current = symbolTable;
     while (current != NULL) {
         if (strcmp(current->code, "IDF") == 0 &&
             strcmp(current->name, entite) == 0 &&
             strcmp(current->scope, scope) == 0) {
-            if (strstr(current->type, "()()") != NULL) return 2; 
-            else if (strstr(current->type, "()") != NULL) return 1; 
+            if (strstr(current->type, "(,)") != NULL) return 2; 
+             if (strstr(current->type, "()") != NULL) return 1; 
         }
         current = current->next;
     }
     return 0;  
-} */
+}

@@ -9,11 +9,12 @@ INTEGER A,B;
 REAL Z, T;
 CHARACTER C*20; 
 INTEGER var4 DIMENSION (20); 
-REAL MAT DIMENSION (20, 200);
+INTEGER MAT DIMENSION (20, 200);
 LOGICAL D;
 
 % Instructions;
 A = MAT(5,4) + (B * 5);
+MAT(5,4) = 10;
 B = 30;
 C = "L3";
 D = TRUE;
@@ -41,7 +42,7 @@ PROGRAM HelloAcad
 % Déclarations;
 INTEGER A,B,C ; 
 REAL Y ; 
-INTEGER TAB DIMENSION (10) ; 
+INTEGER TAB DIMENSION (10);
 
 % Instructions;
 A = TAB(11) + (B * 7);
