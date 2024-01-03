@@ -13,6 +13,21 @@ Les taches faites:
 on a changé un peu la grammaire du syntaxique pour s'adapter avec les routines et la semantique (changement de la logique du double declaration global et local et comment on verifie et ajouter le SCOPE (portée) des idf).
 
 
+///////////////quadruples/////////////////////
+
+
+pour les quadruplets on a fait :
+
+(les fonctions) : 
+- affichage
+- les quadruples pour les opérations logiques
+- les quadruples pour les opérations de comparaison
+
+
+on a fait les fonctions du quadruples dans quads.h mais on a pas pu les ajouter dans la syntaxique a cause de notre grammaire (bcp des erreurs et les conflicts qu'on essaye de les tester).
+
+
+
 
 
 

@@ -15,6 +15,8 @@
     extern char currentScope[10];
     extern char typeidf[10];
     char arr[100];
+    int qc=0;
+    char tmp[100];
 
 %}
 
@@ -25,6 +27,7 @@
    char* str;
    struct 
    {
+       char *val;
        char *type;
    }exp;
 }
@@ -159,17 +162,22 @@ DECLARATION: idf {
 
 AFFECT: idf aff EXPRESSION {
     if(!doubleDeclaration($1, currentScope)) erreurnondec($1);
-    else
+    else{
     incomp_type(type_idf($1, currentScope), $3.type);
     }
 
+    }
 
-| idf po CST pf aff EXPRESSION {
+
+| idf po CST pf aff EXPRESSION  {
+
     if (!doubleDeclaration($1, currentScope)) 
-        erreurnondec($1); else
+        erreurnondec($1);
+         else
         incomp_type(type_idf($1, currentScope), $6.type);
         if (getDimension($1, currentScope) != 1) 
             erreur_dim($1);      
+
     } 
 
 | idf po CST vg CST pf aff EXPRESSION {
@@ -177,7 +185,9 @@ AFFECT: idf aff EXPRESSION {
     else
      incomp_type(type_idf($1, currentScope), $8.type);
     if (getDimension($1, currentScope) != 2) erreur_dim($1);
-}
+    }
+
+
       
 
 
@@ -400,5 +410,6 @@ int main() {
     initialisation();
     yyparse();
     afficher();
+    /* afficher_qdr(); */
     return 0;
 }
