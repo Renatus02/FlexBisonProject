@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-#include "ts.h"
 typedef struct quad quad;
 struct quad
 {

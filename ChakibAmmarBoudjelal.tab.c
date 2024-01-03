@@ -73,6 +73,7 @@
     #include <string.h>
     #include <stdio.h>
     #include <stdlib.h>
+    #include "quads.h"
     void erreurdd(char* idf);
     void erreur_dim(char* idf);
     int getDimension(char entite[], char scope[]);
@@ -86,13 +87,11 @@
     extern char currentScope[10];
     extern char typeidf[10];
     char arr[100];
-    int qc=0;
-    char tmp[100];
 
 
 
 /* Line 189 of yacc.c  */
-#line 96 "ChakibAmmarBoudjelal.tab.c"
+#line 95 "ChakibAmmarBoudjelal.tab.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -171,21 +170,20 @@ typedef union YYSTYPE
 {
 
 /* Line 214 of yacc.c  */
-#line 24 "ChakibAmmarBoudjelal.y"
+#line 23 "ChakibAmmarBoudjelal.y"
  
    int entier; 
    float reel;
    char* str;
    struct 
    {
-       char *val;
        char *type;
    }exp;
 
 
 
 /* Line 214 of yacc.c  */
-#line 189 "ChakibAmmarBoudjelal.tab.c"
+#line 187 "ChakibAmmarBoudjelal.tab.c"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -197,7 +195,7 @@ typedef union YYSTYPE
 
 
 /* Line 264 of yacc.c  */
-#line 201 "ChakibAmmarBoudjelal.tab.c"
+#line 199 "ChakibAmmarBoudjelal.tab.c"
 
 #ifdef short
 # undef short
@@ -526,16 +524,16 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,    46,    46,    46,    46,    52,    52,    56,    60,    60,
-      74,    78,    82,    84,    86,    90,    92,    94,    95,    99,
-     101,   103,   105,   107,   109,   111,   115,   117,   121,   125,
-     125,   129,   134,   145,   157,   163,   172,   183,   196,   198,
-     203,   205,   207,   212,   217,   221,   225,   231,   233,   236,
-     240,   244,   248,   252,   254,   260,   266,   270,   274,   276,
-     278,   280,   284,   286,   290,   292,   294,   298,   302,   304,
-     306,   308,   310,   312,   316,   318,   322,   324,   326,   328,
-     330,   332,   334,   336,   338,   340,   344,   346,   350,   352,
-     356,   358,   360,   362,   364,   366
+       0,    44,    44,    44,    44,    50,    50,    54,    58,    58,
+      72,    76,    80,    82,    84,    88,    90,    92,    93,    97,
+      99,   101,   103,   105,   107,   109,   113,   115,   119,   123,
+     123,   127,   132,   143,   155,   161,   168,   176,   187,   189,
+     194,   196,   198,   203,   208,   212,   216,   222,   224,   227,
+     231,   235,   239,   243,   245,   251,   257,   261,   265,   267,
+     269,   271,   275,   277,   281,   283,   285,   289,   293,   295,
+     297,   299,   301,   303,   307,   309,   313,   315,   317,   319,
+     321,   323,   325,   327,   329,   331,   335,   337,   341,   343,
+     347,   349,   351,   353,   355,   357
 };
 #endif
 
@@ -1583,28 +1581,28 @@ yyreduce:
         case 2:
 
 /* Line 1455 of yacc.c  */
-#line 46 "ChakibAmmarBoudjelal.y"
+#line 44 "ChakibAmmarBoudjelal.y"
     {strcpy(currentScope, "main");;}
     break;
 
   case 4:
 
 /* Line 1455 of yacc.c  */
-#line 46 "ChakibAmmarBoudjelal.y"
+#line 44 "ChakibAmmarBoudjelal.y"
     {printf("syntaxe correcte\n"); YYACCEPT;;}
     break;
 
   case 5:
 
 /* Line 1455 of yacc.c  */
-#line 52 "ChakibAmmarBoudjelal.y"
+#line 50 "ChakibAmmarBoudjelal.y"
     {strcpy(currentScope, "main");;}
     break;
 
   case 8:
 
 /* Line 1455 of yacc.c  */
-#line 60 "ChakibAmmarBoudjelal.y"
+#line 58 "ChakibAmmarBoudjelal.y"
     {
     strcpy(currentScope, (yyvsp[(3) - (3)].str));
 if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
@@ -1621,42 +1619,42 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 10:
 
 /* Line 1455 of yacc.c  */
-#line 74 "ChakibAmmarBoudjelal.y"
+#line 72 "ChakibAmmarBoudjelal.y"
     {strcpy(currentScope, "main");;}
     break;
 
   case 15:
 
 /* Line 1455 of yacc.c  */
-#line 90 "ChakibAmmarBoudjelal.y"
+#line 88 "ChakibAmmarBoudjelal.y"
     {strcpy(typeidf, "INTEGER");;}
     break;
 
   case 16:
 
 /* Line 1455 of yacc.c  */
-#line 92 "ChakibAmmarBoudjelal.y"
+#line 90 "ChakibAmmarBoudjelal.y"
     {strcpy(typeidf, "REAL");;}
     break;
 
   case 17:
 
 /* Line 1455 of yacc.c  */
-#line 94 "ChakibAmmarBoudjelal.y"
+#line 92 "ChakibAmmarBoudjelal.y"
     {strcpy(typeidf, "LOGICAL");;}
     break;
 
   case 18:
 
 /* Line 1455 of yacc.c  */
-#line 95 "ChakibAmmarBoudjelal.y"
+#line 93 "ChakibAmmarBoudjelal.y"
     {strcpy(typeidf, "CHARACTER");;}
     break;
 
   case 31:
 
 /* Line 1455 of yacc.c  */
-#line 129 "ChakibAmmarBoudjelal.y"
+#line 127 "ChakibAmmarBoudjelal.y"
     {
     if (doubleDeclaration((yyvsp[(1) - (1)].str), currentScope)) erreurdd((yyvsp[(1) - (1)].str));
     else insererTYPE((yyvsp[(1) - (1)].str), typeidf, currentScope);
@@ -1666,7 +1664,7 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 32:
 
 /* Line 1455 of yacc.c  */
-#line 134 "ChakibAmmarBoudjelal.y"
+#line 132 "ChakibAmmarBoudjelal.y"
     {
        if(doubleDeclaration((yyvsp[(1) - (5)].str), currentScope)) erreurdd((yyvsp[(1) - (5)].str)); 
        else
@@ -1683,7 +1681,7 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 33:
 
 /* Line 1455 of yacc.c  */
-#line 146 "ChakibAmmarBoudjelal.y"
+#line 144 "ChakibAmmarBoudjelal.y"
     {
             if(doubleDeclaration((yyvsp[(1) - (7)].str), currentScope)) erreurdd((yyvsp[(1) - (7)].str)); 
             else
@@ -1699,7 +1697,7 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 34:
 
 /* Line 1455 of yacc.c  */
-#line 157 "ChakibAmmarBoudjelal.y"
+#line 155 "ChakibAmmarBoudjelal.y"
     {if(doubleDeclaration((yyvsp[(1) - (3)].str), currentScope)) erreurdd((yyvsp[(1) - (3)].str));
             else insererTYPE((yyvsp[(1) - (3)].str), typeidf, currentScope);
             ;}
@@ -1708,55 +1706,50 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 35:
 
 /* Line 1455 of yacc.c  */
-#line 163 "ChakibAmmarBoudjelal.y"
+#line 161 "ChakibAmmarBoudjelal.y"
     {
     if(!doubleDeclaration((yyvsp[(1) - (3)].str), currentScope)) erreurnondec((yyvsp[(1) - (3)].str));
-    else{
+    else
     incomp_type(type_idf((yyvsp[(1) - (3)].str), currentScope), (yyvsp[(3) - (3)].exp).type);
-    }
-
     ;}
     break;
 
   case 36:
 
 /* Line 1455 of yacc.c  */
-#line 172 "ChakibAmmarBoudjelal.y"
+#line 168 "ChakibAmmarBoudjelal.y"
     {
-
     if (!doubleDeclaration((yyvsp[(1) - (6)].str), currentScope)) 
-        erreurnondec((yyvsp[(1) - (6)].str));
-         else
+        erreurnondec((yyvsp[(1) - (6)].str)); else
         incomp_type(type_idf((yyvsp[(1) - (6)].str), currentScope), (yyvsp[(6) - (6)].exp).type);
         if (getDimension((yyvsp[(1) - (6)].str), currentScope) != 1) 
             erreur_dim((yyvsp[(1) - (6)].str));      
-
     ;}
     break;
 
   case 37:
 
 /* Line 1455 of yacc.c  */
-#line 183 "ChakibAmmarBoudjelal.y"
+#line 176 "ChakibAmmarBoudjelal.y"
     {
     if (!doubleDeclaration((yyvsp[(1) - (8)].str), currentScope)) erreurnondec((yyvsp[(1) - (8)].str));
     else
      incomp_type(type_idf((yyvsp[(1) - (8)].str), currentScope), (yyvsp[(8) - (8)].exp).type);
     if (getDimension((yyvsp[(1) - (8)].str), currentScope) != 2) erreur_dim((yyvsp[(1) - (8)].str));
-    ;}
+;}
     break;
 
   case 38:
 
 /* Line 1455 of yacc.c  */
-#line 196 "ChakibAmmarBoudjelal.y"
+#line 187 "ChakibAmmarBoudjelal.y"
     { (yyval.exp) = (yyvsp[(1) - (1)].exp); ;}
     break;
 
   case 39:
 
 /* Line 1455 of yacc.c  */
-#line 198 "ChakibAmmarBoudjelal.y"
+#line 189 "ChakibAmmarBoudjelal.y"
     { 
             if(!doubleDeclaration((yyvsp[(1) - (1)].str), currentScope)) erreurnondec((yyvsp[(1) - (1)].str));
             (yyval.exp).type = type_idf((yyvsp[(1) - (1)].str), currentScope);
@@ -1766,21 +1759,21 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 40:
 
 /* Line 1455 of yacc.c  */
-#line 203 "ChakibAmmarBoudjelal.y"
+#line 194 "ChakibAmmarBoudjelal.y"
     {(yyval.exp).type = "CHARACTER";;}
     break;
 
   case 41:
 
 /* Line 1455 of yacc.c  */
-#line 205 "ChakibAmmarBoudjelal.y"
+#line 196 "ChakibAmmarBoudjelal.y"
     {(yyval.exp).type = "LOGICAL";;}
     break;
 
   case 42:
 
 /* Line 1455 of yacc.c  */
-#line 207 "ChakibAmmarBoudjelal.y"
+#line 198 "ChakibAmmarBoudjelal.y"
     { 
             if(!doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) erreurnondec((yyvsp[(3) - (3)].str));
             (yyval.exp).type = incomp_type((yyvsp[(1) - (3)].exp).type, type_idf((yyvsp[(3) - (3)].str), currentScope));
@@ -1790,7 +1783,7 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 43:
 
 /* Line 1455 of yacc.c  */
-#line 212 "ChakibAmmarBoudjelal.y"
+#line 203 "ChakibAmmarBoudjelal.y"
     { 
              if (!doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) erreurnondec((yyvsp[(3) - (3)].str));
             (yyval.exp).type = incomp_type((yyvsp[(1) - (3)].exp).type, type_idf((yyvsp[(3) - (3)].str), currentScope));
@@ -1800,7 +1793,7 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 44:
 
 /* Line 1455 of yacc.c  */
-#line 217 "ChakibAmmarBoudjelal.y"
+#line 208 "ChakibAmmarBoudjelal.y"
     { 
             (yyval.exp).type = incomp_type((yyvsp[(1) - (3)].exp).type, (yyvsp[(3) - (3)].exp).type);
           ;}
@@ -1809,7 +1802,7 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 45:
 
 /* Line 1455 of yacc.c  */
-#line 221 "ChakibAmmarBoudjelal.y"
+#line 212 "ChakibAmmarBoudjelal.y"
     { 
             (yyval.exp).type = incomp_type((yyvsp[(1) - (3)].exp).type, "REAL");
           ;}
@@ -1818,7 +1811,7 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 46:
 
 /* Line 1455 of yacc.c  */
-#line 225 "ChakibAmmarBoudjelal.y"
+#line 216 "ChakibAmmarBoudjelal.y"
     {
           if ((yyvsp[(3) - (3)].entier)==0) 
           printf ("Erreur semantique division par 0 a la ligne %d et a la colonne %d \n",nb_ligne,nb_colonne); 
@@ -1829,21 +1822,21 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 47:
 
 /* Line 1455 of yacc.c  */
-#line 231 "ChakibAmmarBoudjelal.y"
+#line 222 "ChakibAmmarBoudjelal.y"
     { (yyval.exp) = (yyvsp[(2) - (3)].exp); ;}
     break;
 
   case 48:
 
 /* Line 1455 of yacc.c  */
-#line 233 "ChakibAmmarBoudjelal.y"
+#line 224 "ChakibAmmarBoudjelal.y"
     { (yyval.exp) = (yyvsp[(1) - (1)].exp); ;}
     break;
 
   case 49:
 
 /* Line 1455 of yacc.c  */
-#line 236 "ChakibAmmarBoudjelal.y"
+#line 227 "ChakibAmmarBoudjelal.y"
     { 
             (yyval.exp).type = incomp_type((yyvsp[(1) - (3)].exp).type, "CHARACTER");
             ;}
@@ -1852,7 +1845,7 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 50:
 
 /* Line 1455 of yacc.c  */
-#line 240 "ChakibAmmarBoudjelal.y"
+#line 231 "ChakibAmmarBoudjelal.y"
     { 
             (yyval.exp).type = incomp_type((yyvsp[(1) - (3)].exp).type, "CHARACTER");
             ;}
@@ -1861,7 +1854,7 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 51:
 
 /* Line 1455 of yacc.c  */
-#line 244 "ChakibAmmarBoudjelal.y"
+#line 235 "ChakibAmmarBoudjelal.y"
     { 
             (yyval.exp).type = type_idf((yyvsp[(1) - (4)].exp).type, currentScope);
             ;}
@@ -1870,7 +1863,7 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 52:
 
 /* Line 1455 of yacc.c  */
-#line 248 "ChakibAmmarBoudjelal.y"
+#line 239 "ChakibAmmarBoudjelal.y"
     { 
             (yyval.exp).type = type_idf((yyvsp[(1) - (6)].exp).type, currentScope);
             ;}
@@ -1879,7 +1872,7 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 54:
 
 /* Line 1455 of yacc.c  */
-#line 254 "ChakibAmmarBoudjelal.y"
+#line 245 "ChakibAmmarBoudjelal.y"
     { 
             (yyval.exp).type = incomp_type((yyvsp[(1) - (5)].exp).type, (yyvsp[(4) - (5)].exp).type);
             ;}
@@ -1888,7 +1881,7 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 55:
 
 /* Line 1455 of yacc.c  */
-#line 260 "ChakibAmmarBoudjelal.y"
+#line 251 "ChakibAmmarBoudjelal.y"
     { 
     (yyval.exp).type = type_idf((yyvsp[(2) - (5)].str), (yyvsp[(2) - (5)].str));
     ;}
@@ -1897,63 +1890,63 @@ if (doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) {
   case 59:
 
 /* Line 1455 of yacc.c  */
-#line 276 "ChakibAmmarBoudjelal.y"
+#line 267 "ChakibAmmarBoudjelal.y"
     { if(!doubleDeclaration((yyvsp[(1) - (1)].str), currentScope)) erreurnondec((yyvsp[(1) - (1)].str));;}
     break;
 
   case 61:
 
 /* Line 1455 of yacc.c  */
-#line 280 "ChakibAmmarBoudjelal.y"
+#line 271 "ChakibAmmarBoudjelal.y"
     { if(!doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) erreurnondec((yyvsp[(3) - (3)].str));;}
     break;
 
   case 77:
 
 /* Line 1455 of yacc.c  */
-#line 324 "ChakibAmmarBoudjelal.y"
+#line 315 "ChakibAmmarBoudjelal.y"
     { if(!doubleDeclaration((yyvsp[(1) - (1)].str), currentScope)) erreurnondec((yyvsp[(1) - (1)].str));;}
     break;
 
   case 78:
 
 /* Line 1455 of yacc.c  */
-#line 326 "ChakibAmmarBoudjelal.y"
+#line 317 "ChakibAmmarBoudjelal.y"
     { if(!doubleDeclaration((yyvsp[(3) - (3)].str), currentScope)) erreurnondec((yyvsp[(3) - (3)].str));;}
     break;
 
   case 81:
 
 /* Line 1455 of yacc.c  */
-#line 332 "ChakibAmmarBoudjelal.y"
+#line 323 "ChakibAmmarBoudjelal.y"
     { if(!doubleDeclaration((yyvsp[(3) - (6)].str), currentScope)) erreurnondec((yyvsp[(3) - (6)].str));;}
     break;
 
   case 82:
 
 /* Line 1455 of yacc.c  */
-#line 334 "ChakibAmmarBoudjelal.y"
+#line 325 "ChakibAmmarBoudjelal.y"
     { if(!doubleDeclaration((yyvsp[(3) - (8)].str), currentScope)) erreurnondec((yyvsp[(3) - (8)].str));;}
     break;
 
   case 86:
 
 /* Line 1455 of yacc.c  */
-#line 344 "ChakibAmmarBoudjelal.y"
+#line 335 "ChakibAmmarBoudjelal.y"
     {(yyval.exp).type = "INTEGER";;}
     break;
 
   case 87:
 
 /* Line 1455 of yacc.c  */
-#line 346 "ChakibAmmarBoudjelal.y"
+#line 337 "ChakibAmmarBoudjelal.y"
     {(yyval.exp).type = "REAL";;}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 1957 "ChakibAmmarBoudjelal.tab.c"
+#line 1950 "ChakibAmmarBoudjelal.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2165,7 +2158,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 371 "ChakibAmmarBoudjelal.y"
+#line 362 "ChakibAmmarBoudjelal.y"
 
 
 void erreurdd(char *idf){
@@ -2208,6 +2201,5 @@ int main() {
     initialisation();
     yyparse();
     afficher();
-    /* afficher_qdr(); */
     return 0;
 }
