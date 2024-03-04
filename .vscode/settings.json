@@ -1,6 +1,0 @@
-{
-    "C_Cpp.errorSquiggles": "disabled",
-    "code-runner.executorMapByFileExtension": {
-        ".y": "flex lexical.l && bison -d synt.y && gcc lex.yy.c synt.tab.c -o c -lfl -ly && c.exe<ex.txt",
-    }
-}
