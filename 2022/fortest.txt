@@ -1,5 +1,0 @@
-Variable = 2
-
-for Variable in range(2,9):
-    Seita = false
-
