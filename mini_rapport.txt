@@ -24,7 +24,7 @@ pour les quadruplets on a fait :
 - les quadruples pour les opérations de comparaison
 
 
-on a fait les fonctions du quadruples dans quads.h mais on a pas pu les ajouter dans la syntaxique a cause de notre grammaire (bcp des erreurs et les conflicts le moment on essaye de tester les quadruples et les branchements).
+on a fait les fonctions du quadruples dans quads.h mais on a pas pu les ajouter dans la syntaxique a cause de notre grammaire (bcp derreurs et les conflicts le moment on essaye de tester les quadruples et les branchements).
 
 
 
